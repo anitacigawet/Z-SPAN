@@ -1,0 +1,23 @@
+# Local dependencies and build products
+node_modules/
+dist/
+build/
+
+# Editors and operating-system state
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Credentials and local configuration
+.env
+.env.*
+*.local
+**/secrets/
+**/user_settings.json
+**/*credentials*.json
+**/client_secret*.json
+**/*_oauth*.json
+**/*token*.json
+**/*key*.pem*
