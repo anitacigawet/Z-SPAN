@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zspan.org/respawn/contracts/meeting.schema.json",
+  "title": "Respawn meeting collection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "meetings"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "meetings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/meeting" }
+    }
+  },
+  "$defs": {
+    "meeting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "governing_body_id",
+        "names",
+        "start",
+        "lifecycle_status",
+        "location",
+        "artifacts",
+        "source_id",
+        "retrieved_at"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z]{2}:meeting:[a-z0-9][a-z0-9._-]*$" },
+        "governing_body_id": { "type": "string", "pattern": "^[A-Z]{2}:body:[a-z0-9][a-z0-9._-]*$" },
+        "names": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        },
+        "start": { "$ref": "#/$defs/localStart" },
+        "lifecycle_status": {
+          "enum": ["scheduled", "cancelled", "completed", "unknown"]
+        },
+        "location": { "type": "string" },
+        "artifacts": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/artifact" }
+        },
+        "source_id": { "type": "string", "pattern": "^[A-Z]{2}:source:[a-z0-9][a-z0-9._-]*$" },
+        "source_native_id": { "type": "string" },
+        "retrieved_at": { "type": "string", "format": "date-time" },
+        "notes": { "type": "string" }
+      }
+    },
+    "localStart": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["date", "time", "timezone", "precision"],
+      "properties": {
+        "date": { "type": "string", "format": "date" },
+        "time": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9](?::[0-5][0-9])?$" }
+          ]
+        },
+        "timezone": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "minLength": 1 }
+          ]
+        },
+        "precision": { "enum": ["date", "minute", "second"] }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "precision": { "const": "date" } },
+            "required": ["precision"]
+          },
+          "then": {
+            "properties": {
+              "time": { "type": "null" },
+              "timezone": { "type": "null" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "precision": { "const": "minute" } },
+            "required": ["precision"]
+          },
+          "then": {
+            "properties": {
+              "time": { "type": "string", "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9]$" },
+              "timezone": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "precision": { "const": "second" } },
+            "required": ["precision"]
+          },
+          "then": {
+            "properties": {
+              "time": { "type": "string", "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$" },
+              "timezone": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      ]
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "url"],
+      "properties": {
+        "kind": {
+          "enum": ["detail", "agenda", "agenda_packet", "minutes", "video", "audio", "transcript", "public_comment"]
+        },
+        "url": { "type": "string", "pattern": "^https?://" },
+        "language": {
+          "type": "string",
+          "pattern": "^[A-Za-z]{2,3}(-[A-Za-z0-9]{2,8})*$"
+        }
+      }
+    }
+  }
+}

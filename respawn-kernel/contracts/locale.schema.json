@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zspan.org/respawn/contracts/locale.schema.json",
+  "title": "Respawn locale pack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "locale", "language_name", "direction", "status", "strings"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "locale": {
+      "type": "string",
+      "pattern": "^[A-Za-z]{2,3}(-[A-Za-z0-9]{2,8})*$"
+    },
+    "language_name": { "type": "string", "minLength": 1 },
+    "direction": { "enum": ["ltr", "rtl"] },
+    "status": { "enum": ["source", "draft", "back_check_pending", "reviewed"] },
+    "strings": {
+      "type": "object",
+      "required": [
+        "artifact_agenda",
+        "artifact_agenda_packet",
+        "artifact_audio",
+        "artifact_detail",
+        "artifact_minutes",
+        "artifact_public_comment",
+        "artifact_transcript",
+        "artifact_video",
+        "back_to_home",
+        "breadcrumbs",
+        "project_name",
+        "project_description",
+        "browse_jurisdictions",
+        "child_jurisdictions",
+        "coverage_summary",
+        "governing_bodies",
+        "governing_bodies_count",
+        "jurisdiction",
+        "jurisdictions_count",
+        "languages",
+        "latest_meetings",
+        "meetings_count",
+        "no_governing_bodies",
+        "no_jurisdictions",
+        "source_record",
+        "publication_pending",
+        "no_meetings_found",
+        "status_cancelled",
+        "status_completed",
+        "status_scheduled",
+        "status_unknown"
+      ],
+      "properties": {
+        "project_name": { "type": "string", "minLength": 1 },
+        "project_description": { "type": "string", "minLength": 1 },
+        "browse_jurisdictions": { "type": "string", "minLength": 1 },
+        "latest_meetings": { "type": "string", "minLength": 1 },
+        "source_record": { "type": "string", "minLength": 1 },
+        "publication_pending": { "type": "string", "minLength": 1 },
+        "no_meetings_found": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": { "type": "string" }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "method": { "enum": ["unreviewed", "human", "independent_back_check", "human_and_back_check"] },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

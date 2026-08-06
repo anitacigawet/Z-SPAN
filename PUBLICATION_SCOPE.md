@@ -21,6 +21,9 @@ The current public collection contains:
 - Visitor-facing audit, ribbon-scan, and verification views.
 - The styles used by those selected surfaces.
 - Three canonical, self-contained prompt artifacts preserved unchanged.
+- The runnable Respawn Kernel: country-neutral contracts, locale packs,
+  repository generator, validator, Arizona normalized-record adapter, static
+  reference library, tests, and public bootstrap documentation.
 - Public documentation explaining how to read the material.
 - PolyForm Noncommercial 1.0.0 terms and the required project notice.
 
@@ -36,6 +39,8 @@ This repository intentionally omits:
   interface.
 - Server-side services, APIs, databases, and production infrastructure.
 - Collection, processing, and internal data-management systems.
+- Executable per-source collection recipes, credentials, and country-specific
+  private registries. Respawn defines their boundary but does not publish them.
 - Private operational tools and review surfaces.
 - Deployment configuration, local runtime settings, and credentials.
 - Internal records, working conversations, and unpublished project material.
@@ -49,13 +54,17 @@ an intentional publication boundary.
 
 ## What can be inspected here
 
-The repository supports close reading of the approved visitor-interface code:
+The repository supports close reading of the approved visitor-interface code
+and direct use of the separately bounded Respawn Kernel:
 
 - How places and meetings are presented.
 - How the guide and search surfaces organize public material.
 - How several video sources are adapted behind one player interface.
 - How source links and integrity-related views appear to a visitor.
 - How the visual language is expressed in the selected styles.
+- How an independent country project can model recursive jurisdictions,
+  normalize verified meeting records, validate a seed, and render a
+  multilingual static library without the private Arizona runtime.
 
 ## What cannot be concluded from it
 
@@ -69,7 +78,8 @@ the exact state of this release, see
 
 ## How the boundary is maintained
 
-Public snapshots are built from an explicit list of approved paths rather than
+Public snapshots and the Respawn release are built from explicit approved
+paths rather than
 by copying the private repository and trying to remove sensitive material
 afterward. Each candidate is staged separately, reviewed as a complete tree,
 and checked for credentials, local paths, private wording, development

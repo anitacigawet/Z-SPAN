@@ -10,6 +10,7 @@ adopt the whole project. Each shelf can stand on its own.
 
 | If you are thinking about… | Start here |
 |---|---|
+| Watching the complete project walkthrough | [**Z-SPAN Is Born**](https://www.youtube.com/watch?v=HTpR9jRl314) |
 | Making local meetings easier to find | [`HomePage.tsx`](code/visitor-interface/src/pages/HomePage.tsx), then [`ChannelsPage.tsx`](code/visitor-interface/src/pages/ChannelsPage.tsx) |
 | Organizing records around a place | [`CityPage.tsx`](code/visitor-interface/src/pages/CityPage.tsx) and [`CityLedgerPage.tsx`](code/visitor-interface/src/pages/CityLedgerPage.tsx) |
 | Letting people search by subject | [`SearchPage.tsx`](code/visitor-interface/src/pages/SearchPage.tsx) |
@@ -20,6 +21,7 @@ adopt the whole project. Each shelf can stand on its own.
 | Turning a meeting into a short written digest | [`newsletter.md`](prompts/newsletter.md) |
 | Showing what happens after a meeting | [`whats_next.md`](prompts/whats_next.md) |
 | Describing the overall tone without editorializing | [`council_sentiment.md`](prompts/council_sentiment.md) |
+| Starting an independent public-meeting library for another country | [`respawn-kernel/README.md`](respawn-kernel/README.md), then [`respawn-kernel/BOOTSTRAP.md`](respawn-kernel/BOOTSTRAP.md) |
 
 ## Code shelf
 
@@ -41,6 +43,19 @@ Their NotebookLM labels record the setting in which they were developed. They
 do not describe Z-SPAN's current private runtime, and the private prompt
 collection around them is not published.
 
+## Respawn shelf
+
+[`respawn-kernel/`](respawn-kernel/) is a runnable, country-neutral starting
+point for an independently operated public-meeting library. It includes
+recursive jurisdiction and meeting contracts, localization support, a
+non-overwriting repository generator, deterministic validation, an Arizona
+reference adapter, and a standalone static presentation.
+
+This shelf is intentionally different from the selected visitor-interface
+source: it is designed to be copied into a new repository and continued. Its
+per-source collection recipes, credentials, local branding, and country
+decisions belong to the independent project rather than this public shelf.
+
 ## Ideas and reading guides
 
 - [`docs/PROJECT_MODEL.md`](docs/PROJECT_MODEL.md) explains the project in the
@@ -55,5 +70,6 @@ collection around them is not published.
 ## Snapshot record
 
 [`docs/snapshots/2026-08-02.md`](docs/snapshots/2026-08-02.md) records the
-origin, size, and review state of the first approved source snapshot. Git
-history records the later organization of that source into this library.
+origin, size, and review state of the first approved source snapshot.
+[`docs/snapshots/2026-08-05-respawn-kernel.md`](docs/snapshots/2026-08-05-respawn-kernel.md)
+records the runnable Respawn release. Git history records later changes.

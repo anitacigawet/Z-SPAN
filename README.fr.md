@@ -26,6 +26,10 @@ utile est plus petite : une idée de navigation, une frontière claire pour la
 lecture vidéo, une manière de garder les sources visibles ou un principe de
 conception qui peut rejoindre un projet indépendant.
 
+Le [Respawn Kernel](respawn-kernel/README.md) est l'exception exécutable : un
+point de départ indépendant pour créer une bibliothèque de réunions publiques
+dans n'importe quel pays. Le guide technique complet est actuellement en anglais.
+
 > Cette page est une traduction du README anglais réalisée avec l'aide de
 > l'IA. Les corrections proposées par pull request par des personnes maîtrisant
 > le français sont les bienvenues. En cas de différence de sens, le

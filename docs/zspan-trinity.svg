@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520" role="img" aria-labelledby="title description">
+  <title id="title">The Z-SPAN Trinity</title>
+  <desc id="description">A triangle connecting people, the internet, and civic records, with Z-SPAN at the center.</desc>
+  <style>
+    .edge { fill: none; stroke: #64748b; stroke-width: 3; }
+    .node { fill: #f8fafc; stroke: #334155; stroke-width: 2; }
+    .node-title { fill: #0f172a; font: 700 23px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 1px; }
+    .node-note { fill: #475569; font: 500 17px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .center { fill: #0f172a; stroke: #f8fafc; stroke-width: 4; }
+    .center-text { fill: #f8fafc; font: 700 27px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; letter-spacing: 1px; }
+    @media (prefers-color-scheme: dark) {
+      .edge { stroke: #94a3b8; }
+      .node { fill: #1e293b; stroke: #cbd5e1; }
+      .node-title { fill: #f8fafc; }
+      .node-note { fill: #cbd5e1; }
+      .center { fill: #f8fafc; stroke: #0f172a; }
+      .center-text { fill: #0f172a; }
+    }
+  </style>
+
+  <path class="edge" d="M450 102 L175 390 L725 390 Z" />
+
+  <g aria-label="People keep it alive">
+    <rect class="node" x="315" y="36" width="270" height="104" rx="18" />
+    <text class="node-title" x="450" y="79" text-anchor="middle">PEOPLE</text>
+    <text class="node-note" x="450" y="111" text-anchor="middle">keep it alive</text>
+  </g>
+
+  <g aria-label="The internet carries it">
+    <rect class="node" x="40" y="350" width="270" height="104" rx="18" />
+    <text class="node-title" x="175" y="393" text-anchor="middle">THE INTERNET</text>
+    <text class="node-note" x="175" y="425" text-anchor="middle">carries it</text>
+  </g>
+
+  <g aria-label="Civic records ground it">
+    <rect class="node" x="590" y="350" width="270" height="104" rx="18" />
+    <text class="node-title" x="725" y="393" text-anchor="middle">CIVIC RECORDS</text>
+    <text class="node-note" x="725" y="425" text-anchor="middle">ground it</text>
+  </g>
+
+  <circle class="center" cx="450" cy="292" r="82" />
+  <text class="center-text" x="450" y="301" text-anchor="middle">Z-SPAN</text>
+</svg>

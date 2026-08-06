@@ -1,0 +1,21 @@
+{
+  "kernel_version": "0.2.0",
+  "project": {
+    "name": "{{PROJECT_NAME}}",
+    "country_code": "{{COUNTRY_CODE}}",
+    "primary_locale": "{{PRIMARY_LOCALE}}"
+  },
+  "paths": {
+    "country_profile": "country/profile.json",
+    "jurisdictions": "data/jurisdictions.json",
+    "governing_bodies": "data/governing-bodies.json",
+    "sources": "data/sources.json",
+    "meetings": "data/meetings.json",
+    "locales": "locales"
+  },
+  "controls": {
+    "human_publication_required": true,
+    "private_person_protection_required": true,
+    "recipe_registry": "sealed_local"
+  }
+}

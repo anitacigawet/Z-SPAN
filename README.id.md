@@ -26,6 +26,10 @@ di sini lebih kecil: ide navigasi, batas pemutaran yang jelas, cara menjaga
 sumber asli tetap terlihat, atau prinsip desain yang dapat dibawa ke proyek
 mandiri.
 
+[Respawn Kernel](respawn-kernel/README.md) adalah pengecualian yang dapat
+dijalankan: titik awal mandiri untuk membuat perpustakaan rapat publik bagi
+negara mana pun. Panduan teknis lengkap saat ini tersedia dalam bahasa Inggris.
+
 > Halaman ini adalah terjemahan README bahasa Inggris yang dibuat dengan
 > bantuan AI. Koreksi melalui pull request dari penutur bahasa Indonesia yang
 > fasih sangat dihargai. Jika ada perbedaan makna, [README bahasa Inggris](README.md),
