@@ -60,8 +60,10 @@ repository with country-neutral data contracts, a recursive jurisdiction
 model, translation support, validation tools, and a standalone public library
 that can be expanded one verified place at a time.
 
-Any country, no exceptions. From the United States of America, all the way to
-the People's Republic of China. The kernel studies the governing structure
+Any country, no exceptions.
+From the United States of America, to
+the People's Republic of China. 
+The kernel studies the governing structure
 and public sources that actually exist, records uncertainty instead of
 inventing facts, and adapts the library to that setting. It does not decide
 what people should do with the library. Each independent project owns its
