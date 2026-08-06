@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zspan.org/respawn/contracts/country-profile.schema.json",
+  "title": "Respawn country profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "country",
+    "locales",
+    "jurisdiction_model",
+    "operating_context",
+    "research_status"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "country": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "name"],
+      "properties": {
+        "code": { "type": "string", "pattern": "^[A-Z]{2}$" },
+        "name": { "$ref": "#/$defs/localizedText" }
+      }
+    },
+    "locales": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primary", "supported"],
+      "properties": {
+        "primary": { "$ref": "#/$defs/languageTag" },
+        "supported": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/languageTag" }
+        }
+      }
+    },
+    "jurisdiction_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["shape", "levels"],
+      "properties": {
+        "shape": { "enum": ["strict_tree", "mixed", "asymmetric"] },
+        "notes": { "type": "string" },
+        "levels": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/jurisdictionLevel" }
+        }
+      }
+    },
+    "operating_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "does_not_gate_bootstrap",
+        "public_meeting_rules",
+        "public_record_rules",
+        "source_access_constraints",
+        "publication_constraints",
+        "operator_considerations",
+        "adaptations",
+        "provenance"
+      ],
+      "properties": {
+        "does_not_gate_bootstrap": { "const": true },
+        "public_meeting_rules": { "type": "string" },
+        "public_record_rules": { "type": "string" },
+        "source_access_constraints": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "publication_constraints": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "operator_considerations": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "adaptations": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "notes": { "type": "string" },
+        "provenance": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/provenance" }
+        }
+      }
+    },
+    "research_status": {
+      "enum": ["research_pending", "in_review", "researched"]
+    }
+  },
+  "$defs": {
+    "languageTag": {
+      "type": "string",
+      "pattern": "^[A-Za-z]{2,3}(-[A-Za-z0-9]{2,8})*$"
+    },
+    "localizedText": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
+    "jurisdictionLevel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "terms", "parent_keys", "may_hold_governing_bodies"],
+      "properties": {
+        "key": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+        "terms": { "$ref": "#/$defs/localizedText" },
+        "parent_keys": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" }
+        },
+        "may_hold_governing_bodies": { "type": "boolean" },
+        "notes": { "type": "string" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "publisher", "url", "accessed_on"],
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "publisher": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "pattern": "^https?://" },
+        "accessed_on": { "type": "string", "format": "date" }
+      }
+    }
+  }
+}

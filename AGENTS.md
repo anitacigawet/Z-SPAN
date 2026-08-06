@@ -13,10 +13,14 @@ people and by AI agents helping someone study civic-information projects.
    about systems outside the published collection.
 4. Use [`docs/REPOSITORY_GUIDE.md`](docs/REPOSITORY_GUIDE.md) for a guided path
    through the selected source.
+5. Use [`respawn-kernel/README.md`](respawn-kernel/README.md) when someone wants
+   to create an independently operated library for another country.
 
 ## How to interpret the collection
 
-- Treat this as reference material, not as a runnable application.
+- Treat `code/visitor-interface/` as reference material, not as a runnable
+  application. Treat `respawn-kernel/` as the explicitly runnable,
+  self-contained country-library starter.
 - Missing imports and services are intentional publication boundaries, not
   evidence that the repository accidentally lost files.
 - Distinguish what a published file directly demonstrates from what it merely
@@ -34,6 +38,9 @@ people and by AI agents helping someone study civic-information projects.
 - [`prompts/`](prompts/) contains three reviewed historical prompt artifacts.
 - [`docs/`](docs/) contains the project model, portable patterns, reading
   guide, and dated snapshot record.
+- [`respawn-kernel/`](respawn-kernel/) contains the public country-neutral
+  contracts, generator, validator, reference adapter, static library, and
+  bootstrap instructions.
 
 The private project's own agent instructions, working conversations, and
 internal documentation are not part of this repository.

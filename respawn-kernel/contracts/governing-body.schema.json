@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zspan.org/respawn/contracts/governing-body.schema.json",
+  "title": "Respawn governing-body collection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "governing_bodies"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "governing_bodies": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/governingBody" }
+    }
+  },
+  "$defs": {
+    "governingBody": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "jurisdiction_id", "body_type", "names", "source_urls", "status"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z]{2}:body:[a-z0-9][a-z0-9._-]*$" },
+        "jurisdiction_id": { "type": "string", "pattern": "^[A-Z]{2}:[a-z0-9][a-z0-9._-]*$" },
+        "body_type": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+        "names": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        },
+        "source_urls": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^https?://" }
+        },
+        "status": { "enum": ["active", "inactive", "unknown"] },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

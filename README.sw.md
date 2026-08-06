@@ -25,6 +25,10 @@ wazo la urambazaji, mpaka ulio wazi wa uchezaji wa video, njia ya kuweka
 vyanzo vya awali vionekane, au kanuni ya usanifu inayoweza kutumika katika
 mradi mwingine unaojitegemea.
 
+[Respawn Kernel](respawn-kernel/README.md) ndiyo sehemu inayoweza kuendeshwa:
+mwanzo huru wa kujenga maktaba ya mikutano ya umma kwa nchi yoyote. Mwongozo
+kamili wa kiufundi unapatikana kwa Kiingereza kwa sasa.
+
 > Ukurasa huu ni tafsiri ya README ya Kiingereza iliyotayarishwa kwa msaada wa
 > AI. Marekebisho kupitia pull request kutoka kwa watu wanaojua Kiswahili vizuri
 > yanakaribishwa. Iwapo maana zitatofautiana, [README ya Kiingereza](README.md),

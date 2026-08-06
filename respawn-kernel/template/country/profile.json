@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "country": {
+    "code": "{{COUNTRY_CODE}}",
+    "name": {
+      "{{PRIMARY_LOCALE}}": "{{COUNTRY_NAME}}"
+    }
+  },
+  "locales": {
+    "primary": "{{PRIMARY_LOCALE}}",
+    "supported": ["{{PRIMARY_LOCALE}}"]
+  },
+  "jurisdiction_model": {
+    "shape": "mixed",
+    "notes": "Research pending. Replace this placeholder with the country’s real administrative and governing structure.",
+    "levels": [
+      {
+        "key": "country",
+        "terms": {
+          "{{PRIMARY_LOCALE}}": "{{COUNTRY_NAME}}"
+        },
+        "parent_keys": [],
+        "may_hold_governing_bodies": false,
+        "notes": "Placeholder root only; no lower-level structure has been inferred."
+      }
+    ]
+  },
+  "operating_context": {
+    "does_not_gate_bootstrap": true,
+    "public_meeting_rules": "Research pending.",
+    "public_record_rules": "Research pending.",
+    "source_access_constraints": [],
+    "publication_constraints": [],
+    "operator_considerations": [],
+    "adaptations": [],
+    "notes": "Describe documented conditions and disagreements without assigning a safe/unsafe or go/no-go verdict.",
+    "provenance": []
+  },
+  "research_status": "research_pending"
+}

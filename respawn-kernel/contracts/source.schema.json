@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zspan.org/respawn/contracts/source.schema.json",
+  "title": "Respawn public-source collection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "sources"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "sources": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/source" }
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "governing_body_id",
+        "kind",
+        "public_url",
+        "adapter_family",
+        "recipe_visibility",
+        "status"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z]{2}:source:[a-z0-9][a-z0-9._-]*$" },
+        "governing_body_id": { "type": "string", "pattern": "^[A-Z]{2}:body:[a-z0-9][a-z0-9._-]*$" },
+        "kind": {
+          "enum": ["calendar", "agenda", "minutes", "video", "transcript", "combined"]
+        },
+        "public_url": { "type": "string", "pattern": "^https?://" },
+        "adapter_family": { "type": "string", "minLength": 1 },
+        "recipe_visibility": { "const": "sealed_local" },
+        "status": {
+          "enum": ["research_pending", "adapter_candidate", "awaiting_independent_audit", "verified", "source_unavailable", "source_changed"]
+        },
+        "last_verified_on": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "format": "date" }
+          ]
+        },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

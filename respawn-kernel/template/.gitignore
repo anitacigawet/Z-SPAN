@@ -1,0 +1,14 @@
+.env
+.env.*
+.cache/
+__pycache__/
+*.pyc
+
+# Per-source collection recipes and credentials stay under local custody.
+registry/private/
+
+# Raw downloads may contain material unsuitable for a public repository.
+data/raw/
+
+# Generated reference-site output. Review it before publishing.
+dist/
