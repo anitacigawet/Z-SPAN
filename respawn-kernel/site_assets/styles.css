@@ -1,0 +1,257 @@
+:root {
+  color-scheme: light;
+  --page: hsl(40 29% 97%);
+  --surface: hsl(0 0% 100%);
+  --ink: hsl(222 30% 15%);
+  --muted: hsl(218 12% 42%);
+  --line: hsl(216 18% 84%);
+  --accent: hsl(221 56% 35%);
+  --accent-soft: hsl(218 48% 94%);
+  --notice: hsl(43 86% 91%);
+  --notice-ink: hsl(34 64% 23%);
+  --shadow: 0 16px 40px hsl(220 22% 20% / 0.08);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 0.18em;
+}
+
+a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.preview-banner {
+  padding: 0.7rem 1rem;
+  background: var(--notice);
+  color: var(--notice-ink);
+  text-align: center;
+  font-weight: 650;
+}
+
+.site-frame {
+  width: min(72rem, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.25rem 0 4rem;
+}
+
+.language-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  min-height: 2rem;
+  font-size: 0.9rem;
+}
+
+.language-nav span {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.hero,
+.page-header {
+  max-width: 52rem;
+  padding: clamp(2.5rem, 8vw, 6rem) 0 2rem;
+}
+
+.page-header {
+  padding-top: 2.5rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.6rem;
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 1rem;
+  font-size: clamp(2.3rem, 7vw, 5.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+h2 {
+  margin-bottom: 1rem;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  margin-bottom: 0.45rem;
+  font-size: 1.08rem;
+}
+
+.intro {
+  max-width: 44rem;
+  color: var(--muted);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0 0 3rem;
+}
+
+.stat,
+.meeting-card,
+.jurisdiction-list {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.stat {
+  padding: 1.25rem;
+}
+
+.stat strong,
+.stat span {
+  display: block;
+}
+
+.stat strong {
+  font-size: 2rem;
+}
+
+.stat span,
+.meeting-meta,
+.meeting-location,
+.empty-state {
+  color: var(--muted);
+}
+
+main {
+  display: grid;
+  gap: 3.5rem;
+}
+
+.jurisdiction-list {
+  margin: 0;
+  padding: 0.35rem;
+  list-style: none;
+}
+
+.jurisdiction-list li + li {
+  border-top: 1px solid var(--line);
+}
+
+.jurisdiction-link {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.95rem 1rem;
+  color: var(--ink);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.jurisdiction-link:hover {
+  background: var(--accent-soft);
+}
+
+.meeting-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 1rem;
+}
+
+.meeting-card {
+  padding: 1.15rem;
+}
+
+.meeting-meta,
+.artifact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.9rem;
+  font-size: 0.86rem;
+}
+
+.meeting-meta {
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.meeting-location {
+  margin-bottom: 0.85rem;
+  font-size: 0.92rem;
+}
+
+.artifact-links a {
+  font-weight: 650;
+}
+
+.body-section + .body-section {
+  margin-top: 2rem;
+}
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding-top: 1.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.breadcrumbs a {
+  color: var(--muted);
+}
+
+[dir="rtl"] .language-nav {
+  justify-content: flex-start;
+}
+
+[dir="rtl"] .jurisdiction-link span {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 42rem) {
+  .site-frame {
+    width: min(72rem, calc(100% - 1.25rem));
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding-top: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}

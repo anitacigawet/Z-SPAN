@@ -24,6 +24,10 @@ uma ideia de navegação, um limite claro para a reprodução, uma maneira de
 manter as fontes visíveis ou um princípio de design que possa ser aproveitado
 em um trabalho independente.
 
+O [Respawn Kernel](respawn-kernel/README.md) é a exceção executável: um ponto
+de partida independente para criar uma biblioteca de reuniões públicas para
+qualquer país. O guia técnico completo está disponível atualmente em inglês.
+
 > Esta página é uma tradução do README em inglês feita com auxílio de IA.
 > Correções por pull request de pessoas fluentes em português são bem-vindas.
 > Se houver diferença de sentido, prevalecem o [README em inglês](README.md),

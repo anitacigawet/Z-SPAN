@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zspan.org/respawn/contracts/jurisdiction.schema.json",
+  "title": "Respawn jurisdiction collection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "jurisdictions"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "jurisdictions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/jurisdiction" }
+    }
+  },
+  "$defs": {
+    "jurisdiction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "parent_id",
+        "level_key",
+        "names",
+        "governance_status",
+        "source_urls"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[A-Z]{2}:[a-z0-9][a-z0-9._-]*$" },
+        "parent_id": {
+          "oneOf": [
+            { "type": "null" },
+            { "type": "string", "pattern": "^[A-Z]{2}:[a-z0-9][a-z0-9._-]*$" }
+          ]
+        },
+        "level_key": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+        "names": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": { "type": "string", "minLength": 1 }
+        },
+        "governance_status": {
+          "enum": ["confirmed", "statistical_only", "historical", "disputed", "unknown"]
+        },
+        "source_urls": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^https?://" }
+        },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

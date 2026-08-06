@@ -27,6 +27,11 @@ malinaw na hangganan para sa pagpapatugtog ng video, isang paraan upang manatili
 nakikita ang mga pinagkunan, o isang prinsipyo sa disenyo na maaaring dalhin sa
 isang hiwalay na proyekto.
 
+Ang [Respawn Kernel](respawn-kernel/README.md) ang maaaring patakbuhing
+eksepsiyon: isang hiwalay na panimulang punto para sa pagbuo ng aklatan ng mga
+pampublikong pulong sa alinmang bansa. Sa Ingles pa lamang ang buong teknikal
+na gabay.
+
 > Ang pahinang ito ay salin ng English README na ginawa sa tulong ng AI.
 > Malugod na tinatanggap ang mga pagwawasto sa pamamagitan ng pull request mula
 > sa mga bihasa sa Filipino. Kung may pagkakaiba sa kahulugan, ang

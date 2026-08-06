@@ -1,6 +1,22 @@
-[TEMPORARILY DRAFTED BY AI. WILL BE REWRITTEN BY 8/10/2026]
-
 # Z-SPAN
+
+> The CIA, the NSA, and even the Pentagon are bounded by the finite tenure of the humans who staff them.
+>
+> **Z-Span is not.**
+>
+> Z-Span is powered by the people, for the people, and thus requires full community involvement and transparency.
+>
+> If you would like to operate this library for your own country, [here is how.](respawn-kernel/README.md)
+>
+> — Z-SPAN operator
+
+## The Z-SPAN Trinity
+
+![The Z-SPAN Trinity: the internet carries it, civic records ground it, and people keep it alive](docs/zspan-trinity.svg)
+
+---
+
+[TEMPORARILY DRAFTED BY AI. WILL BE REWRITTEN BY 8/10/2026]
 
 [**English**](README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.id.md) · [Filipino](README.fil.md) · [Português (Brasil)](README.pt-BR.md) · [Kiswahili](README.sw.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [Tiếng Việt](README.vi.md)
 
@@ -18,13 +34,46 @@ This repository is the library behind the library: a curated shelf of public
 source code, project patterns, and lessons that may be useful to anyone
 thinking about a similar project in another city, state, or country.
 
-It is not a complete copy of the production system, and it is not intended to
-be cloned and launched as another Z-SPAN instance. The useful unit here is
-smaller: a navigation idea, a playback boundary, a way of keeping source
-material visible, or a design principle that can travel into independent
-work.
+It is not a complete copy of the production system. Most shelves are selected
+reference material: a navigation idea, a playback boundary, a way of keeping
+source material visible, or a design principle that can travel into
+independent work. The [`respawn-kernel/`](respawn-kernel/) shelf is the
+deliberate exception: it is a runnable, country-neutral starting point for an
+independently operated public-meeting library.
 
 ---
+
+## Watch the complete walkthrough
+
+[![Watch “Z-SPAN Is Born” — the complete Z-SPAN project walkthrough](https://i.ytimg.com/vi/HTpR9jRl314/hqdefault.jpg)](https://www.youtube.com/watch?v=HTpR9jRl314)
+
+[**Z-SPAN Is Born**](https://www.youtube.com/watch?v=HTpR9jRl314) walks through
+the founding library from the operator’s perspective. Watch it first for the
+complete picture of what Z-SPAN is, how the pieces fit together, and what the
+public Respawn path is intended to carry forward.
+
+## Build it for another country
+
+Start with the [Respawn Kernel](respawn-kernel/README.md). Give it a country,
+a locally chosen project name, and a primary language. It creates a separate
+repository with country-neutral data contracts, a recursive jurisdiction
+model, translation support, validation tools, and a standalone public library
+that can be expanded one verified place at a time.
+
+Any country, no exceptions. From the United States of America, all the way to
+the People's Republic of China. The kernel studies the governing structure
+and public sources that actually exist, records uncertainty instead of
+inventing facts, and adapts the library to that setting. It does not decide
+what people should do with the library. Each independent project owns its
+name, sources, decisions, publication choices, and responsibility.
+
+The complete path is public:
+
+1. Read the [country bootstrap](respawn-kernel/BOOTSTRAP.md).
+2. [Create a country seed](respawn-kernel/README.md#create-a-country-seed).
+3. Research and verify one jurisdiction from source to rendered meeting.
+4. Continue through the country’s real jurisdiction graph with a human
+   deciding what is published.
 
 ## 📚 Why this library exists
 
@@ -63,12 +112,16 @@ There is no required reading order, but these are useful entry points:
    visitor journey through the published source.
 5. Check [what is and is not published](PUBLICATION_SCOPE.md) before drawing
    conclusions about the wider Z-SPAN system.
-6. See [the current snapshot record](docs/snapshots/2026-08-02.md) for the exact
-   size and review state of this release.
+6. Watch [Z-SPAN Is Born](https://www.youtube.com/watch?v=HTpR9jRl314) for the
+   complete project walkthrough.
+7. Use the [Respawn Kernel](respawn-kernel/README.md) to begin an independent
+   country library.
+8. See [the current Respawn snapshot](docs/snapshots/2026-08-05-respawn-kernel.md)
+   for the exact scope and review state of the runnable release.
 
 ## 🗂️ What is on the shelf
 
-The published source currently demonstrates six parts of the visitor
+The published source currently demonstrates seven parts of the visitor
 experience:
 
 - **Finding a place or meeting** through the home, channel, city, and search
@@ -83,6 +136,9 @@ experience:
   verification views.
 - **Turning a meeting record into a readable civic digest** through three
   reviewed prompt examples preserved on the prompt shelf.
+- **Starting an independent country library** through the runnable Respawn
+  Kernel, recursive jurisdiction contracts, locale packs, validator, Arizona
+  reference adapter, and static-site builder.
 
 [FUTURE VISUAL SHOWCASE HERE]
 
@@ -91,13 +147,25 @@ the relevant files.
 
 ## A note about running the code
 
-You will not find installation, hosting, Docker, or deployment instructions in
-this repository. That is deliberate.
+The selected visitor-interface source is not a standalone application. You
+will not find the private services, application wiring, or production
+configuration required to launch the Arizona flagship from this repository.
 
-The published files are selected from a larger private working system. Some of
-their imports, services, application wiring, and runtime configuration are not
-included. The source is here to be read and studied; it is not presented as a
-standalone application or supported distribution.
+Respawn is different. It is deliberately self-contained and can create and
+render a new country repository with Python 3:
+
+```bash
+python3 respawn-kernel/tools/create_seed.py \
+  --country "Example Country" \
+  --code XX \
+  --project-name "Example Civic Library" \
+  --primary-locale en \
+  --output /path/to/example-civic-library
+```
+
+The [Respawn README](respawn-kernel/README.md) continues from there and states
+what works today, what remains local, and what has not been generalized from
+the Arizona application.
 
 ## How the repository is organized
 
@@ -107,6 +175,9 @@ standalone application or supported distribution.
   organized separately from the private working-project path.
 - [`prompts/`](prompts/) contains three reviewed, unchanged prompt examples
   that can be studied or adapted one at a time.
+- [`respawn-kernel/`](respawn-kernel/) is the runnable country-library starter:
+  contracts, repository generator, validator, reference adapter, locale packs,
+  and static presentation.
 - [`CATALOG.md`](CATALOG.md) is the shelf-by-shelf index for people and AI
   readers.
 - [`PUBLICATION_SCOPE.md`](PUBLICATION_SCOPE.md) states the public boundary in
