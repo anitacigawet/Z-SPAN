@@ -2806,11 +2806,11 @@ async function startServer() {
  // proxyJsonAuth forwards the owner cookie and preserves the 401 (proxyToFlask
  // masked it as a 200 carrying the error body). The Vocabulary Curator agent
  // reads it by hitting Flask directly with its bearer, not via this route.
- app.get("/api/city-intelligence/:slug", (req, res) =>
+ app.get("/api/city/:slug", (req, res) =>
  proxyJsonAuth(
  req,
  res,
- `/api/city-intelligence/${encodeURIComponent(req.params.slug)}`,
+ `/api/city/${encodeURIComponent(req.params.slug)}`,
  { timeoutMs: 30_000 },
  ),
  );

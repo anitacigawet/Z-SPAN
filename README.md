@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.svg" alt="Z-SPAN — For All. A virtual library for local politics. Maintained by the people, for the people." width="1000">
+  <img src="repository-assets/banner.svg" alt="Z-SPAN — For All. A virtual library for local politics. Maintained by the people, for the people." width="1000">
 </p>
 
 > *Scientia potentia est.*
@@ -12,7 +12,7 @@
 
 [TEMPORARILY DRAFTED BY AI. WILL BE REWRITTEN BY 8/10/2026]
 
-[**English**](README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.id.md) · [Filipino](README.fil.md) · [Português (Brasil)](README.pt-BR.md) · [Kiswahili](README.sw.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [Tiếng Việt](README.vi.md)
+[**English**](README.md) · [العربية](translations/README.ar.md) · [Español](translations/README.es.md) · [فارسی](translations/README.fa.md) · [Français](translations/README.fr.md) · [हिन्दी](translations/README.hi.md) · [Bahasa Indonesia](translations/README.id.md) · [Filipino](translations/README.fil.md) · [Português (Brasil)](translations/README.pt-BR.md) · [Kiswahili](translations/README.sw.md) · [简体中文](translations/README.zh-CN.md) · [繁體中文](translations/README.zh-TW.md) · [Tiếng Việt](translations/README.vi.md)
 
 **A virtual library for local politics.**
 
@@ -189,7 +189,7 @@ in the Z-SPAN ecosystem, contact
 
 ## The Z-SPAN Trinity
 
-![The Z-SPAN Trinity: the internet carries it, civic records ground it, and people keep it alive](docs/zspan-trinity.svg)
+![The Z-SPAN Trinity: the internet carries it, civic records ground it, and people keep it alive](repository-assets/zspan-trinity.svg)
 
 ---
 

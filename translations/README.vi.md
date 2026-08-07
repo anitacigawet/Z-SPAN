@@ -2,7 +2,7 @@
 
 # Z-SPAN
 
-[English](README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.id.md) · [Filipino](README.fil.md) · [Português (Brasil)](README.pt-BR.md) · [Kiswahili](README.sw.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [**Tiếng Việt**](README.vi.md)
+[English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.id.md) · [Filipino](README.fil.md) · [Português (Brasil)](README.pt-BR.md) · [Kiswahili](README.sw.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [**Tiếng Việt**](README.vi.md)
 
 **Một thư viện ảo về chính trị địa phương.**
 
@@ -25,13 +25,13 @@ hơn: một ý tưởng điều hướng, một ranh giới rõ ràng cho việc
 cách giữ tài liệu nguồn luôn hiện hữu, hoặc một nguyên tắc thiết kế có thể được
 đưa vào một dự án độc lập.
 
-[Respawn Kernel](respawn-kernel/README.md) là ngoại lệ có thể chạy độc lập:
+[Respawn Kernel](../documents/respawn-kernel/README.md) là ngoại lệ có thể chạy độc lập:
 một điểm khởi đầu để xây dựng thư viện các cuộc họp công khai cho bất kỳ quốc
 gia nào. Hướng dẫn kỹ thuật đầy đủ hiện có bằng tiếng Anh.
 
 > Trang này là bản dịch README tiếng Anh có sự hỗ trợ của AI. Chúng tôi hoan
 > nghênh người thông thạo tiếng Việt gửi chỉnh sửa qua pull request. Nếu có
-> khác biệt về ý nghĩa, hãy lấy [README tiếng Anh](README.md) làm bản chuẩn;
+> khác biệt về ý nghĩa, hãy lấy [README tiếng Anh](../README.md) làm bản chuẩn;
 > [LICENSE](LICENSE) là văn bản chuẩn về điều khoản cấp phép, còn
 > [NOTICE](NOTICE) là văn bản chuẩn về ghi công bắt buộc và giới hạn sử dụng
 > tên Z-SPAN. Các tài liệu liên kết khác hiện vẫn bằng tiếng Anh.

@@ -2,7 +2,7 @@
 
 # Z-SPAN
 
-[English](README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [**Bahasa Indonesia**](README.id.md) · [Filipino](README.fil.md) · [Português (Brasil)](README.pt-BR.md) · [Kiswahili](README.sw.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [Tiếng Việt](README.vi.md)
+[English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [**Bahasa Indonesia**](README.id.md) · [Filipino](README.fil.md) · [Português (Brasil)](README.pt-BR.md) · [Kiswahili](README.sw.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [Tiếng Việt](README.vi.md)
 
 **Perpustakaan virtual tentang politik lokal.**
 
@@ -26,13 +26,13 @@ di sini lebih kecil: ide navigasi, batas pemutaran yang jelas, cara menjaga
 sumber asli tetap terlihat, atau prinsip desain yang dapat dibawa ke proyek
 mandiri.
 
-[Respawn Kernel](respawn-kernel/README.md) adalah pengecualian yang dapat
+[Respawn Kernel](../documents/respawn-kernel/README.md) adalah pengecualian yang dapat
 dijalankan: titik awal mandiri untuk membuat perpustakaan rapat publik bagi
 negara mana pun. Panduan teknis lengkap saat ini tersedia dalam bahasa Inggris.
 
 > Halaman ini adalah terjemahan README bahasa Inggris yang dibuat dengan
 > bantuan AI. Koreksi melalui pull request dari penutur bahasa Indonesia yang
-> fasih sangat dihargai. Jika ada perbedaan makna, [README bahasa Inggris](README.md),
+> fasih sangat dihargai. Jika ada perbedaan makna, [README bahasa Inggris](../README.md),
 > [LICENSE](LICENSE), dan [NOTICE](NOTICE) menjadi acuan. Dokumen lain yang
 > ditautkan masih berbahasa Inggris.
 
