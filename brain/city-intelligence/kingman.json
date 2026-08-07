@@ -1,0 +1,369 @@
+{
+  "canonical_name": "Kingman",
+  "county": "Mohave",
+  "state": "Arizona",
+  "council": {
+    "seats": 7,
+    "term_length_years": 4,
+    "elected_at_large_or_by_district": "at-large",
+    "vice_mayor_selection": "other",
+    "next_election_date": "2026-07-21",
+    "next_election_seats_up": [
+      "mayor",
+      "seat_3",
+      "seat_4",
+      "seat_5"
+    ]
+  },
+  "current_members": [
+    {
+      "name": "Ken Watkins",
+      "role": "Mayor",
+      "seat_id": "mayor",
+      "term_started": "2024",
+      "term_ends": "2026",
+      "source_url": "https://kingman.novusagenda.com/agendapublic/DisplayAgendaPDF.ashx?MeetingID=1036"
+    },
+    {
+      "name": "Cherish Sammeli",
+      "role": "Vice Mayor",
+      "seat_id": "vice_mayor",
+      "term_started": "2024",
+      "term_ends": "2028",
+      "source_url": "https://kingman.novusagenda.com/agendapublic/DisplayAgendaPDF.ashx?MeetingID=1036"
+    },
+    {
+      "name": "Jamie Scott Stehly",
+      "role": "Council Member",
+      "seat_id": "seat_1",
+      "term_started": "2024",
+      "term_ends": "2028",
+      "source_url": "https://kingman.novusagenda.com/agendapublic/DisplayAgendaPDF.ashx?MeetingID=1036"
+    },
+    {
+      "name": "Keith Walker",
+      "role": "Council Member",
+      "seat_id": "seat_2",
+      "term_started": "2024",
+      "term_ends": "2028",
+      "source_url": "https://kingman.novusagenda.com/agendapublic/DisplayAgendaPDF.ashx?MeetingID=1036"
+    },
+    {
+      "name": "Jim Dykens",
+      "role": "Council Member",
+      "seat_id": "seat_3",
+      "term_started": "2024",
+      "term_ends": "2026",
+      "source_url": "https://kingman.novusagenda.com/agendapublic/DisplayAgendaPDF.ashx?MeetingID=1036"
+    },
+    {
+      "name": "Shawn Savage",
+      "role": "Council Member",
+      "seat_id": "seat_4",
+      "term_started": null,
+      "term_ends": "2026",
+      "source_url": "https://d3n9y02raazwpg.cloudfront.net/cityofkingman/6ad4547a-d050-11f0-bb28-005056a89546-30512650-8738-4ee5-b8f6-cc2be9b67550-1773423533.pdf"
+    },
+    {
+      "name": "Smiley Ward",
+      "role": "Council Member",
+      "seat_id": "seat_5",
+      "term_started": null,
+      "term_ends": "2026",
+      "source_url": "https://d3n9y02raazwpg.cloudfront.net/cityofkingman/6ad4547a-d050-11f0-bb28-005056a89546-30512650-8738-4ee5-b8f6-cc2be9b67550-1773423533.pdf"
+    }
+  ],
+  "primary_source_url": "https://www.cityofkingman.gov/",
+  "verified_on": "2026-05-11",
+  "notes": "Mayor currently serves a 2-year term; a 2026 ballot measure may extend this to 4 years. Council terms are 4 years. Vice Mayor is selected by the council. Jim Dykens was elected to a 2-year term in 2024 to fill a vacancy.",
+  "meeting_patterns": [
+    {
+      "pattern_id": "city_council",
+      "meeting_type": "City Council",
+      "cadence": {
+        "frequency": "monthly_weeks",
+        "day_of_week": "Tuesday",
+        "weeks_of_month": [
+          1,
+          3
+        ]
+      },
+      "time_local": "5:00 PM",
+      "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+      "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+      "exceptions": [],
+      "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+      "verified_on": "2026-06-02",
+      "notes": "36 instances; dominant cadence 1st + 3rd Tuesday at 5:00 PM (high confidence). ~12 of 36 instances are off-cadence special/work sessions on other weekdays."
+    },
+    {
+      "pattern_id": "planning_zoning_commission",
+      "meeting_type": "Planning & Zoning Commission",
+      "cadence": {
+        "frequency": "monthly_weeks",
+        "day_of_week": "Wednesday",
+        "weeks_of_month": [
+          2
+        ]
+      },
+      "time_local": "5:30 PM",
+      "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+      "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+      "exceptions": [],
+      "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+      "verified_on": "2026-06-02",
+      "notes": "12 instances; 11 of 12 land on 2nd Wednesday. Time drifted across 4:00/5:00/5:30 PM; 5:30 PM modal."
+    },
+    {
+      "pattern_id": "municipal_utility_commission",
+      "meeting_type": "Municipal Utility Commission",
+      "cadence": {
+        "frequency": "monthly_weeks",
+        "day_of_week": "Thursday",
+        "weeks_of_month": [
+          4
+        ]
+      },
+      "time_local": "5:30 PM",
+      "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+      "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+      "exceptions": [],
+      "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+      "verified_on": "2026-06-02",
+      "notes": "10 instances, all 4th Thursday. Winter 2026 shifted 5:30 PM → 4:30 PM."
+    },
+    {
+      "pattern_id": "economic_development_advisory_commission",
+      "meeting_type": "Economic Development Advisory Commission",
+      "cadence": {
+        "frequency": "monthly_weeks",
+        "day_of_week": "Tuesday",
+        "weeks_of_month": [
+          4
+        ]
+      },
+      "time_local": "12:00 PM",
+      "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+      "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+      "exceptions": [],
+      "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+      "verified_on": "2026-06-02",
+      "notes": "8 instances; majority 4th Tuesday. 2 off-day entries (Wed 9/17, Thu 11/20) suggest occasional rescheduling."
+    },
+    {
+      "pattern_id": "golf_commission",
+      "meeting_type": "Golf Commission",
+      "cadence": {
+        "frequency": "monthly_weeks",
+        "day_of_week": "Wednesday",
+        "weeks_of_month": [
+          2
+        ]
+      },
+      "time_local": "1:00 PM",
+      "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+      "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+      "exceptions": [],
+      "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+      "verified_on": "2026-06-02",
+      "notes": "7 instances; dominant cadence 2nd Wednesday at 1:00 PM. 2 off-cadence entries (Mon 6/9, Thu 1/22)."
+    },
+    {
+      "pattern_id": "heritage_preservation_commission",
+      "meeting_type": "Heritage Preservation Commission",
+      "cadence": {
+        "frequency": "monthly_weeks",
+        "day_of_week": "Tuesday",
+        "weeks_of_month": [
+          4
+        ]
+      },
+      "time_local": "12:00 PM",
+      "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+      "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+      "exceptions": [],
+      "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+      "verified_on": "2026-06-02",
+      "notes": "6 instances, all 4th Tuesday. Modal time noon; Jan 2026 shifted to 11 AM."
+    },
+    {
+      "pattern_id": "airport_industrial_park_advisory_commission",
+      "meeting_type": "Airport & Industrial Park Advisory Commission",
+      "cadence": {
+        "frequency": "monthly_weeks",
+        "day_of_week": "Monday",
+        "weeks_of_month": [
+          3
+        ]
+      },
+      "time_local": "3:00 PM",
+      "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+      "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+      "exceptions": [],
+      "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+      "verified_on": "2026-06-02",
+      "notes": "5 instances; 4 of 5 on 3rd Monday at 3:00 PM. One Thursday outlier (2025-11-06). Bi-monthly in practice (does not meet every month)."
+    },
+    {
+      "pattern_id": "parks_aquatics_recreation_trails_commission",
+      "meeting_type": "Parks, Aquatics, Recreation and Trails Commission",
+      "cadence": {
+        "frequency": "monthly_weeks",
+        "day_of_week": "Wednesday",
+        "weeks_of_month": [
+          3
+        ],
+        "months_of_year": [
+          2,
+          5,
+          8,
+          11
+        ]
+      },
+      "time_local": "12:00 PM",
+      "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+      "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+      "exceptions": [],
+      "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+      "verified_on": "2026-06-02",
+      "notes": "4 instances, all 3rd Wednesday. Quarterly in practice (May/Aug/Nov/Feb)."
+    },
+    {
+      "pattern_id": "clean_city_commission",
+      "meeting_type": "Clean City Commission",
+      "cadence": {
+        "frequency": "monthly_weeks",
+        "day_of_week": "Thursday",
+        "weeks_of_month": [
+          3
+        ],
+        "months_of_year": [
+          1,
+          3,
+          7,
+          10
+        ]
+      },
+      "time_local": "5:00 PM",
+      "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+      "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+      "exceptions": [],
+      "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+      "verified_on": "2026-06-02",
+      "notes": "4 instances, all 3rd Thursday. Quarterly in practice (Jul/Oct/Jan/Mar). Jan 2026 shifted to 4 PM."
+    },
+    {
+      "pattern_id": "transit_advisory_commission",
+      "meeting_type": "Transit Advisory Commission",
+      "cadence": {
+        "frequency": "monthly_weeks",
+        "day_of_week": "Monday",
+        "weeks_of_month": [
+          4
+        ],
+        "months_of_year": [
+          1,
+          4,
+          7,
+          10
+        ]
+      },
+      "time_local": "3:30 PM",
+      "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+      "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+      "exceptions": [],
+      "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+      "verified_on": "2026-06-02",
+      "notes": "4 instances, all 4th Monday. Quarterly in practice (Jul/Oct/Jan/Apr). Jan 2026 shifted to 2:30 PM."
+    },
+    {
+      "pattern_id": "board_of_adjustment",
+      "meeting_type": "Board of Adjustment",
+      "cadence": {
+        "frequency": "adhoc"
+      },
+      "time_local": "5:00 PM",
+      "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+      "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+      "exceptions": [],
+      "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+      "verified_on": "2026-06-02",
+      "notes": "Only 1 instance in scrape (2025-07-23); cadence unclear. Board of Adjustment typically convenes only as needed for variance/appeal cases."
+    }
+  ],
+  "notebooklm_persona_preamble": "The city of Kingman is located in Mohave County, Arizona. The Kingman City Council has 7 voting members elected at-large. The current members are: Mayor Ken Watkins, Vice Mayor Cherish Sammeli, and Council Members Jamie Scott Stehly, Keith Walker, Jim Dykens, Shawn Savage, and Smiley Ward. When transcribing or attributing quotes, use these exact spellings.",
+  "whisper_vocabulary_hints": [
+    {
+      "term": "Andy Devine",
+      "promoted_at": "2026-05-27T08:17:37+00:00",
+      "category": "person",
+      "first_seen": "2026-05-16 22:17:16",
+      "source": "02_Core_Project/council_navigator/media/review_queue/kingman/2026-04-21__city_council_apr_21_2026/batch_02/RESPONSE.md",
+      "promoted_by": "vocabulary-curator"
+    },
+    {
+      "term": "POS systems",
+      "promoted_at": "2026-05-27T08:17:41+00:00",
+      "category": "other",
+      "first_seen": "2026-05-16 22:17:16",
+      "source": "02_Core_Project/council_navigator/media/review_queue/kingman/2026-04-21__city_council_apr_21_2026/batch_02/RESPONSE.md",
+      "promoted_by": "vocabulary-curator"
+    },
+    {
+      "term": "Beale Street",
+      "promoted_at": "2026-05-27T08:17:42+00:00",
+      "category": "street",
+      "first_seen": "2026-05-16 22:17:16",
+      "source": "02_Core_Project/council_navigator/media/review_queue/kingman/2026-04-21__city_council_apr_21_2026/batch_02/RESPONSE.md",
+      "promoted_by": "vocabulary-curator"
+    },
+    {
+      "term": "Councilmember Stehly",
+      "promoted_at": "2026-05-27T08:57:17+00:00",
+      "first_seen": "2026-05-16 22:17:16",
+      "source": "02_Core_Project/council_navigator/media/review_queue/kingman/2026-04-21__city_council_apr_21_2026/batch_02/RESPONSE.md",
+      "promoted_by": "slack:U0B5F583BAR"
+    },
+    {
+      "term": "Dykens",
+      "promoted_at": "2026-06-04T05:18:38+00:00",
+      "category": "person",
+      "first_seen": "2026-06-04 05:12:34",
+      "source": "compiler:motions extraction for m101091 (Counselor Stehly motion to approve item 2J was made by what NotebookLM transcribed as Councilmember Dykins; canonical roster has Jim Dykens)",
+      "promoted_by": "operator"
+    },
+    {
+      "term": "Mohave County",
+      "promoted_at": "2026-06-22T00:00:00+00:00",
+      "category": "geography",
+      "first_seen": "2026-06-22 V1-Repair-1 audit of m103753 transcript_words",
+      "source": "m103753 (Kingman City Council 2026-06-02) transcript_words rendered 'Mojave County' 2x; canonical AZ-state spelling is Mohave County (the project's pilot county)",
+      "promoted_by": "operator"
+    },
+    {
+      "term": "Mohave Museum",
+      "promoted_at": "2026-06-22T00:00:00+00:00",
+      "category": "institution",
+      "first_seen": "2026-06-22 V1-Repair-1 audit of m103753 transcript_words",
+      "source": "m103753 transcript_words rendered 'Mojave Museum'; canonical full name is 'The Mohave Museum of History and Arts' (Kingman institution)",
+      "promoted_by": "operator"
+    },
+    {
+      "term": "Lake Havasu",
+      "promoted_at": "2026-06-22T00:00:00+00:00",
+      "category": "geography",
+      "first_seen": "2026-06-22 V1-Repair-1 audit of m103753 transcript_words",
+      "source": "m103753 transcript_words rendered 'Lake Kavisou' 2x; canonical Mohave-County sibling city (Lake Havasu City) — will recur across all 4 Mohave-cluster city transcripts",
+      "promoted_by": "operator"
+    },
+    {
+      "term": "Stockton Hill Road",
+      "promoted_at": "2026-06-22T00:00:00+00:00",
+      "category": "street",
+      "first_seen": "2026-06-22 V1-Repair-1 audit of m103753 transcript_words",
+      "source": "m103753 captured correctly 2x; Kingman's primary north-south arterial; pre-seeded for recurring future-meeting reference",
+      "promoted_by": "operator"
+    }
+  ],
+  "ocd_division_id": "ocd-division/country:us/state:az/place:kingman"
+}

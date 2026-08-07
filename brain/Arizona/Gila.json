@@ -1,0 +1,92 @@
+{
+  "county": "Gila",
+  "state": "Arizona",
+  "city_count": 5,
+  "cities": [
+    {
+      "city": "Globe",
+      "calendar_found": true,
+      "calendar_url": "https://destinyhosted.com/agenda_publish.cfm?id=45623&mt=ALL",
+      "notes": null,
+      "coverage": {
+        "city": "Globe",
+        "county": "Gila County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 33.393642,
+        "lng": -110.741106,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:globe",
+        "sample_meeting_count": 530,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Hayden",
+      "calendar_found": true,
+      "calendar_url": "https://townofhaydenaz.gov/meetings/",
+      "notes": null,
+      "coverage": {
+        "city": "Hayden",
+        "county": "Gila County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T04:04:27Z",
+        "lat": 32.99495,
+        "lng": -110.779898,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:hayden",
+        "sample_meeting_count": 87,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Miami",
+      "calendar_found": true,
+      "calendar_url": "https://miamiaz.gov/departments/town-clerk/public-meetings/",
+      "notes": null,
+      "coverage": {
+        "city": "Miami",
+        "county": "Gila County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T04:04:27Z",
+        "lat": 33.395065,
+        "lng": -110.872382,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:miami",
+        "sample_meeting_count": 179,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Payson",
+      "calendar_found": true,
+      "calendar_url": "https://payson.granicus.com/ViewPublisher.php?view_id=17",
+      "notes": null,
+      "coverage": {
+        "city": "Payson",
+        "county": "Gila County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T04:04:27Z",
+        "lat": 34.243841,
+        "lng": -111.318964,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:payson",
+        "sample_meeting_count": 100,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Winkelman",
+      "calendar_found": true,
+      "calendar_url": "https://winkelmanaz.gov/meeting-minutes/",
+      "notes": null,
+      "coverage": {
+        "city": "Winkelman",
+        "county": "Gila County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T04:04:27Z",
+        "lat": 32.981677,
+        "lng": -110.761687,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:winkelman",
+        "sample_meeting_count": 32,
+        "state": "az"
+      }
+    }
+  ]
+}

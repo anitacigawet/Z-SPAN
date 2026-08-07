@@ -1,0 +1,562 @@
+[
+  {
+    "County": "Apache County",
+    "City": "St. Johns",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.sjaz.us/meetings-agendas/",
+    "Notes/Status": null
+  },
+  {
+    "County": "Apache County",
+    "City": "Chinle",
+    "Calendar Found": true,
+    "Calendar URL": "https://chinle.navajochapters.org/records/",
+    "Notes/Status": null
+  },
+  {
+    "County": "Apache County",
+    "City": "Eagar",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.eagaraz.gov/o/tofe/page/agendas-minutes",
+    "Notes/Status": null
+  },
+  {
+    "County": "Apache County",
+    "City": "Fort Defiance",
+    "Calendar Found": true,
+    "Calendar URL": "https://ftdefiance.navajochapters.org/blog/category/chapter-meeting-agenda-and-minutes/",
+    "Notes/Status": null
+  },
+  {
+    "County": "Apache County",
+    "City": "Ganado",
+    "Calendar Found": true,
+    "Calendar URL": "https://ganado.navajochapters.org/870-2/",
+    "Notes/Status": null
+  },
+  {
+    "County": "Apache County",
+    "City": "Springerville",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.springervilleaz.gov/agendas",
+    "Notes/Status": null
+  },
+  {
+    "County": "Apache County",
+    "City": "Window Rock",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.navajonationcouncil.org/calendar/",
+    "Notes/Status": null
+  },
+  {
+    "County": "Cochise County",
+    "City": "Bisbee",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.bisbeeaz.gov/agendacenter",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Cochise County",
+    "City": "Benson",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.bensonaz.gov/government/city_council/agendas_minutes___public_notices.php",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Cochise County",
+    "City": "Douglas",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.douglasaz.gov/AgendaCenter/City-Council-2",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Cochise County",
+    "City": "Sierra Vista",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.sierravistaaz.gov/our-city/advanced-components/list-detail-pages/calendar-list",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Cochise County",
+    "City": "Tombstone",
+    "Calendar Found": true,
+    "Calendar URL": "https://cityoftombstoneaz.gov/events/category/city-council/",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Cochise County",
+    "City": "Willcox",
+    "Calendar Found": true,
+    "Calendar URL": "https://willcox.az.gov/city-council-meetings-agendas-resolutions-1",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Coconino County",
+    "City": "Flagstaff",
+    "Calendar Found": true,
+    "Calendar URL": "https://public.destinyhosted.com/agenda_publish.cfm?id=35247",
+    "Notes/Status": null
+  },
+  {
+    "County": "Coconino County",
+    "City": "Page",
+    "Calendar Found": true,
+    "Calendar URL": "https://pageaz.portal.civicclerk.com/",
+    "Notes/Status": null
+  },
+  {
+    "County": "Coconino County",
+    "City": "Sedona",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.sedonaaz.gov/i-want-to/advanced-components-not-displayed/calendar-meeting-list",
+    "Notes/Status": null
+  },
+  {
+    "County": "Coconino County",
+    "City": "Tuba City",
+    "Calendar Found": true,
+    "Calendar URL": "https://tonaneesdizi.navajochapters.org/",
+    "Notes/Status": null
+  },
+  {
+    "County": "Coconino County",
+    "City": "Williams",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.williamsaz.gov/government/meetings/city_council",
+    "Notes/Status": null
+  },
+  {
+    "County": "Gila County",
+    "City": "Globe",
+    "Calendar Found": true,
+    "Calendar URL": "https://destinyhosted.com/agenda_publish.cfm?id=45623&mt=ALL",
+    "Notes/Status": null
+  },
+  {
+    "County": "Gila County",
+    "City": "Hayden",
+    "Calendar Found": true,
+    "Calendar URL": "https://townofhaydenaz.gov/meetings/",
+    "Notes/Status": null
+  },
+  {
+    "County": "Gila County",
+    "City": "Miami",
+    "Calendar Found": true,
+    "Calendar URL": "https://miamiaz.gov/departments/town-clerk/public-meetings/",
+    "Notes/Status": null
+  },
+  {
+    "County": "Gila County",
+    "City": "Payson",
+    "Calendar Found": true,
+    "Calendar URL": "https://payson.granicus.com/ViewPublisher.php?view_id=17",
+    "Notes/Status": null
+  },
+  {
+    "County": "Gila County",
+    "City": "Winkelman",
+    "Calendar Found": true,
+    "Calendar URL": "https://winkelmanaz.gov/meeting-minutes/",
+    "Notes/Status": null
+  },
+  {
+    "County": "Graham County",
+    "City": "Safford",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.cityofsafford.us/AgendaCenter",
+    "Notes/Status": "CivicEngage Agenda Center for Council Meeting Agendas and Minutes"
+  },
+  {
+    "County": "Graham County",
+    "City": "Pima",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.pimatown.az.gov/town_council/agendas_and_minutes.php",
+    "Notes/Status": "Agendas and Minutes page (Regular meetings are the second Tuesday of the month)"
+  },
+  {
+    "County": "Graham County",
+    "City": "Thatcher",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.thatcher.az.gov/government/advanced-components/list-detail-pages/calendar-meeting-list",
+    "Notes/Status": "Town Council Meeting List (Regular meetings are the 3rd Monday of the month)"
+  },
+  {
+    "County": "Greenlee County",
+    "City": "Clifton",
+    "Calendar Found": true,
+    "Calendar URL": "https://cliftonaz.com/2026-meetings",
+    "Notes/Status": null
+  },
+  {
+    "County": "Greenlee County",
+    "City": "Duncan",
+    "Calendar Found": true,
+    "Calendar URL": "https://duncanaz.us/home/government/town-meeting-agendas-minutes/",
+    "Notes/Status": null
+  },
+  {
+    "County": "Greenlee County",
+    "City": "Morenci",
+    "Calendar Found": true,
+    "Calendar URL": "https://greenlee.az.gov/public-notices/",
+    "Notes/Status": null
+  },
+  {
+    "County": "La Paz County",
+    "City": "Parker",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.townofparkeraz.com/events",
+    "Notes/Status": null
+  },
+  {
+    "County": "La Paz County",
+    "City": "Bouse",
+    "Calendar Found": false,
+    "Calendar URL": null,
+    "Notes/Status": "CDP - No municipal government"
+  },
+  {
+    "County": "La Paz County",
+    "City": "Quartzsite",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.ci.quartzsite.az.us/calendar.php",
+    "Notes/Status": null
+  },
+  {
+    "County": "La Paz County",
+    "City": "Salome",
+    "Calendar Found": false,
+    "Calendar URL": null,
+    "Notes/Status": "CDP - No municipal government"
+  },
+  {
+    "County": "Maricopa County",
+    "City": "Phoenix",
+    "Calendar Found": true,
+    "Calendar URL": "https://phoenix.legistar.com/Calendar.aspx",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Maricopa County",
+    "City": "Mesa",
+    "Calendar Found": true,
+    "Calendar URL": "https://mesa.legistar.com/Calendar.aspx",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Maricopa County",
+    "City": "Chandler",
+    "Calendar Found": true,
+    "Calendar URL": "https://public.destinyhosted.com/agenda_publish.cfm?id=24263",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Maricopa County",
+    "City": "Glendale",
+    "Calendar Found": true,
+    "Calendar URL": "https://glendale-az.legistar.com/Calendar.aspx",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Maricopa County",
+    "City": "Scottsdale",
+    "Calendar Found": true,
+    "Calendar URL": "https://scottsdale.granicus.com/ViewPublisher.php?view_id=118",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Maricopa County",
+    "City": "Tempe",
+    "Calendar Found": true,
+    "Calendar URL": "https://tempe.hylandcloud.com/AgendaOnline",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Maricopa County",
+    "City": "Peoria",
+    "Calendar Found": true,
+    "Calendar URL": "https://peoriaaz.novusagenda.com/agendapublic/meetingsgeneral.aspx?meetingtype=1&Date=cus&From=01/01/2016&To=12/31/2026",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Mohave County",
+    "City": "Kingman",
+    "Calendar Found": true,
+    "Calendar URL": "https://cityofkingman.granicus.com/ViewPublisherRSS.php?view_id=1",
+    "Notes/Status": null
+  },
+  {
+    "County": "Mohave County",
+    "City": "Bullhead City",
+    "Calendar Found": true,
+    "Calendar URL": "https://bullheadcity.granicus.com/ViewPublisherRSS.php?view_id=2",
+    "Notes/Status": null
+  },
+  {
+    "County": "Mohave County",
+    "City": "Colorado City",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.tocc.us/meetings",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Mohave County",
+    "City": "Lake Havasu City",
+    "Calendar Found": true,
+    "Calendar URL": "https://lakehavasucity.legistar.com/Feed.ashx?M=Calendar&ID=29909585&GUID=5f2f1296-e2aa-4862-abb6-f6eccdb5151e&Mode=2025&Title=Lake+Havasu+City+-+Calendar+(2025)",
+    "Notes/Status": null
+  },
+  {
+    "County": "Navajo County",
+    "City": "Holbrook",
+    "Calendar Found": true,
+    "Calendar URL": "https://holbrookaz.gov/government/council-agenda/",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Navajo County",
+    "City": "Kayenta",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.kayentatownship-nsn.gov/event/",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Navajo County",
+    "City": "Pinetop-Lakeside",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.pinetoplakesideaz.gov/agendacenter",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Navajo County",
+    "City": "Show Low",
+    "Calendar Found": true,
+    "Calendar URL": "https://showlowaz.portal.civicclerk.com/",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Navajo County",
+    "City": "Snowflake",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.snowflakeaz.gov/events/category/council-meetings/",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Navajo County",
+    "City": "Winslow",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.winslowaz.gov/page/boards-agendas-minutes",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Pima County",
+    "City": "Tucson",
+    "Calendar Found": true,
+    "Calendar URL": "https://tucsonaz.hylandcloud.com/221agendaonline",
+    "Notes/Status": "OnBase Agenda Online"
+  },
+  {
+    "County": "Pima County",
+    "City": "Ajo",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.ajowpccc.org/",
+    "Notes/Status": "Western Pima County Community Council (WPCCC) - Schedule on website"
+  },
+  {
+    "County": "Pima County",
+    "City": "Green Valley",
+    "Calendar Found": true,
+    "Calendar URL": "https://gvcouncil.org/calendar/",
+    "Notes/Status": "Green Valley Council - Calendar on website"
+  },
+  {
+    "County": "Pima County",
+    "City": "Marana",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.maranaaz.gov/Council/Public-Notices",
+    "Notes/Status": "Public Notices webpage for meeting agendas"
+  },
+  {
+    "County": "Pima County",
+    "City": "Oro Valley",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.orovalleyaz.gov/Government/Departments/Town-Clerk/Meetings-and-Agendas",
+    "Notes/Status": "Meetings and Agendas page with live streaming and archives"
+  },
+  {
+    "County": "Pima County",
+    "City": "Sahuarita",
+    "Calendar Found": true,
+    "Calendar URL": "https://sahuaritaaz.gov/calendar.aspx?CID=26",
+    "Notes/Status": "CivicPlus Calendar for Council, Boards, and Commission Meetings"
+  },
+  {
+    "County": "Pima County",
+    "City": "South Tucson",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.southtucsonaz.gov/calendar",
+    "Notes/Status": "City Calendar (First and third Tuesdays of each month at 6:00 pm)"
+  },
+  {
+    "County": "Pinal County",
+    "City": "Florence",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.florenceaz.gov/calendar/",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Pinal County",
+    "City": "Apache Junction",
+    "Calendar Found": true,
+    "Calendar URL": "https://apachejunction.legistar.com/Calendar.aspx",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Pinal County",
+    "City": "Casa Grande",
+    "Calendar Found": true,
+    "Calendar URL": "https://casagrandeaz.gov/Calendar.aspx?CID=27",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Pinal County",
+    "City": "Coolidge",
+    "Calendar Found": true,
+    "Calendar URL": "https://coolidgecityaz.iqm2.com/Citizens/Calendar.aspx",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Pinal County",
+    "City": "Eloy",
+    "Calendar Found": true,
+    "Calendar URL": "https://eloyaz.gov/574/Agendas-Minutes-Public-Notices",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Pinal County",
+    "City": "Maricopa",
+    "Calendar Found": true,
+    "Calendar URL": "https://maricopa.legistar.com/Calendar.aspx",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Pinal County",
+    "City": "Queen Creek",
+    "Calendar Found": true,
+    "Calendar URL": "https://queencreekaz.granicus.com/ViewPublisher.php?view_id=3",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Santa Cruz County",
+    "City": "Nogales",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.nogalesaz.gov/AgendaCenter",
+    "Notes/Status": null
+  },
+  {
+    "County": "Santa Cruz County",
+    "City": "Patagonia",
+    "Calendar Found": true,
+    "Calendar URL": "https://patagonia-az.gov/mayor-council/council-meetings-agendas-minutes/",
+    "Notes/Status": null
+  },
+  {
+    "County": "Santa Cruz County",
+    "City": "Rio Rico",
+    "Calendar Found": true,
+    "Calendar URL": "https://santacruzcoaz.portal.civicclerk.com/",
+    "Notes/Status": null
+  },
+  {
+    "County": "Yavapai County",
+    "City": "Prescott",
+    "Calendar Found": true,
+    "Calendar URL": "https://prescottaz.portal.civicclerk.com/",
+    "Notes/Status": null
+  },
+  {
+    "County": "Yavapai County",
+    "City": "Camp Verde",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.campverde.az.gov/government/town_council/agendas_minutes.php",
+    "Notes/Status": null
+  },
+  {
+    "County": "Yavapai County",
+    "City": "Chino Valley",
+    "Calendar Found": true,
+    "Calendar URL": "https://chinovalleyaz.portal.civicclerk.com/",
+    "Notes/Status": null
+  },
+  {
+    "County": "Yavapai County",
+    "City": "Clarkdale",
+    "Calendar Found": true,
+    "Calendar URL": "https://clarkdaleaz.portal.civicclerk.com/",
+    "Notes/Status": null
+  },
+  {
+    "County": "Yavapai County",
+    "City": "Chino Valley",
+    "Calendar Found": true,
+    "Calendar URL": "https://chinovalleyaz.portal.civicclerk.com/",
+    "Notes/Status": null
+  },
+  {
+    "County": "Yavapai County",
+    "City": "Clarkdale",
+    "Calendar Found": true,
+    "Calendar URL": "https://clarkdaleaz.portal.civicclerk.com/",
+    "Notes/Status": null
+  },
+  {
+    "County": "Yavapai County",
+    "City": "Cottonwood",
+    "Calendar Found": true,
+    "Calendar URL": "https://cottonwoodaz.granicus.com/ViewPublisher.php?view_id=1",
+    "Notes/Status": null
+  },
+  {
+    "County": "Yavapai County",
+    "City": "Jerome",
+    "Calendar Found": true,
+    "Calendar URL": "https://jerome-az.municodemeetings.com/calendar",
+    "Notes/Status": null
+  },
+  {
+    "County": "Yavapai County",
+    "City": "Sedona",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.sedonaaz.gov/i-want-to/advanced-components-not-displayed/calendar-meeting-list",
+    "Notes/Status": null
+  },
+  {
+    "County": "Yuma County",
+    "City": "Yuma",
+    "Calendar Found": true,
+    "Calendar URL": "https://yuma-az.legistar.com/Calendar.aspx",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Yuma County",
+    "City": "San Luis",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.sanluisaz.gov/calendar.aspx?CID=28",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Yuma County",
+    "City": "Somerton",
+    "Calendar Found": true,
+    "Calendar URL": "https://cityofsomerton.civicweb.net/Portal/MeetingSchedule.aspx",
+    "Notes/Status": "Completed by User Instruction"
+  },
+  {
+    "County": "Yuma County",
+    "City": "Wellton",
+    "Calendar Found": true,
+    "Calendar URL": "https://www.welltonaz.gov/agendacenter",
+    "Notes/Status": "Completed by User Instruction"
+  }
+]

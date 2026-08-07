@@ -1,0 +1,75 @@
+{
+  "county": "Yuma",
+  "state": "Arizona",
+  "city_count": 4,
+  "cities": [
+    {
+      "city": "San Luis",
+      "calendar_found": true,
+      "calendar_url": "https://www.sanluisaz.gov/calendar.aspx?CID=28",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "San Luis",
+        "county": "Yuma County",
+        "coverage": "postponed",
+        "last_checked": "2026-07-01T01:57:27Z",
+        "lat": 32.485678,
+        "lng": -114.721947,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:san_luis",
+        "sample_meeting_count": 356,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Somerton",
+      "calendar_found": true,
+      "calendar_url": "https://cityofsomerton.civicweb.net/Portal/MeetingSchedule.aspx",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Somerton",
+        "county": "Yuma County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 32.601816,
+        "lng": -114.696344,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:somerton",
+        "sample_meeting_count": 31,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Wellton",
+      "calendar_found": true,
+      "calendar_url": "https://www.welltonaz.gov/agendacenter",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Wellton",
+        "county": "Yuma County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T04:04:27Z",
+        "lat": 32.640144,
+        "lng": -114.215206,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:wellton",
+        "sample_meeting_count": 1,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Yuma",
+      "calendar_found": true,
+      "calendar_url": "https://yuma-az.legistar.com/Calendar.aspx",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Yuma",
+        "county": "Yuma County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T04:04:27Z",
+        "lat": 32.516286,
+        "lng": -114.521782,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:yuma",
+        "sample_meeting_count": 4,
+        "state": "az"
+      }
+    }
+  ]
+}

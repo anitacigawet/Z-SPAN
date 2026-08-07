@@ -1,0 +1,940 @@
+{
+  "county": "Mohave",
+  "state": "Arizona",
+  "city_count": 4,
+  "cities": [
+    {
+      "city": "Bullhead City",
+      "calendar_found": true,
+      "calendar_url": "https://bullheadcity.granicus.com/ViewPublisherRSS.php?view_id=2",
+      "notes": null,
+      "coverage": {
+        "city": "Bullhead City",
+        "county": "Mohave County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 35.127371,
+        "lng": -114.55599,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:bullhead_city",
+        "sample_meeting_count": 100,
+        "state": "az"
+      },
+      "intelligence": {
+        "canonical_name": "Bullhead City",
+        "county": "Mohave",
+        "state": "Arizona",
+        "council": {
+          "seats": 7,
+          "term_length_years": 4,
+          "elected_at_large_or_by_district": "at-large",
+          "vice_mayor_selection": "rotates_annually",
+          "next_election_date": "2026-08-04",
+          "next_election_seats_up": [
+            "mayor",
+            "vice_mayor",
+            "seat_1",
+            "seat_4"
+          ]
+        },
+        "current_members": [
+          {
+            "name": "Karen Dallman",
+            "role": "Mayor",
+            "seat_id": "mayor",
+            "term_started": "2026-04",
+            "term_ends": "2026",
+            "source_url": "https://www.bullheadcityaz.gov/leadership-government/mayor-and-council/"
+          },
+          {
+            "name": "Dan Alfonzo",
+            "role": "Vice Mayor",
+            "seat_id": "vice_mayor",
+            "term_started": "2022",
+            "term_ends": "2026",
+            "source_url": "https://www.bullheadcityaz.gov/leadership-government/mayor-and-council/"
+          },
+          {
+            "name": "Pamela Smith",
+            "role": "Council Member",
+            "seat_id": "seat_1",
+            "term_started": "2025-07",
+            "term_ends": "2026",
+            "source_url": "https://www.bullheadcityaz.gov/leadership-government/mayor-and-council/"
+          },
+          {
+            "name": "Jason Newlin",
+            "role": "Council Member",
+            "seat_id": "seat_2",
+            "term_started": "2024",
+            "term_ends": "2028",
+            "source_url": "https://www.bullheadcityaz.gov/leadership-government/mayor-and-council/"
+          },
+          {
+            "name": "Eugene O'Neill",
+            "role": "Council Member",
+            "seat_id": "seat_3",
+            "term_started": "2024",
+            "term_ends": "2028",
+            "source_url": "https://www.bullheadcityaz.gov/leadership-government/mayor-and-council/"
+          },
+          {
+            "name": "Tami Ring",
+            "role": "Council Member",
+            "seat_id": "seat_4",
+            "term_started": "2013",
+            "term_ends": "2026",
+            "source_url": "https://www.bullheadcityaz.gov/leadership-government/mayor-and-council/"
+          }
+        ],
+        "primary_source_url": "https://www.bullheadcityaz.gov/leadership-government/mayor-and-council/",
+        "verified_on": "2026-05-11",
+        "notes": "The City Council officially consists of 7 seats. Currently, only 6 members are listed on the official roster because Karen Dallman was appointed Mayor in April 2026, leaving her former council seat vacant. Pamela Smith on seat_1 (short 2025-07 -> 2026 term) is likely the appointee filling that gap, with the August 2026 primary set to formalize this. The primary election on August 4, 2026 will elect one Mayor and two full-term Council Members, plus one two-year-term Council Member.",
+        "meeting_patterns": [
+          {
+            "pattern_id": "city_council",
+            "meeting_type": "City Council",
+            "cadence": {
+              "frequency": "monthly_weeks",
+              "day_of_week": "Tuesday",
+              "weeks_of_month": [
+                1,
+                3
+              ]
+            },
+            "time_local": "5:30 PM",
+            "location": "City Council Chambers, 1255 Marina Boulevard, Bullhead City, AZ 86442",
+            "youtube_channel_url": null,
+            "exceptions": [],
+            "source_url": "https://www.bullheadcityaz.gov/city-government/city-council",
+            "verified_on": "2026-06-02",
+            "notes": "57 Regular Meeting instances over 28 months; 54 of 57 fit the 1st + 3rd Tuesday cadence at 5:30 PM (high confidence). 3 outliers (one Wed, one 5th Tue, one Mon-shift) appear to be holiday reschedules. Time format quirk: parser stores meeting_time without AM/PM marker; civic context makes 05:30 = 5:30 PM. Times shifted from 4:30 PM (early 2024) to 5:30 PM (mid-2024 onward); modal is 5:30 PM. Parser also captures Special Meetings, Executive Sessions, Work Sessions, and Budget Work Sessions for the same body \u2014 those are off-cadence and excluded from the recurring pattern. Other Bullhead bodies (Planning Commission, P&Z) are NOT in the scrape; parser-coverage gap to fill via WebFetch fallback in a follow-up."
+          }
+        ],
+        "notebooklm_persona_preamble": "The city of Bullhead City is located in Mohave County, Arizona. The Bullhead City Council has 7 voting seats elected at-large; one council seat is currently vacant pending the August 2026 election. The current members are: Mayor Karen Dallman, Vice Mayor Dan Alfonzo, and Council Members Pamela Smith, Jason Newlin, Eugene O'Neill, and Tami Ring. When transcribing or attributing quotes, use these exact spellings.",
+        "ocd_division_id": "ocd-division/country:us/state:az/place:bullhead_city",
+        "whisper_vocabulary_hints": [
+          {
+            "term": "Dallman",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Mayor Dallman",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Karen Dallman",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Alfonzo",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Vice Mayor Alfonzo",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Dan Alfonzo",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Pamela Smith",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Councilmember Smith",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Newlin",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Councilmember Newlin",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Jason Newlin",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "O'Neill",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Councilmember O'Neill",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Eugene O'Neill",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Tami Ring",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Councilmember Ring",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          }
+        ]
+      }
+    },
+    {
+      "city": "Colorado City",
+      "calendar_found": true,
+      "calendar_url": "https://www.tocc.us/meetings",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Colorado City",
+        "county": "Mohave County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 36.970109,
+        "lng": -112.985312,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:colorado_city",
+        "sample_meeting_count": 35,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Kingman",
+      "calendar_found": true,
+      "calendar_url": "https://cityofkingman.granicus.com/ViewPublisherRSS.php?view_id=1",
+      "notes": null,
+      "coverage": {
+        "city": "Kingman",
+        "county": "Mohave County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 35.216992,
+        "lng": -114.010529,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:kingman",
+        "sample_meeting_count": 100,
+        "state": "az"
+      },
+      "intelligence": {
+        "canonical_name": "Kingman",
+        "county": "Mohave",
+        "state": "Arizona",
+        "council": {
+          "seats": 7,
+          "term_length_years": 4,
+          "elected_at_large_or_by_district": "at-large",
+          "vice_mayor_selection": "other",
+          "next_election_date": "2026-07-21",
+          "next_election_seats_up": [
+            "mayor",
+            "seat_3",
+            "seat_4",
+            "seat_5"
+          ]
+        },
+        "current_members": [
+          {
+            "name": "Ken Watkins",
+            "role": "Mayor",
+            "seat_id": "mayor",
+            "term_started": "2024",
+            "term_ends": "2026",
+            "source_url": "https://kingman.novusagenda.com/agendapublic/DisplayAgendaPDF.ashx?MeetingID=1036"
+          },
+          {
+            "name": "Cherish Sammeli",
+            "role": "Vice Mayor",
+            "seat_id": "vice_mayor",
+            "term_started": "2024",
+            "term_ends": "2028",
+            "source_url": "https://kingman.novusagenda.com/agendapublic/DisplayAgendaPDF.ashx?MeetingID=1036"
+          },
+          {
+            "name": "Jamie Scott Stehly",
+            "role": "Council Member",
+            "seat_id": "seat_1",
+            "term_started": "2024",
+            "term_ends": "2028",
+            "source_url": "https://kingman.novusagenda.com/agendapublic/DisplayAgendaPDF.ashx?MeetingID=1036"
+          },
+          {
+            "name": "Keith Walker",
+            "role": "Council Member",
+            "seat_id": "seat_2",
+            "term_started": "2024",
+            "term_ends": "2028",
+            "source_url": "https://kingman.novusagenda.com/agendapublic/DisplayAgendaPDF.ashx?MeetingID=1036"
+          },
+          {
+            "name": "Jim Dykens",
+            "role": "Council Member",
+            "seat_id": "seat_3",
+            "term_started": "2024",
+            "term_ends": "2026",
+            "source_url": "https://kingman.novusagenda.com/agendapublic/DisplayAgendaPDF.ashx?MeetingID=1036"
+          },
+          {
+            "name": "Shawn Savage",
+            "role": "Council Member",
+            "seat_id": "seat_4",
+            "term_started": null,
+            "term_ends": "2026",
+            "source_url": "https://d3n9y02raazwpg.cloudfront.net/cityofkingman/6ad4547a-d050-11f0-bb28-005056a89546-30512650-8738-4ee5-b8f6-cc2be9b67550-1773423533.pdf"
+          },
+          {
+            "name": "Smiley Ward",
+            "role": "Council Member",
+            "seat_id": "seat_5",
+            "term_started": null,
+            "term_ends": "2026",
+            "source_url": "https://d3n9y02raazwpg.cloudfront.net/cityofkingman/6ad4547a-d050-11f0-bb28-005056a89546-30512650-8738-4ee5-b8f6-cc2be9b67550-1773423533.pdf"
+          }
+        ],
+        "primary_source_url": "https://www.cityofkingman.gov/",
+        "verified_on": "2026-05-11",
+        "notes": "Mayor currently serves a 2-year term; a 2026 ballot measure may extend this to 4 years. Council terms are 4 years. Vice Mayor is selected by the council. Jim Dykens was elected to a 2-year term in 2024 to fill a vacancy.",
+        "meeting_patterns": [
+          {
+            "pattern_id": "city_council",
+            "meeting_type": "City Council",
+            "cadence": {
+              "frequency": "monthly_weeks",
+              "day_of_week": "Tuesday",
+              "weeks_of_month": [
+                1,
+                3
+              ]
+            },
+            "time_local": "5:00 PM",
+            "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+            "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+            "exceptions": [],
+            "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+            "verified_on": "2026-06-02",
+            "notes": "36 instances; dominant cadence 1st + 3rd Tuesday at 5:00 PM (high confidence). ~12 of 36 instances are off-cadence special/work sessions on other weekdays."
+          },
+          {
+            "pattern_id": "planning_zoning_commission",
+            "meeting_type": "Planning & Zoning Commission",
+            "cadence": {
+              "frequency": "monthly_weeks",
+              "day_of_week": "Wednesday",
+              "weeks_of_month": [
+                2
+              ]
+            },
+            "time_local": "5:30 PM",
+            "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+            "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+            "exceptions": [],
+            "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+            "verified_on": "2026-06-02",
+            "notes": "12 instances; 11 of 12 land on 2nd Wednesday. Time drifted across 4:00/5:00/5:30 PM; 5:30 PM modal."
+          },
+          {
+            "pattern_id": "municipal_utility_commission",
+            "meeting_type": "Municipal Utility Commission",
+            "cadence": {
+              "frequency": "monthly_weeks",
+              "day_of_week": "Thursday",
+              "weeks_of_month": [
+                4
+              ]
+            },
+            "time_local": "5:30 PM",
+            "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+            "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+            "exceptions": [],
+            "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+            "verified_on": "2026-06-02",
+            "notes": "10 instances, all 4th Thursday. Winter 2026 shifted 5:30 PM \u2192 4:30 PM."
+          },
+          {
+            "pattern_id": "economic_development_advisory_commission",
+            "meeting_type": "Economic Development Advisory Commission",
+            "cadence": {
+              "frequency": "monthly_weeks",
+              "day_of_week": "Tuesday",
+              "weeks_of_month": [
+                4
+              ]
+            },
+            "time_local": "12:00 PM",
+            "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+            "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+            "exceptions": [],
+            "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+            "verified_on": "2026-06-02",
+            "notes": "8 instances; majority 4th Tuesday. 2 off-day entries (Wed 9/17, Thu 11/20) suggest occasional rescheduling."
+          },
+          {
+            "pattern_id": "golf_commission",
+            "meeting_type": "Golf Commission",
+            "cadence": {
+              "frequency": "monthly_weeks",
+              "day_of_week": "Wednesday",
+              "weeks_of_month": [
+                2
+              ]
+            },
+            "time_local": "1:00 PM",
+            "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+            "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+            "exceptions": [],
+            "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+            "verified_on": "2026-06-02",
+            "notes": "7 instances; dominant cadence 2nd Wednesday at 1:00 PM. 2 off-cadence entries (Mon 6/9, Thu 1/22)."
+          },
+          {
+            "pattern_id": "heritage_preservation_commission",
+            "meeting_type": "Heritage Preservation Commission",
+            "cadence": {
+              "frequency": "monthly_weeks",
+              "day_of_week": "Tuesday",
+              "weeks_of_month": [
+                4
+              ]
+            },
+            "time_local": "12:00 PM",
+            "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+            "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+            "exceptions": [],
+            "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+            "verified_on": "2026-06-02",
+            "notes": "6 instances, all 4th Tuesday. Modal time noon; Jan 2026 shifted to 11 AM."
+          },
+          {
+            "pattern_id": "airport_industrial_park_advisory_commission",
+            "meeting_type": "Airport & Industrial Park Advisory Commission",
+            "cadence": {
+              "frequency": "monthly_weeks",
+              "day_of_week": "Monday",
+              "weeks_of_month": [
+                3
+              ]
+            },
+            "time_local": "3:00 PM",
+            "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+            "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+            "exceptions": [],
+            "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+            "verified_on": "2026-06-02",
+            "notes": "5 instances; 4 of 5 on 3rd Monday at 3:00 PM. One Thursday outlier (2025-11-06). Bi-monthly in practice (does not meet every month)."
+          },
+          {
+            "pattern_id": "parks_aquatics_recreation_trails_commission",
+            "meeting_type": "Parks, Aquatics, Recreation and Trails Commission",
+            "cadence": {
+              "frequency": "monthly_weeks",
+              "day_of_week": "Wednesday",
+              "weeks_of_month": [
+                3
+              ],
+              "months_of_year": [
+                2,
+                5,
+                8,
+                11
+              ]
+            },
+            "time_local": "12:00 PM",
+            "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+            "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+            "exceptions": [],
+            "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+            "verified_on": "2026-06-02",
+            "notes": "4 instances, all 3rd Wednesday. Quarterly in practice (May/Aug/Nov/Feb)."
+          },
+          {
+            "pattern_id": "clean_city_commission",
+            "meeting_type": "Clean City Commission",
+            "cadence": {
+              "frequency": "monthly_weeks",
+              "day_of_week": "Thursday",
+              "weeks_of_month": [
+                3
+              ],
+              "months_of_year": [
+                1,
+                3,
+                7,
+                10
+              ]
+            },
+            "time_local": "5:00 PM",
+            "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+            "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+            "exceptions": [],
+            "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+            "verified_on": "2026-06-02",
+            "notes": "4 instances, all 3rd Thursday. Quarterly in practice (Jul/Oct/Jan/Mar). Jan 2026 shifted to 4 PM."
+          },
+          {
+            "pattern_id": "transit_advisory_commission",
+            "meeting_type": "Transit Advisory Commission",
+            "cadence": {
+              "frequency": "monthly_weeks",
+              "day_of_week": "Monday",
+              "weeks_of_month": [
+                4
+              ],
+              "months_of_year": [
+                1,
+                4,
+                7,
+                10
+              ]
+            },
+            "time_local": "3:30 PM",
+            "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+            "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+            "exceptions": [],
+            "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+            "verified_on": "2026-06-02",
+            "notes": "4 instances, all 4th Monday. Quarterly in practice (Jul/Oct/Jan/Apr). Jan 2026 shifted to 2:30 PM."
+          },
+          {
+            "pattern_id": "board_of_adjustment",
+            "meeting_type": "Board of Adjustment",
+            "cadence": {
+              "frequency": "adhoc"
+            },
+            "time_local": "5:00 PM",
+            "location": "Council Chambers, 310 N. 4th Street, Kingman, AZ 86401",
+            "youtube_channel_url": "https://www.youtube.com/@CityofKingman",
+            "exceptions": [],
+            "source_url": "https://www.cityofkingman.gov/government/agendas-minutes",
+            "verified_on": "2026-06-02",
+            "notes": "Only 1 instance in scrape (2025-07-23); cadence unclear. Board of Adjustment typically convenes only as needed for variance/appeal cases."
+          }
+        ],
+        "notebooklm_persona_preamble": "The city of Kingman is located in Mohave County, Arizona. The Kingman City Council has 7 voting members elected at-large. The current members are: Mayor Ken Watkins, Vice Mayor Cherish Sammeli, and Council Members Jamie Scott Stehly, Keith Walker, Jim Dykens, Shawn Savage, and Smiley Ward. When transcribing or attributing quotes, use these exact spellings.",
+        "whisper_vocabulary_hints": [
+          {
+            "term": "Andy Devine",
+            "promoted_at": "2026-05-27T08:17:37+00:00",
+            "category": "person",
+            "first_seen": "2026-05-16 22:17:16",
+            "source": "workshop-only (path removed)",
+            "promoted_by": "vocabulary-curator"
+          },
+          {
+            "term": "POS systems",
+            "promoted_at": "2026-05-27T08:17:41+00:00",
+            "category": "other",
+            "first_seen": "2026-05-16 22:17:16",
+            "source": "workshop-only (path removed)",
+            "promoted_by": "vocabulary-curator"
+          },
+          {
+            "term": "Beale Street",
+            "promoted_at": "2026-05-27T08:17:42+00:00",
+            "category": "street",
+            "first_seen": "2026-05-16 22:17:16",
+            "source": "workshop-only (path removed)",
+            "promoted_by": "vocabulary-curator"
+          },
+          {
+            "term": "Councilmember Stehly",
+            "promoted_at": "2026-05-27T08:57:17+00:00",
+            "first_seen": "2026-05-16 22:17:16",
+            "source": "workshop-only (path removed)",
+            "promoted_by": "slack:U0B5F583BAR"
+          },
+          {
+            "term": "Dykens",
+            "promoted_at": "2026-06-04T05:18:38+00:00",
+            "category": "person",
+            "first_seen": "2026-06-04 05:12:34",
+            "source": "compiler:motions extraction for m101091 (Counselor Stehly motion to approve item 2J was made by what NotebookLM transcribed as Councilmember Dykins; canonical roster has Jim Dykens)",
+            "promoted_by": "operator"
+          },
+          {
+            "term": "Mohave County",
+            "promoted_at": "2026-06-22T00:00:00+00:00",
+            "category": "geography",
+            "first_seen": "2026-06-22 V1-Repair-1 audit of m103753 transcript_words",
+            "source": "m103753 (Kingman City Council 2026-06-02) transcript_words rendered 'Mojave County' 2x; canonical AZ-state spelling is Mohave County (the project's pilot county)",
+            "promoted_by": "operator"
+          },
+          {
+            "term": "Mohave Museum",
+            "promoted_at": "2026-06-22T00:00:00+00:00",
+            "category": "institution",
+            "first_seen": "2026-06-22 V1-Repair-1 audit of m103753 transcript_words",
+            "source": "m103753 transcript_words rendered 'Mojave Museum'; canonical full name is 'The Mohave Museum of History and Arts' (Kingman institution)",
+            "promoted_by": "operator"
+          },
+          {
+            "term": "Lake Havasu",
+            "promoted_at": "2026-06-22T00:00:00+00:00",
+            "category": "geography",
+            "first_seen": "2026-06-22 V1-Repair-1 audit of m103753 transcript_words",
+            "source": "m103753 transcript_words rendered 'Lake Kavisou' 2x; canonical Mohave-County sibling city (Lake Havasu City) \u2014 will recur across all 4 Mohave-cluster city transcripts",
+            "promoted_by": "operator"
+          },
+          {
+            "term": "Stockton Hill Road",
+            "promoted_at": "2026-06-22T00:00:00+00:00",
+            "category": "street",
+            "first_seen": "2026-06-22 V1-Repair-1 audit of m103753 transcript_words",
+            "source": "m103753 captured correctly 2x; Kingman's primary north-south arterial; pre-seeded for recurring future-meeting reference",
+            "promoted_by": "operator"
+          }
+        ],
+        "ocd_division_id": "ocd-division/country:us/state:az/place:kingman"
+      }
+    },
+    {
+      "city": "Lake Havasu City",
+      "calendar_found": true,
+      "calendar_url": "https://lakehavasucity.legistar.com/Feed.ashx?M=Calendar&ID=29909585&GUID=5f2f1296-e2aa-4862-abb6-f6eccdb5151e&Mode=2025&Title=Lake+Havasu+City+-+Calendar+(2025)",
+      "notes": null,
+      "coverage": {
+        "city": "Lake Havasu City",
+        "county": "Mohave County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 34.499809,
+        "lng": -114.310943,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:lake_havasu_city",
+        "sample_meeting_count": 6,
+        "state": "az"
+      },
+      "intelligence": {
+        "canonical_name": "Lake Havasu City",
+        "county": "Mohave",
+        "state": "Arizona",
+        "council": {
+          "seats": 7,
+          "term_length_years": 4,
+          "elected_at_large_or_by_district": "at-large",
+          "vice_mayor_selection": "other",
+          "next_election_date": "2026-07-21",
+          "next_election_seats_up": [
+            "mayor",
+            "seat_1",
+            "seat_3",
+            "seat_4"
+          ]
+        },
+        "current_members": [
+          {
+            "name": "Cal Sheehy",
+            "role": "Mayor",
+            "seat_id": "mayor",
+            "term_started": "2018",
+            "term_ends": "2026",
+            "source_url": "https://www.lhcaz.gov/mayor-city-council"
+          },
+          {
+            "name": "David Diaz",
+            "role": "Vice Mayor",
+            "seat_id": "vice_mayor",
+            "term_started": "2024",
+            "term_ends": "2028",
+            "source_url": "https://www.lhcaz.gov/mayor-city-council"
+          },
+          {
+            "name": "Michele Lin",
+            "role": "Council Member",
+            "seat_id": "seat_1",
+            "term_started": "2014",
+            "term_ends": "2026",
+            "source_url": "https://www.lhcaz.gov/mayor-city-council"
+          },
+          {
+            "name": "Cameron Moses",
+            "role": "Council Member",
+            "seat_id": "seat_2",
+            "term_started": "2020",
+            "term_ends": "2028",
+            "source_url": "https://www.lhcaz.gov/mayor-city-council"
+          },
+          {
+            "name": "Jeni Coke",
+            "role": "Council Member",
+            "seat_id": "seat_3",
+            "term_started": "2014",
+            "term_ends": "2026",
+            "source_url": "https://www.lhcaz.gov/mayor-city-council"
+          },
+          {
+            "name": "Jim Dolan",
+            "role": "Council Member",
+            "seat_id": "seat_4",
+            "term_started": "2018",
+            "term_ends": "2026",
+            "source_url": "https://www.lhcaz.gov/mayor-city-council"
+          },
+          {
+            "name": "Nancy Campbell",
+            "role": "Council Member",
+            "seat_id": "seat_5",
+            "term_started": "2020",
+            "term_ends": "2028",
+            "source_url": "https://www.lhcaz.gov/mayor-city-council"
+          }
+        ],
+        "primary_source_url": "https://www.lhcaz.gov/mayor-city-council",
+        "verified_on": "2026-05-11",
+        "notes": "The Primary Election date for 2026 was moved from August 4 to July 21. Vice Mayor is appointed from within the Council.",
+        "meeting_patterns": [
+          {
+            "pattern_id": "city_council",
+            "meeting_type": "City Council",
+            "cadence": {
+              "frequency": "monthly_weeks",
+              "day_of_week": "Tuesday",
+              "weeks_of_month": [
+                2,
+                4
+              ]
+            },
+            "time_local": "5:30 PM",
+            "location": "City Council Chambers, 2330 N. McCulloch Boulevard, Lake Havasu City, AZ 86403",
+            "youtube_channel_url": null,
+            "exceptions": [],
+            "source_url": "https://www.lhcaz.gov/citycouncil",
+            "verified_on": "2026-06-02",
+            "notes": "27 instances over 8 months (Jan-Dec 2025); 24 of 27 fit the 2nd + 4th Tuesday cadence at 5:30 PM. 3 outliers are morning sessions (8:30/9:00 AM) on non-Tuesday weekdays \u2014 almost certainly budget work sessions, off the recurring cadence. Parser date format for Lake Havasu is M/D/YYYY (different from most cities' YYYY-MM-DD). Parser-coverage gap: only City Council captured; Planning Commission and other bodies not in scrape \u2014 fill via WebFetch fallback in a follow-up."
+          }
+        ],
+        "notebooklm_persona_preamble": "The city of Lake Havasu City is located in Mohave County, Arizona. The Lake Havasu City Council has 7 voting members elected at-large. The current members are: Mayor Cal Sheehy, Vice Mayor David Diaz, and Council Members Michele Lin, Cameron Moses, Jeni Coke, Jim Dolan, and Nancy Campbell. When transcribing or attributing quotes, use these exact spellings.",
+        "ocd_division_id": "ocd-division/country:us/state:az/place:lake_havasu_city",
+        "whisper_vocabulary_hints": [
+          {
+            "term": "Sheehy",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Mayor Sheehy",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Cal Sheehy",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Diaz",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Vice Mayor Diaz",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "David Diaz",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Lin",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Councilmember Lin",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Michele Lin",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Moses",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Councilmember Moses",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Cameron Moses",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Coke",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Councilmember Coke",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Jeni Coke",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Dolan",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Councilmember Dolan",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Jim Dolan",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Campbell",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Councilmember Campbell",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          },
+          {
+            "term": "Nancy Campbell",
+            "category": "person",
+            "promoted_at": "2026-06-21T05:29:29+00:00",
+            "first_seen": "2026-06-21T05:29:29+00:00",
+            "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+            "promoted_by": "developer-claude:c5-finding"
+          }
+        ]
+      }
+    }
+  ]
+}

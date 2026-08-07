@@ -1,0 +1,109 @@
+{
+  "county": "Navajo",
+  "state": "Arizona",
+  "city_count": 6,
+  "cities": [
+    {
+      "city": "Holbrook",
+      "calendar_found": true,
+      "calendar_url": "https://holbrookaz.gov/government/council-agenda/",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Holbrook",
+        "county": "Navajo County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 34.904624,
+        "lng": -110.16721,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:holbrook",
+        "sample_meeting_count": 24,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Kayenta",
+      "calendar_found": true,
+      "calendar_url": "https://www.kayentatownship-nsn.gov/event/",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Kayenta",
+        "county": "Navajo County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T04:04:27Z",
+        "lat": 36.717169,
+        "lng": -110.260459,
+        "ocd_division_id": null,
+        "sample_meeting_count": 3,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Pinetop-Lakeside",
+      "calendar_found": true,
+      "calendar_url": "https://www.pinetoplakesideaz.gov/agendacenter",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Pinetop-Lakeside",
+        "county": "Navajo County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T04:04:27Z",
+        "lat": 34.148424,
+        "lng": -109.965998,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:pinetop-lakeside",
+        "sample_meeting_count": 6,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Show Low",
+      "calendar_found": true,
+      "calendar_url": "https://showlowaz.portal.civicclerk.com/",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Show Low",
+        "county": "Navajo County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T03:27:59Z",
+        "lat": 34.265053,
+        "lng": -110.038321,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:show_low",
+        "sample_meeting_count": 15,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Snowflake",
+      "calendar_found": true,
+      "calendar_url": "https://www.snowflakeaz.gov/events/category/council-meetings/",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Snowflake",
+        "county": "Navajo County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 34.521459,
+        "lng": -110.091182,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:snowflake",
+        "sample_meeting_count": 50,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Winslow",
+      "calendar_found": true,
+      "calendar_url": "https://www.winslowaz.gov/page/boards-agendas-minutes",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Winslow",
+        "county": "Navajo County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T04:04:27Z",
+        "lat": 35.024236,
+        "lng": -110.709331,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:winslow",
+        "sample_meeting_count": 3,
+        "state": "az"
+      }
+    }
+  ]
+}

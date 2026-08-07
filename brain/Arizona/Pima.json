@@ -1,0 +1,126 @@
+{
+  "county": "Pima",
+  "state": "Arizona",
+  "city_count": 7,
+  "cities": [
+    {
+      "city": "Ajo",
+      "calendar_found": true,
+      "calendar_url": "https://www.ajowpccc.org/",
+      "notes": "Western Pima County Community Council (WPCCC) - Schedule on website",
+      "coverage": {
+        "city": "Ajo",
+        "county": "Pima County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 32.392279,
+        "lng": -112.883874,
+        "ocd_division_id": null,
+        "sample_meeting_count": 1,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Green Valley",
+      "calendar_found": true,
+      "calendar_url": "https://gvcouncil.org/calendar/",
+      "notes": "Green Valley Council - Calendar on website",
+      "coverage": {
+        "city": "Green Valley",
+        "county": "Pima County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 31.840843,
+        "lng": -111.004482,
+        "ocd_division_id": null,
+        "sample_meeting_count": 1,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Marana",
+      "calendar_found": true,
+      "calendar_url": "https://www.maranaaz.gov/Council/Public-Notices",
+      "notes": "Public Notices webpage for meeting agendas",
+      "coverage": {
+        "city": "Marana",
+        "county": "Pima County",
+        "coverage": "postponed",
+        "last_checked": null,
+        "lat": 32.465939,
+        "lng": -111.135401,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:marana",
+        "sample_meeting_count": 10,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Oro Valley",
+      "calendar_found": true,
+      "calendar_url": "https://www.orovalleyaz.gov/Government/Departments/Town-Clerk/Meetings-and-Agendas",
+      "notes": "Meetings and Agendas page with live streaming and archives",
+      "coverage": {
+        "city": "Oro Valley",
+        "county": "Pima County",
+        "coverage": "postponed",
+        "last_checked": "2026-07-01T01:57:27Z",
+        "lat": 32.420713,
+        "lng": -110.977,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:oro_valley",
+        "sample_meeting_count": 129,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Sahuarita",
+      "calendar_found": true,
+      "calendar_url": "https://sahuaritaaz.gov/calendar.aspx?CID=26",
+      "notes": "CivicPlus Calendar for Council, Boards, and Commission Meetings",
+      "coverage": {
+        "city": "Sahuarita",
+        "county": "Pima County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 31.932238,
+        "lng": -110.965395,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:sahuarita",
+        "sample_meeting_count": 519,
+        "state": "az"
+      }
+    },
+    {
+      "city": "South Tucson",
+      "calendar_found": true,
+      "calendar_url": "https://www.southtucsonaz.gov/calendar",
+      "notes": "City Calendar (First and third Tuesdays of each month at 6:00 pm)",
+      "coverage": {
+        "city": "South Tucson",
+        "county": "Pima County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 32.195474,
+        "lng": -110.969154,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:south_tucson",
+        "sample_meeting_count": "",
+        "state": "az"
+      }
+    },
+    {
+      "city": "Tucson",
+      "calendar_found": true,
+      "calendar_url": "https://tucsonaz.hylandcloud.com/221agendaonline",
+      "notes": "OnBase Agenda Online",
+      "coverage": {
+        "city": "Tucson",
+        "county": "Pima County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T04:04:27Z",
+        "lat": 32.153036,
+        "lng": -110.870773,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:tucson",
+        "sample_meeting_count": 250,
+        "state": "az"
+      }
+    }
+  ]
+}
