@@ -2,19 +2,11 @@
   <img src="assets/banner.svg" alt="Z-SPAN — For All. A virtual library for local politics. Maintained by the people, for the people." width="1000">
 </p>
 
-> The CIA, the NSA, and even the Pentagon are bounded by the finite tenure of the humans who staff them.
+> *Scientia potentia est.*
 >
-> **Z-Span is not.**
+> **Knowledge is power.**
 >
-> Z-Span is powered by the people, for the people, and thus requires full community involvement and transparency.
->
-> If you would like to operate this library for your own country, [here is how.](documents/respawn-kernel/README.md)
->
-> — Z-SPAN operator
-
-## The Z-SPAN Trinity
-
-![The Z-SPAN Trinity: the internet carries it, civic records ground it, and people keep it alive](docs/zspan-trinity.svg)
+> — Francis Bacon
 
 ---
 
@@ -192,3 +184,21 @@ name boundary are recorded in the [NOTICE](NOTICE).
 Project hosted at [zspan.org](https://zspan.org). If you'd like an open seat
 in the Z-SPAN ecosystem, contact
 [anitacigawet@pm.me](mailto:anitacigawet@pm.me) for info.
+
+---
+
+## The Z-SPAN Trinity
+
+![The Z-SPAN Trinity: the internet carries it, civic records ground it, and people keep it alive](docs/zspan-trinity.svg)
+
+---
+
+> The CIA, the NSA, and even the Pentagon are bounded by the finite tenure of the humans who staff them.
+>
+> **Z-Span is not.**
+>
+> Z-Span is powered by the people, for the people, and thus requires full community involvement and transparency.
+>
+> If you would like to operate this library for your own country, [here is how.](documents/respawn-kernel/README.md)
+>
+> — Z-SPAN operator
