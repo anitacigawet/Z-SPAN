@@ -1,0 +1,74 @@
+/* Global resets — most styling lives in index.css and Tailwind. */
+* {
+ box-sizing: border-box;
+}
+
+html {
+ -webkit-font-smoothing: antialiased;
+ -moz-osx-font-smoothing: grayscale;
+ overflow-x: hidden;
+ scroll-behavior: smooth;
+}
+
+body {
+ margin: 0;
+ padding: 0;
+ overflow-x: hidden;
+ -webkit-tap-highlight-color: transparent;
+ -webkit-text-size-adjust: 100%;
+}
+
+/* Safe area insets for notched phones */
+@supports (padding: env(safe-area-inset-top)) {
+ .sticky {
+ padding-top: env(safe-area-inset-top);
+ }
+ body {
+ padding-left: env(safe-area-inset-left);
+ padding-right: env(safe-area-inset-right);
+ padding-bottom: env(safe-area-inset-bottom);
+ }
+}
+
+/* Hide scrollbar on small screens */
+@media (max-width: 640px) {
+ ::-webkit-scrollbar {
+ width: 0;
+ height: 0;
+ }
+}
+
+/* Native input fixes for the dark theme */
+select option {
+ background: #161618;
+ color: #e4e4e5;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+ filter: invert(0.6);
+ cursor: pointer;
+}
+input[type="checkbox"] {
+ accent-color: #ffffff;
+}
+
+/* Larger touch targets on mobile */
+@media (max-width: 640px) {
+ button,
+ a,
+ select,
+ input[type="date"] {
+ min-height: 36px;
+ }
+}
+
+/* Focus ring */
+*:focus-visible {
+ outline: 1px solid rgba(255, 255, 255, 0.25);
+ outline-offset: 2px;
+}
+
+button,
+[role="button"] {
+ -webkit-user-select: none;
+ user-select: none;
+}

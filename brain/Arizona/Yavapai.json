@@ -1,0 +1,109 @@
+{
+  "county": "Yavapai",
+  "state": "Arizona",
+  "city_count": 6,
+  "cities": [
+    {
+      "city": "Camp Verde",
+      "calendar_found": true,
+      "calendar_url": "https://www.campverde.az.gov/government/town_council/agendas_minutes.php",
+      "notes": null,
+      "coverage": {
+        "city": "Camp Verde",
+        "county": "Yavapai County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 34.569405,
+        "lng": -111.857014,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:camp_verde",
+        "sample_meeting_count": 14,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Chino Valley",
+      "calendar_found": true,
+      "calendar_url": "https://chinovalleyaz.portal.civicclerk.com/",
+      "notes": null,
+      "coverage": {
+        "city": "Chino Valley",
+        "county": "Yavapai County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T03:27:59Z",
+        "lat": 34.73989,
+        "lng": -112.40606,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:chino_valley",
+        "sample_meeting_count": "",
+        "state": "az"
+      }
+    },
+    {
+      "city": "Clarkdale",
+      "calendar_found": true,
+      "calendar_url": "https://clarkdaleaz.portal.civicclerk.com/",
+      "notes": null,
+      "coverage": {
+        "city": "Clarkdale",
+        "county": "Yavapai County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T03:27:59Z",
+        "lat": 34.747979,
+        "lng": -112.058699,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:clarkdale",
+        "sample_meeting_count": "",
+        "state": "az"
+      }
+    },
+    {
+      "city": "Cottonwood",
+      "calendar_found": true,
+      "calendar_url": "https://cottonwoodaz.granicus.com/ViewPublisher.php?view_id=1",
+      "notes": null,
+      "coverage": {
+        "city": "Cottonwood",
+        "county": "Yavapai County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 34.750834,
+        "lng": -111.984004,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:cottonwood",
+        "sample_meeting_count": 100,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Jerome",
+      "calendar_found": true,
+      "calendar_url": "https://jerome-az.municodemeetings.com/calendar",
+      "notes": null,
+      "coverage": {
+        "city": "Jerome",
+        "county": "Yavapai County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 34.747088,
+        "lng": -112.107515,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:jerome",
+        "sample_meeting_count": 25,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Prescott",
+      "calendar_found": true,
+      "calendar_url": "https://prescottaz.portal.civicclerk.com/",
+      "notes": null,
+      "coverage": {
+        "city": "Prescott",
+        "county": "Yavapai County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T03:27:59Z",
+        "lat": 34.592241,
+        "lng": -112.446733,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:prescott",
+        "sample_meeting_count": 15,
+        "state": "az"
+      }
+    }
+  ]
+}

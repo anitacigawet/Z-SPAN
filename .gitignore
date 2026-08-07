@@ -1,23 +1,38 @@
-# Local dependencies and build products
+# Secrets & credentials — never publish
+secrets/
+*.env
+*.env.local
+*credentials*.json
+*_secret*
+oauth_*.json
+
+# Local build / cache
+__pycache__/
+*.pyc
 node_modules/
+.venv/
+.venv-worker/
 dist/
 build/
+.next/
+*.egg-info/
 
-# Editors and operating-system state
+# Local data / logs
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+logs/
+*.log
+
+# Editor / OS
 .DS_Store
-Thumbs.db
 .idea/
 .vscode/
 *.swp
 
-# Credentials and local configuration
-.env
-.env.*
-*.local
-**/secrets/
-**/user_settings.json
-**/*credentials*.json
-**/client_secret*.json
-**/*_oauth*.json
-**/*token*.json
-**/*key*.pem*
+# Operator-only working files (should never be committed to public)
+verbatim_ledger/
+.claude/
+journals/
+04_Operator_Side/

@@ -1,0 +1,58 @@
+{
+  "county": "Greenlee",
+  "state": "Arizona",
+  "city_count": 3,
+  "cities": [
+    {
+      "city": "Clifton",
+      "calendar_found": true,
+      "calendar_url": "https://cliftonaz.com/2026-meetings",
+      "notes": null,
+      "coverage": {
+        "city": "Clifton",
+        "county": "Greenlee County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 33.02957,
+        "lng": -109.284039,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:clifton",
+        "sample_meeting_count": 4,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Duncan",
+      "calendar_found": true,
+      "calendar_url": "https://duncanaz.us/home/government/town-meeting-agendas-minutes/",
+      "notes": null,
+      "coverage": {
+        "city": "Duncan",
+        "county": "Greenlee County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 32.749981,
+        "lng": -109.0884,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:duncan",
+        "sample_meeting_count": 160,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Morenci",
+      "calendar_found": true,
+      "calendar_url": "https://greenlee.az.gov/public-notices/",
+      "notes": null,
+      "coverage": {
+        "city": "Morenci",
+        "county": "Greenlee County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T04:04:27Z",
+        "lat": 33.058381,
+        "lng": -109.333177,
+        "ocd_division_id": null,
+        "sample_meeting_count": 113,
+        "state": "az"
+      }
+    }
+  ]
+}

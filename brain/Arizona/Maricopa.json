@@ -1,0 +1,126 @@
+{
+  "county": "Maricopa",
+  "state": "Arizona",
+  "city_count": 7,
+  "cities": [
+    {
+      "city": "Chandler",
+      "calendar_found": true,
+      "calendar_url": "https://public.destinyhosted.com/agenda_publish.cfm?id=24263",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Chandler",
+        "county": "Maricopa County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 33.282765,
+        "lng": -111.851819,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:chandler",
+        "sample_meeting_count": 29,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Glendale",
+      "calendar_found": true,
+      "calendar_url": "https://glendale-az.legistar.com/Calendar.aspx",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Glendale",
+        "county": "Maricopa County",
+        "coverage": "postponed",
+        "last_checked": "2026-07-01T01:57:27Z",
+        "lat": 33.533111,
+        "lng": -112.189901,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:glendale",
+        "sample_meeting_count": "",
+        "state": "az"
+      }
+    },
+    {
+      "city": "Mesa",
+      "calendar_found": true,
+      "calendar_url": "https://mesa.legistar.com/Calendar.aspx",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Mesa",
+        "county": "Maricopa County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 33.400626,
+        "lng": -111.716487,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:mesa",
+        "sample_meeting_count": 17,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Peoria",
+      "calendar_found": true,
+      "calendar_url": "https://peoriaaz.novusagenda.com/agendapublic/meetingsgeneral.aspx?meetingtype=1&Date=cus&From=01/01/2016&To=12/31/2026",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Peoria",
+        "county": "Maricopa County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 33.786186,
+        "lng": -112.308042,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:peoria",
+        "sample_meeting_count": 680,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Phoenix",
+      "calendar_found": true,
+      "calendar_url": "https://phoenix.legistar.com/Calendar.aspx",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Phoenix",
+        "county": "Maricopa County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 33.572154,
+        "lng": -112.090132,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:phoenix",
+        "sample_meeting_count": 10,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Scottsdale",
+      "calendar_found": true,
+      "calendar_url": "https://scottsdale.granicus.com/ViewPublisher.php?view_id=118",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Scottsdale",
+        "county": "Maricopa County",
+        "coverage": "postponed",
+        "last_checked": null,
+        "lat": 33.684272,
+        "lng": -111.861448,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:scottsdale",
+        "sample_meeting_count": 1095,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Tempe",
+      "calendar_found": true,
+      "calendar_url": "https://tempe.hylandcloud.com/AgendaOnline",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Tempe",
+        "county": "Maricopa County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 33.388414,
+        "lng": -111.931782,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:tempe",
+        "sample_meeting_count": 39,
+        "state": "az"
+      }
+    }
+  ]
+}

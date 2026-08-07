@@ -1,0 +1,58 @@
+{
+  "county": "Graham",
+  "state": "Arizona",
+  "city_count": 3,
+  "cities": [
+    {
+      "city": "Pima",
+      "calendar_found": true,
+      "calendar_url": "https://www.pimatown.az.gov/town_council/agendas_and_minutes.php",
+      "notes": "Agendas and Minutes page (Regular meetings are the second Tuesday of the month)",
+      "coverage": {
+        "city": "Pima",
+        "county": "Graham County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T04:04:27Z",
+        "lat": 32.891886,
+        "lng": -109.844268,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:pima",
+        "sample_meeting_count": 108,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Safford",
+      "calendar_found": true,
+      "calendar_url": "https://www.cityofsafford.us/AgendaCenter",
+      "notes": "CivicEngage Agenda Center for Council Meeting Agendas and Minutes",
+      "coverage": {
+        "city": "Safford",
+        "county": "Graham County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 32.833298,
+        "lng": -109.697418,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:safford",
+        "sample_meeting_count": 2,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Thatcher",
+      "calendar_found": true,
+      "calendar_url": "https://www.thatcher.az.gov/government/advanced-components/list-detail-pages/calendar-meeting-list",
+      "notes": "Town Council Meeting List (Regular meetings are the 3rd Monday of the month)",
+      "coverage": {
+        "city": "Thatcher",
+        "county": "Graham County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 32.812708,
+        "lng": -109.766516,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:thatcher",
+        "sample_meeting_count": "",
+        "state": "az"
+      }
+    }
+  ]
+}

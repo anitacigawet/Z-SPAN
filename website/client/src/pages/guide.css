@@ -1,0 +1,1501 @@
+/* Guide cinematic rebuild — Phase G (2026-06-02).
+ *
+ * The Guide is the present-tense layer of the network — what's broadcasting
+ * right now. Visual register: Xbox Big Picture / Plex-now-playing rather
+ * than the catalog-grid grammar of the rest of the site.
+ *
+ * Ported from Traveling/styles.css (CC0 "Escape Kingman" project):
+ * - depth gradient (top blue ellipse + bottom amber crescent over #04050a)
+ * - starfield + grain overlay
+ * - twinkle animation
+ *
+ * All Guide-specific styles live here so the rest of the app's CSS is
+ * untouched. Scoped under .guide-root so nothing leaks.
+ */
+
+.guide-root {
+ position: relative;
+ min-height: 100vh;
+ color: #f1ece0;
+ font-family: "Manrope", "Helvetica Neue", Helvetica, system-ui, sans-serif;
+ font-size: 15px;
+ line-height: 1.5;
+ letter-spacing: 0.005em;
+ /* V1-design-1 #5 — celestial sandwich (Gemini reference image #3).
+ * Top sphere is a recognizable bright body descending into the header;
+ * bottom shows the upper edge of a warmer sphere rising from below.
+ * The viewer reads as suspended in the dark band between them.
+ *
+ * Stacked radial-gradients per sphere: inner BODY (bright disc with
+ * visible curvature) + outer ATMOSPHERE (soft halo extending beyond
+ * the body). Anchored OUTSIDE the viewport (at 50% -8% and 50% 116%)
+ * so only the inward-facing arc is visible. */
+ background:
+ /* Top crescent — image-1 ellipse shape seated at the top edge.
+ * Alphas bumped ~30% from the prior pass per operator's 'slightly
+ * increase the brightness of the top and bottom elements'. Still
+ * fades out by ~68% Y so the middle band stays pure black. */
+ radial-gradient(
+ ellipse 65% 32% at 50% 0%,
+ rgba(118, 148, 188, 0.30) 0%,
+ rgba(76, 104, 146, 0.15) 28%,
+ rgba(40, 58, 90, 0.05) 50%,
+ transparent 68%
+ ),
+ /* Bottom crescent — same ~30% brightness bump for symmetry. */
+ radial-gradient(
+ ellipse 75% 30% at 50% 100%,
+ rgba(128, 104, 80, 0.24) 0%,
+ rgba(88, 70, 52, 0.11) 30%,
+ rgba(44, 35, 26, 0.03) 52%,
+ transparent 70%
+ ),
+ /* Pure deep-space black base — no blue tint, no warm tint, just
+ * black so the celestial crescents read as the only color in the
+ * frame + stars and country carry the focal weight. */
+ #000000;
+ overflow-x: hidden;
+}
+
+/* —— Starfield (G-1) + V1-design-1 #5 mask ——
+ * Fixed full-viewport SVG behind the gradient + content. mulberry32-seeded
+ * pinpoints + medium stars + bright feature stars with cross-flares.
+ * z:0 sits between the gradient (rendered as a background-image on .guide-root)
+ * and the content (z:1+).
+ *
+ * The mask-image fades stars at the top + bottom edges so they concentrate
+ * in the middle ambient band — the "viewer suspended in space between two
+ * spheres" composition. Without the mask the stars overlap the bright
+ * sphere glows and the celestial-sandwich read collapses into "stars
+ * everywhere with diffuse gradients on top." */
+.guide-root .guide-starfield {
+ position: fixed;
+ inset: 0;
+ z-index: 0;
+ pointer-events: none;
+ overflow: hidden;
+ mask-image: linear-gradient(
+ to bottom,
+ transparent 0%,
+ rgba(0, 0, 0, 0.35) 12%,
+ rgba(0, 0, 0, 0.85) 28%,
+ rgba(0, 0, 0, 1) 42%,
+ rgba(0, 0, 0, 1) 58%,
+ rgba(0, 0, 0, 0.85) 72%,
+ rgba(0, 0, 0, 0.35) 88%,
+ transparent 100%
+ );
+ -webkit-mask-image: linear-gradient(
+ to bottom,
+ transparent 0%,
+ rgba(0, 0, 0, 0.35) 12%,
+ rgba(0, 0, 0, 0.85) 28%,
+ rgba(0, 0, 0, 1) 42%,
+ rgba(0, 0, 0, 1) 58%,
+ rgba(0, 0, 0, 0.85) 72%,
+ rgba(0, 0, 0, 0.35) 88%,
+ transparent 100%
+ );
+}
+.guide-root .guide-starfield svg {
+ width: 100%;
+ height: 100%;
+ display: block;
+}
+.guide-root .guide-starfield-grain {
+ position: absolute;
+ inset: 0;
+ opacity: 0.05;
+ mix-blend-mode: overlay;
+ background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/></svg>");
+}
+@keyframes guide-twinkle {
+ 0%,
+ 100% {
+ opacity: var(--o, 0.5);
+ }
+ 50% {
+ opacity: calc(var(--o, 0.5) * 0.25);
+ }
+}
+.guide-root .guide-tw {
+ animation: guide-twinkle var(--d, 6s) ease-in-out infinite;
+ animation-delay: var(--delay, 0s);
+}
+
+/* —— Content layer above the starfield ——
+ * Everything rendered as children of .guide-root needs z:1+ so it sits
+ * above the starfield (which is z:0 inside .guide-root). Flex column
+ * with min-height:100vh so the .guide-bottom-eyebrow footer lands at
+ * the actual viewport bottom (in the warm crescent zone) regardless
+ * of how much main content there is. */
+.guide-root .guide-content {
+ position: relative;
+ z-index: 1;
+ width: 100%;
+ min-height: 100vh;
+ display: flex;
+ flex-direction: column;
+}
+
+/* —— Header chrome ——
+ * Top bar mirrors the rest of the app's sticky chrome (per the channel
+ * browser / HQ pattern) but reads slightly darker + more atmospheric to
+ * match the cinematic register. Translucent so the starfield bleeds
+ * through subtly at the top edge. */
+.guide-root .guide-chrome {
+ position: sticky;
+ top: 0;
+ z-index: 40;
+ /* V1-design-1 #5 — chrome made fully transparent so the top sphere
+ * arc reads continuously into the header area per the Gemini ref.
+ * The prior opaque rgba(4,5,10,0.78) + 14px backdrop-blur was
+ * blocking the sphere from bleeding into the title region. */
+ background: transparent;
+ backdrop-filter: none;
+ border-bottom: none;
+}
+.guide-root .guide-chrome-inner {
+ max-width: 1600px;
+ margin: 0 auto;
+ padding: 18px 32px 12px;
+ display: grid;
+ grid-template-columns: 1fr auto 1fr;
+ align-items: center;
+ gap: 24px;
+}
+.guide-root .guide-chrome-left {
+ display: flex;
+ align-items: center;
+ justify-self: start;
+ min-width: 0;
+}
+.guide-root .guide-chrome-center {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-self: center;
+ gap: 4px;
+ min-width: 0;
+}
+.guide-root .guide-title-count-row {
+ display: inline-flex;
+ align-items: center;
+ gap: 8px;
+}
+/* V1-design-1 iter — icon-only chrome buttons.
+ * Unified shape for back / mode-swap / refresh: small square dark-glass
+ * tile with the lucide SVG icon centered. Matches the minimal
+ * 'controls fade into the celestial space' intent operator referenced. */
+.guide-root .guide-icon-btn {
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ width: 36px;
+ height: 36px;
+ padding: 0;
+ border: 1px solid rgba(180, 220, 255, 0.14);
+ border-radius: 8px;
+ background: rgba(15, 20, 36, 0.65);
+ color: rgba(241, 236, 224, 0.78);
+ cursor: pointer;
+ transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+ backdrop-filter: blur(6px);
+ -webkit-backdrop-filter: blur(6px);
+}
+.guide-root .guide-icon-btn:hover {
+ color: #ffffff;
+ background: rgba(28, 32, 52, 0.85);
+ border-color: rgba(180, 220, 255, 0.28);
+}
+.guide-root .guide-icon-btn:focus-visible {
+ outline: 2px solid rgba(139, 233, 253, 0.55);
+ outline-offset: 2px;
+}
+.guide-root .guide-icon-btn svg {
+ display: block;
+}
+.guide-root .guide-live-dot {
+ position: relative;
+ display: inline-flex;
+ width: 7px;
+ height: 7px;
+}
+.guide-root .guide-live-dot::before {
+ content: "";
+ position: absolute;
+ inset: 0;
+ border-radius: 999px;
+ background: #e5484d;
+ opacity: 0.75;
+ animation: guide-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.guide-root .guide-live-dot::after {
+ content: "";
+ position: absolute;
+ inset: 0;
+ border-radius: 999px;
+ background: #e5484d;
+}
+/* Inactive state — no broadcasts live. Honest dim-grey dot, no ping
+ * animation. Per operator: 'when there is 0 also, the dot should
+ * just be grey for state honesty.' */
+.guide-root .guide-live-dot--inactive::before {
+ background: rgba(180, 190, 210, 0.35);
+ opacity: 0.6;
+ animation: none;
+}
+.guide-root .guide-live-dot--inactive::after {
+ background: rgba(180, 190, 210, 0.65);
+}
+@keyframes guide-ping {
+ 75%,
+ 100% {
+ transform: scale(2);
+ opacity: 0;
+ }
+}
+.guide-root .guide-title {
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 13px;
+ font-weight: 700;
+ letter-spacing: 0.18em;
+ text-transform: uppercase;
+ color: #ffffff;
+ white-space: nowrap;
+}
+.guide-root .guide-title-count {
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 10px;
+ letter-spacing: 0.18em;
+ text-transform: uppercase;
+ color: rgba(241, 236, 224, 0.42);
+ white-space: nowrap;
+}
+/* —— Right-side chrome action group ——
+ * Holds the mode-swap pill + the Refresh button as a tight pair on the
+ * right edge of the header. Per the 2026-06-19 V1-design-1 refinement #4,
+ * the prior center-mounted 2-button MAP/CARDS toggle was replaced with a
+ * single mode-swap pill that shows the DESTINATION mode (when on cards,
+ * label="Map" → clicking switches to map; vice versa). Keeps the visual
+ * register tighter and gives the title-block more breathing room. */
+.guide-root .guide-chrome-actions {
+ display: inline-flex;
+ align-items: center;
+ justify-self: end;
+ gap: 8px;
+}
+/* Refresh button — inherits .guide-icon-btn; only the loading-spin
+ * animation needs a specific rule. */
+.guide-root .guide-refresh-btn.is-loading svg {
+ animation: guide-spin 0.8s linear infinite;
+}
+@keyframes guide-spin {
+ to {
+ transform: rotate(360deg);
+ }
+}
+
+/* —— Main content area ——
+ * flex:1 so main expands to fill available viewport height between
+ * the sticky header and the bottom-eyebrow footer. Padding pushes
+ * the map content below the top-glow falloff. */
+.guide-root .guide-main {
+ flex: 1;
+ width: 100%;
+ max-width: 1600px;
+ margin: 0 auto;
+ padding: 72px 32px 32px;
+}
+
+/* —— GuideCard (G-3) — one card per live broadcast ——
+ * Each card is a Leaflet snapshot of the meeting's county (dark CartoDB
+ * tiles + dashed amber polygon from us-atlas + pulse pin on active city)
+ * with the state name promoted as a large overlay + a small meta strip
+ * below (title + city/county). Interaction disabled on the map; click
+ * handler lands in G-5 (cinematic takeover). U-curve depth lands in G-4. */
+
+.guide-root .guide-card-deck {
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: center;
+ align-items: flex-start;
+ gap: 28px;
+ max-width: 1400px;
+ margin: 0 auto;
+ /* G-4 — U-curve depth. Perspective parent + preserve-3d so per-card
+ * rotateY/translateZ (set inline from GuideRoot based on position)
+ * actually renders in 3D space. V1-UI-2 C2 — perspective tightened
+ * 2200→1600. V1-UI-2 C5 — Opus visual critique pass on the 3-card
+ * mock-render showed even 1600 read as nearly flat at desktop scale;
+ * tightened further to 1200 + tilt bumped 15→22 in GuideRoot.tsx so
+ * the U-curve is unmistakable without going theatrical. */
+ perspective: 1200px;
+ transform-style: preserve-3d;
+}
+
+.guide-root .guide-card {
+ display: flex;
+ flex-direction: column;
+ width: 360px;
+ height: 280px;
+ padding: 0;
+ background: rgba(10, 14, 28, 0.6);
+ border: 1px solid rgba(180, 220, 255, 0.10);
+ border-radius: 14px;
+ overflow: hidden;
+ cursor: pointer;
+ text-align: left;
+ font-family: inherit;
+ color: inherit;
+ /* G-4 — the rotateY + translateZ are set inline from GuideRoot via
+ * the `style` prop (per-card tilt computed by position-from-center).
+ * The transform-origin is center-vertical so cards rotate around
+ * their own axis, cradling toward the row's center. */
+ transform-origin: 50% 50%;
+ transition:
+ border-color 0.22s ease,
+ background-color 0.22s ease,
+ box-shadow 0.22s ease;
+ /* NOTE: transform is intentionally excluded from the transition list
+ * — the inline tilt is static per-position; transitioning it would
+ * make the deck animate as cards rerender, which reads as buggy. */
+}
+.guide-root .guide-card:hover,
+.guide-root .guide-card:focus-visible {
+ border-color: rgba(217, 165, 90, 0.4);
+ background: rgba(15, 20, 36, 0.85);
+ box-shadow: 0 16px 40px -20px rgba(217, 165, 90, 0.4);
+ outline: none;
+}
+
+/* Map area fills the card minus the meta strip. */
+.guide-root .guide-card-map {
+ position: relative;
+ flex: 1 1 auto;
+ width: 100%;
+ min-height: 0;
+ background: #0a0e1c;
+ border-bottom: 1px solid rgba(180, 220, 255, 0.06);
+}
+.guide-root .guide-card-map-host {
+ position: absolute;
+ inset: 0;
+}
+/* Leaflet's container needs background:transparent so our dark card bg
+ * shows through if tiles fail to load (offline / CartoDB blip). */
+.guide-root .guide-card-map-host.leaflet-container {
+ background: transparent;
+}
+
+/* Promoted state name — overlay in the top-right corner of the map.
+ * Cormorant Garamond italic, deliberately prominent per James's spec
+ * ("make the name of the state stand out a bit more and be a bit
+ * larger"). Bumped 22px→30px + opacity 0.72→0.92 after the G-3 Opus
+ * critique flagged the original treatment as timid. */
+.guide-root .guide-card-state-name {
+ position: absolute;
+ top: 10px;
+ right: 14px;
+ z-index: 410;
+ font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+ font-weight: 300;
+ font-style: italic;
+ font-size: 30px;
+ line-height: 1;
+ letter-spacing: -0.005em;
+ color: rgba(232, 192, 130, 0.92);
+ text-shadow:
+ 0 1px 12px rgba(4, 5, 10, 0.95),
+ 0 0 3px rgba(4, 5, 10, 0.6);
+ pointer-events: none;
+ user-select: none;
+}
+
+/* LIVE chip — top-left corner, mirrors the rest of the app's live-dot
+ * pattern with a small text label. Red, pulsing, deliberate. */
+.guide-root .guide-card-live-chip {
+ position: absolute;
+ top: 12px;
+ left: 12px;
+ z-index: 410;
+ display: inline-flex;
+ align-items: center;
+ gap: 6px;
+ padding: 4px 8px 4px 7px;
+ border-radius: 999px;
+ background: rgba(4, 5, 10, 0.75);
+ border: 1px solid rgba(229, 72, 77, 0.4);
+ color: #e5484d;
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 9px;
+ font-weight: 700;
+ letter-spacing: 0.22em;
+ text-transform: uppercase;
+ pointer-events: none;
+}
+.guide-root .guide-card-live-chip .guide-card-live-dot {
+ position: relative;
+ width: 6px;
+ height: 6px;
+ border-radius: 999px;
+ background: #e5484d;
+}
+.guide-root .guide-card-live-chip .guide-card-live-dot::before {
+ content: "";
+ position: absolute;
+ inset: 0;
+ border-radius: 999px;
+ background: #e5484d;
+ opacity: 0.7;
+ animation: guide-card-live-pulse 1.6s ease-out infinite;
+}
+@keyframes guide-card-live-pulse {
+ 0% {
+ transform: scale(0.8);
+ opacity: 0.7;
+ }
+ 100% {
+ transform: scale(2.6);
+ opacity: 0;
+ }
+}
+
+/* Active-city pulse pin — Leaflet DivIcon. White core (so it pops AGAINST
+ * the amber county polygon — the original amber-on-amber treatment made
+ * the pin invisible per the G-3 Opus critique) + amber halo + two
+ * staggered amber pulses. Mirrors Traveling's kingman-pin pattern
+ * structurally; the white core is the disambiguation from the polygon. */
+.guide-root .leaflet-container .guide-card-pin {
+ position: relative;
+ width: 16px;
+ height: 16px;
+}
+.guide-root .leaflet-container .guide-card-pin .guide-card-pin-dot {
+ position: absolute;
+ inset: 5px;
+ border-radius: 999px;
+ background: #ffffff;
+ box-shadow:
+ 0 0 4px rgba(255, 255, 255, 0.95),
+ 0 0 10px rgba(217, 165, 90, 0.95),
+ 0 0 18px rgba(217, 165, 90, 0.7);
+}
+.guide-root .leaflet-container .guide-card-pin .guide-card-pin-pulse {
+ position: absolute;
+ inset: 0;
+ border-radius: 999px;
+ background: rgba(255, 220, 160, 0.55);
+ animation: guide-card-pin-pulse 1.8s ease-out infinite;
+}
+.guide-root .leaflet-container .guide-card-pin .guide-card-pin-pulse--late {
+ animation-delay: 0.7s;
+}
+@keyframes guide-card-pin-pulse {
+ 0% {
+ transform: scale(0.5);
+ opacity: 0.75;
+ }
+ 100% {
+ transform: scale(3.5);
+ opacity: 0;
+ }
+}
+
+/* Bottom meta strip — title + city/county subtitle. Fixed height so all
+ * cards line up regardless of title length. Title truncates to one line. */
+.guide-root .guide-card-meta {
+ flex: 0 0 auto;
+ padding: 12px 16px 14px;
+ background: rgba(4, 5, 10, 0.85);
+}
+.guide-root .guide-card-meta-title {
+ display: -webkit-box;
+ -webkit-line-clamp: 1;
+ -webkit-box-orient: vertical;
+ overflow: hidden;
+ font-size: 13px;
+ font-weight: 600;
+ color: #ffffff;
+ line-height: 1.35;
+}
+.guide-root .guide-card-meta-place {
+ margin-top: 3px;
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 10px;
+ letter-spacing: 0.08em;
+ color: rgba(241, 236, 224, 0.5);
+ text-transform: uppercase;
+}
+
+/* —— Cinematic takeover (G-5) ——
+ * Full-screen player overlay opened on card click. Gradient + starfield
+ * stay visible behind a backdrop-filter:blur scrim. Frame zooms + fades
+ * in for the cinematic register James asked for (Xbox Big Picture). */
+
+.guide-root .guide-takeover-overlay {
+ position: fixed;
+ inset: 0;
+ z-index: 60;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ padding: 32px;
+ background: rgba(4, 5, 10, 0.72);
+ backdrop-filter: blur(14px);
+ -webkit-backdrop-filter: blur(14px);
+ animation: guide-takeover-overlay-in 250ms ease-out;
+}
+@keyframes guide-takeover-overlay-in {
+ from {
+ opacity: 0;
+ backdrop-filter: blur(0);
+ }
+ to {
+ opacity: 1;
+ backdrop-filter: blur(14px);
+ }
+}
+
+.guide-root .guide-takeover-frame {
+ position: relative;
+ width: min(100%, 1280px);
+ max-height: calc(100vh - 64px);
+ display: flex;
+ flex-direction: column;
+ gap: 18px;
+ padding: 28px 32px 24px;
+ border: 1px solid rgba(180, 220, 255, 0.12);
+ border-radius: 18px;
+ background:
+ radial-gradient(ellipse 60% 40% at 50% 0%, rgba(30, 36, 60, 0.5), transparent 70%),
+ rgba(8, 10, 22, 0.95);
+ box-shadow:
+ 0 60px 120px -40px rgba(0, 0, 0, 0.8),
+ 0 0 0 1px rgba(180, 220, 255, 0.06);
+ animation: guide-takeover-frame-in 380ms cubic-bezier(0.16, 1, 0.3, 1);
+ font-family: "Manrope", "Helvetica Neue", Helvetica, system-ui, sans-serif;
+}
+@keyframes guide-takeover-frame-in {
+ from {
+ opacity: 0;
+ transform: scale(0.86) translateY(20px);
+ }
+ to {
+ opacity: 1;
+ transform: scale(1) translateY(0);
+ }
+}
+
+.guide-root .guide-takeover-close {
+ position: absolute;
+ top: 14px;
+ right: 14px;
+ width: 36px;
+ height: 36px;
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ border: 1px solid rgba(180, 220, 255, 0.12);
+ border-radius: 999px;
+ background: rgba(15, 20, 36, 0.85);
+ color: rgba(241, 236, 224, 0.75);
+ cursor: pointer;
+ transition:
+ background-color 0.18s ease,
+ color 0.18s ease,
+ border-color 0.18s ease;
+ z-index: 5;
+}
+.guide-root .guide-takeover-close:hover {
+ background: rgba(28, 32, 52, 0.95);
+ color: #ffffff;
+ border-color: rgba(180, 220, 255, 0.32);
+}
+/* Esc hint sits under the close button (per G-5 Opus follow-up) so the
+ * keyboard escape is discoverable without crowding the close affordance.
+ * G-6 iter: bumped top 56→64px so the hint has breathing room from the
+ * close button (was touching its bottom edge — Opus G-6 round). */
+.guide-root .guide-takeover-esc-hint {
+ position: absolute;
+ top: 64px;
+ right: 22px;
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 9px;
+ font-weight: 500;
+ letter-spacing: 0.22em;
+ text-transform: uppercase;
+ color: rgba(241, 236, 224, 0.42);
+ pointer-events: none;
+ user-select: none;
+}
+
+.guide-root .guide-takeover-header {
+ display: flex;
+ flex-direction: column;
+ gap: 4px;
+ padding-right: 56px; /* clear of the close button */
+}
+.guide-root .guide-takeover-meta {
+ display: inline-flex;
+ align-items: center;
+ gap: 12px;
+}
+.guide-root .guide-takeover-live {
+ display: inline-flex;
+ align-items: center;
+ gap: 6px;
+ padding: 3px 8px 3px 7px;
+ border-radius: 999px;
+ background: rgba(229, 72, 77, 0.16);
+ color: #e5484d;
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 9px;
+ font-weight: 700;
+ letter-spacing: 0.22em;
+ text-transform: uppercase;
+}
+.guide-root .guide-takeover-live-dot {
+ position: relative;
+ width: 6px;
+ height: 6px;
+ border-radius: 999px;
+ background: #e5484d;
+}
+.guide-root .guide-takeover-live-dot::before {
+ content: "";
+ position: absolute;
+ inset: 0;
+ border-radius: 999px;
+ background: #e5484d;
+ opacity: 0.7;
+ animation: guide-card-live-pulse 1.6s ease-out infinite;
+}
+.guide-root .guide-takeover-state-name {
+ font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+ font-weight: 300;
+ font-style: italic;
+ font-size: 20px;
+ color: rgba(232, 192, 130, 0.85);
+}
+.guide-root .guide-takeover-title {
+ margin: 4px 0 0;
+ font-size: 22px;
+ font-weight: 600;
+ line-height: 1.25;
+ color: #ffffff;
+}
+.guide-root .guide-takeover-place {
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 11px;
+ color: rgba(241, 236, 224, 0.5);
+ letter-spacing: 0.08em;
+ text-transform: uppercase;
+}
+
+.guide-root .guide-takeover-player-frame {
+ position: relative;
+ width: 100%;
+ aspect-ratio: 16 / 9;
+ overflow: hidden;
+ border-radius: 12px;
+ background: #000000;
+ border: 1px solid rgba(180, 220, 255, 0.06);
+}
+.guide-root .guide-takeover-player {
+ position: absolute;
+ inset: 0;
+ width: 100%;
+ height: 100%;
+ border: 0;
+}
+
+.guide-root .guide-takeover-footer {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ gap: 16px;
+ padding-top: 4px;
+}
+.guide-root .guide-takeover-link {
+ color: rgba(139, 233, 253, 0.8);
+ font-size: 12px;
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ text-decoration: none;
+ letter-spacing: 0.04em;
+}
+.guide-root .guide-takeover-link:hover {
+ color: #ffffff;
+ text-decoration: underline;
+}
+.guide-root .guide-takeover-demote {
+ display: inline-flex;
+ align-items: center;
+ gap: 6px;
+ padding: 8px 16px;
+ border: 1px solid rgba(139, 233, 253, 0.35);
+ border-radius: 999px;
+ background: transparent;
+ color: rgba(205, 246, 255, 0.9);
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 11px;
+ font-weight: 500;
+ letter-spacing: 0.12em;
+ text-transform: uppercase;
+ cursor: pointer;
+ transition:
+ background-color 0.18s ease,
+ color 0.18s ease,
+ border-color 0.18s ease;
+}
+.guide-root .guide-takeover-demote:hover {
+ background: rgba(139, 233, 253, 0.12);
+ color: #ffffff;
+ border-color: rgba(139, 233, 253, 0.6);
+}
+
+/* —— Inline player (G-6) ——
+ * Plex-now-playing-style HORIZONTAL DOCKED BAR at the bottom of the
+ * viewport (per G-6 Opus iteration — the original 440px corner PiP
+ * read as a chat widget rather than a "now playing" rail). Small
+ * video on the left, title + place + LIVE chip in the center, action
+ * buttons on the right. Single slot — clicking another card while
+ * inline mode is active swaps the player's video (NOT opens a new
+ * player). Maximize button returns to cinematic; close exits the
+ * player entirely (resetting playerMode to cinematic for next open). */
+
+.guide-root .guide-inline-player {
+ position: fixed;
+ left: 50%;
+ bottom: 20px;
+ transform: translateX(-50%);
+ z-index: 50;
+ width: min(960px, calc(100vw - 40px));
+ display: grid;
+ grid-template-columns: 168px 1fr auto;
+ align-items: stretch;
+ gap: 0;
+ border-radius: 14px;
+ /* Surface treatment matches the GuideCard register per G-10 cross-view
+ * Opus critique that flagged the heavier 0.96 opacity as making the
+ * bar read as a different product from the cards above it. Same
+ * (10, 14, 28) base, same 0.10 border alpha, lighter shadow. */
+ background: rgba(10, 14, 28, 0.85);
+ backdrop-filter: blur(8px);
+ -webkit-backdrop-filter: blur(8px);
+ border: 1px solid rgba(180, 220, 255, 0.10);
+ box-shadow:
+ 0 28px 64px -20px rgba(0, 0, 0, 0.65),
+ 0 0 0 1px rgba(180, 220, 255, 0.04);
+ overflow: hidden;
+ font-family: "Manrope", "Helvetica Neue", Helvetica, system-ui, sans-serif;
+ animation: guide-inline-player-in 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes guide-inline-player-in {
+ from {
+ opacity: 0;
+ transform: translateX(-50%) translateY(20px);
+ }
+ to {
+ opacity: 1;
+ transform: translateX(-50%) translateY(0);
+ }
+}
+
+/* Left column — the small live video. 16:9 aspect inside the
+ * 168px column → ~95px tall, the bar's natural height. */
+.guide-root .guide-inline-player-frame {
+ position: relative;
+ width: 168px;
+ aspect-ratio: 16 / 9;
+ background: #000000;
+ border-right: 1px solid rgba(180, 220, 255, 0.06);
+}
+.guide-root .guide-inline-player-iframe {
+ position: absolute;
+ inset: 0;
+ width: 100%;
+ height: 100%;
+ border: 0;
+}
+
+/* Center column — meta block (LIVE chip + title + place). Title has
+ * room here that the corner-frame couldn't give it. The head wraps a
+ * single .guide-inline-player-meta (actions are a SEPARATE grid child,
+ * not nested here — see InlinePlayer.tsx comment). `min-width: 0` on
+ * both the grid item and the inner ellipsis target is what lets a long
+ * title actually truncate inside a `1fr` grid column. */
+.guide-root .guide-inline-player-head {
+ display: flex;
+ align-items: center;
+ padding: 10px 16px;
+ min-width: 0;
+}
+.guide-root .guide-inline-player-meta {
+ display: flex;
+ align-items: center;
+ gap: 12px;
+ min-width: 0;
+ width: 100%;
+}
+.guide-root .guide-inline-player-live {
+ display: inline-flex;
+ align-items: center;
+ gap: 5px;
+ padding: 3px 8px 3px 7px;
+ border-radius: 999px;
+ background: rgba(229, 72, 77, 0.16);
+ color: #e5484d;
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 9px;
+ font-weight: 700;
+ letter-spacing: 0.22em;
+ text-transform: uppercase;
+ flex-shrink: 0;
+}
+.guide-root .guide-inline-player-live-dot {
+ position: relative;
+ width: 5px;
+ height: 5px;
+ border-radius: 999px;
+ background: #e5484d;
+}
+.guide-root .guide-inline-player-live-dot::before {
+ content: "";
+ position: absolute;
+ inset: 0;
+ border-radius: 999px;
+ background: #e5484d;
+ opacity: 0.7;
+ animation: guide-card-live-pulse 1.6s ease-out infinite;
+}
+.guide-root .guide-inline-player-meta-text {
+ min-width: 0;
+ flex: 1 1 auto;
+}
+.guide-root .guide-inline-player-title {
+ font-size: 13px;
+ font-weight: 600;
+ color: #ffffff;
+ line-height: 1.3;
+ white-space: nowrap;
+ overflow: hidden;
+ text-overflow: ellipsis;
+}
+.guide-root .guide-inline-player-place {
+ margin-top: 2px;
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 10px;
+ letter-spacing: 0.08em;
+ color: rgba(241, 236, 224, 0.5);
+ text-transform: uppercase;
+ white-space: nowrap;
+ overflow: hidden;
+ text-overflow: ellipsis;
+}
+
+/* Right column — actions. Buttons aligned to the right edge of the bar.
+ * This is the THIRD grid child (auto-sized), pinned right by the grid
+ * track itself. Padding lives here so the buttons keep visual breathing
+ * room from the head's ellipsis edge. */
+.guide-root .guide-inline-player-actions {
+ display: flex;
+ align-items: center;
+ gap: 6px;
+ padding: 0 16px;
+ flex-shrink: 0;
+}
+.guide-root .guide-inline-player-action {
+ display: inline-flex;
+ align-items: center;
+ gap: 5px;
+ padding: 6px 12px;
+ border: 1px solid rgba(180, 220, 255, 0.14);
+ border-radius: 999px;
+ background: transparent;
+ color: rgba(241, 236, 224, 0.75);
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 10px;
+ font-weight: 500;
+ letter-spacing: 0.14em;
+ text-transform: uppercase;
+ cursor: pointer;
+ transition:
+ background-color 0.18s ease,
+ color 0.18s ease,
+ border-color 0.18s ease;
+}
+.guide-root .guide-inline-player-action:hover {
+ background: rgba(180, 220, 255, 0.1);
+ color: #ffffff;
+ border-color: rgba(180, 220, 255, 0.32);
+}
+.guide-root .guide-inline-player-close {
+ padding: 6px 8px;
+}
+
+/* —— Aggregate map view (G-7) ——
+ * Single Leaflet of the continental US — every active broadcast's
+ * county highlighted in dashed-amber + a pulse-dot at the active city.
+ * Click → opens the broadcast (cinematic or inline, matching the
+ * current playerMode in GuideRoot). */
+
+.guide-root .guide-aggregate-wrap {
+ position: relative;
+ width: 100%;
+ max-width: 1600px;
+ margin: 0 auto;
+ display: flex;
+ flex-direction: column;
+}
+/* Map container — soft edge fades into the celestial backdrop. The
+ * CartoDB dark_nolabels basemap brings the fine detail back per the
+ * Escape Kingman aesthetic; the radial mask softens the rectangular
+ * boundary so the basemap dissolves into the surrounding space rather
+ * than reading as a framed widget. */
+.guide-root .guide-aggregate-host {
+ width: 100%;
+ height: min(calc(100vh - 380px), 560px);
+ min-height: 380px;
+ overflow: hidden;
+ border: none;
+ background: transparent;
+ mask-image: radial-gradient(
+ ellipse 82% 76% at 50% 50%,
+ black 40%,
+ rgba(0, 0, 0, 0.92) 65%,
+ rgba(0, 0, 0, 0.55) 85%,
+ transparent 100%
+ );
+ -webkit-mask-image: radial-gradient(
+ ellipse 82% 76% at 50% 50%,
+ black 40%,
+ rgba(0, 0, 0, 0.92) 65%,
+ rgba(0, 0, 0, 0.55) 85%,
+ transparent 100%
+ );
+}
+.guide-root .guide-aggregate-host.leaflet-container {
+ background: #04050a;
+}
+/* Heavy darken on the CartoDB dark_nolabels tiles so the ocean reads
+ * near-black per operator's 'beautiful black' aesthetic — the basemap's
+ * own gray ocean would otherwise compete with the celestial backdrop.
+ * Brightness 0.42 + contrast 1.2 + saturate 0.6 keeps the fine subtle
+ * road/terrain detail visible but pushes overall tone to deep black.
+ * Pins + polygons stay full luminance (filter is scoped to .leaflet-
+ * tile-pane only). */
+.guide-root .guide-aggregate-host .leaflet-tile-pane {
+ filter: brightness(0.62) contrast(1.08);
+}
+
+/* —— Leaflet zoom controls — dark glass restyle (V1-design-1 #1) ——
+ * Default Leaflet renders the +/- pair as a white box with black borders
+ * and a heavy box-shadow — extremely off-theme against the dark celestial
+ * backdrop. Match the same translucent-dark glass family used by the
+ * Guide's other small controls (back btn, refresh btn, mode toggle).
+ * Scoped under .guide-root so this can't leak to other Leaflet surfaces. */
+.guide-root .leaflet-control-zoom {
+ border: 1px solid rgba(180, 220, 255, 0.12);
+ border-radius: 8px;
+ overflow: hidden;
+ box-shadow: 0 8px 24px -12px rgba(0, 0, 0, 0.55);
+ background: transparent;
+}
+.guide-root .leaflet-control-zoom a.leaflet-control-zoom-in,
+.guide-root .leaflet-control-zoom a.leaflet-control-zoom-out {
+ width: 30px;
+ height: 30px;
+ line-height: 30px;
+ background: rgba(15, 20, 36, 0.78);
+ backdrop-filter: blur(8px);
+ -webkit-backdrop-filter: blur(8px);
+ color: rgba(241, 236, 224, 0.78);
+ border: none;
+ border-bottom: 1px solid rgba(180, 220, 255, 0.08);
+ font-size: 16px;
+ font-weight: 500;
+ transition:
+ background-color 0.18s ease,
+ color 0.18s ease;
+}
+.guide-root .leaflet-control-zoom a.leaflet-control-zoom-out {
+ border-bottom: none;
+}
+.guide-root .leaflet-control-zoom a.leaflet-control-zoom-in:hover,
+.guide-root .leaflet-control-zoom a.leaflet-control-zoom-out:hover,
+.guide-root .leaflet-control-zoom a.leaflet-control-zoom-in:focus,
+.guide-root .leaflet-control-zoom a.leaflet-control-zoom-out:focus {
+ background: rgba(28, 32, 52, 0.92);
+ color: #ffffff;
+ outline: none;
+}
+.guide-root .leaflet-control-zoom a.leaflet-control-zoom-in.leaflet-disabled,
+.guide-root .leaflet-control-zoom a.leaflet-control-zoom-out.leaflet-disabled {
+ background: rgba(15, 20, 36, 0.55);
+ color: rgba(241, 236, 224, 0.25);
+ cursor: default;
+}
+
+/* Pulse pin for the aggregate map. Slightly larger than the per-card
+ * pin since this map renders at wide scale and pins compete with the
+ * county polygons for attention. White core + amber halo + double-
+ * staggered pulse (same family as the per-card pin). */
+.guide-root .leaflet-container .guide-aggregate-pin {
+ position: relative;
+ width: 16px;
+ height: 16px;
+ cursor: pointer;
+}
+.guide-root .leaflet-container .guide-aggregate-pin .guide-aggregate-pin-dot {
+ position: absolute;
+ inset: 5px;
+ border-radius: 999px;
+ background: #ffffff;
+ box-shadow:
+ 0 0 4px rgba(255, 255, 255, 0.95),
+ 0 0 10px rgba(217, 165, 90, 0.95),
+ 0 0 18px rgba(217, 165, 90, 0.7);
+}
+.guide-root .leaflet-container .guide-aggregate-pin .guide-aggregate-pin-pulse {
+ position: absolute;
+ inset: 0;
+ border-radius: 999px;
+ background: rgba(255, 220, 160, 0.55);
+ animation: guide-card-pin-pulse 1.8s ease-out infinite;
+}
+.guide-root .leaflet-container .guide-aggregate-pin .guide-aggregate-pin-pulse--late {
+ animation-delay: 0.7s;
+}
+
+/* —— Leaflet attribution bar — dark glass restyle (V1-design-1 #2) ——
+ * OSM + CARTO licenses REQUIRE visible attribution, so display:none is
+ * illegal. Instead: translucent dark bg + dim text so the attribution
+ * stays legibly visible (license compliance) but reads as part of the
+ * dark glass control family rather than the bright default white box.
+ * Border omitted — the dark backdrop-blurred surface carries the visual
+ * definition on its own, and a borderless pill reads as more 'tucked
+ * into the corner' than a framed one (matches operator intent). Links
+ * get a subtle cyan tint matching the mode-toggle active color so they
+ * remain discoverable. */
+.guide-root .leaflet-control-attribution {
+ background: rgba(8, 10, 22, 0.75);
+ backdrop-filter: blur(8px);
+ -webkit-backdrop-filter: blur(8px);
+ border: none;
+ border-top-left-radius: 6px;
+ padding: 3px 8px;
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 10px;
+ letter-spacing: 0.02em;
+ color: rgba(241, 236, 224, 0.55);
+}
+.guide-root .leaflet-control-attribution a {
+ color: rgba(139, 233, 253, 0.72);
+ text-decoration: none;
+}
+.guide-root .leaflet-control-attribution a:hover,
+.guide-root .leaflet-control-attribution a:focus {
+ color: #cdf6ff;
+ text-decoration: underline;
+ outline: none;
+}
+
+
+/* Tooltip styling — dark + on-brand. Default Leaflet tooltip is white. */
+.guide-root .leaflet-tooltip.guide-aggregate-tip {
+ background: rgba(8, 10, 22, 0.96);
+ border: 1px solid rgba(217, 165, 90, 0.32);
+ border-radius: 8px;
+ padding: 8px 12px;
+ color: #f1ece0;
+ font-family: "Manrope", "Helvetica Neue", Helvetica, system-ui, sans-serif;
+ box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.75);
+}
+.guide-root .leaflet-tooltip.guide-aggregate-tip::before {
+ border-top-color: rgba(217, 165, 90, 0.32) !important;
+}
+.guide-root .guide-aggregate-tip-title {
+ font-size: 12px;
+ font-weight: 600;
+ color: #ffffff;
+ margin-bottom: 2px;
+}
+.guide-root .guide-aggregate-tip-place {
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 9px;
+ letter-spacing: 0.08em;
+ color: rgba(241, 236, 224, 0.55);
+ text-transform: uppercase;
+}
+
+/* Empty-state overlay — sits on top of the (blank) map when no broadcasts
+ * are live. Dismissible via 'Okay' (session-only) or 'Never show again'
+ * (localStorage-persisted). pointer-events:auto so the buttons + link
+ * are interactive (previously pointer-events:none which broke the
+ * channels-link too). */
+.guide-root .guide-aggregate-empty-overlay {
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ pointer-events: auto;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 14px;
+ padding: 18px 28px 16px;
+ max-width: min(420px, 80vw);
+ background: rgba(8, 10, 22, 0.85);
+ border: 1px solid rgba(180, 220, 255, 0.14);
+ border-radius: 12px;
+ backdrop-filter: blur(10px);
+ -webkit-backdrop-filter: blur(10px);
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 12px;
+ color: rgba(241, 236, 224, 0.72);
+ letter-spacing: 0.04em;
+ text-align: center;
+}
+.guide-root .guide-aggregate-empty-text {
+ margin: 0;
+ line-height: 1.55;
+}
+.guide-root .guide-aggregate-empty-actions {
+ display: inline-flex;
+ align-items: center;
+ gap: 8px;
+}
+.guide-root .guide-aggregate-empty-btn {
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ padding: 6px 14px;
+ border: 1px solid rgba(180, 220, 255, 0.18);
+ border-radius: 999px;
+ background: rgba(15, 20, 36, 0.65);
+ color: rgba(220, 230, 245, 0.78);
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 10px;
+ font-weight: 500;
+ letter-spacing: 0.16em;
+ text-transform: uppercase;
+ cursor: pointer;
+ transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+.guide-root .guide-aggregate-empty-btn:hover {
+ color: #ffffff;
+ background: rgba(28, 32, 52, 0.85);
+ border-color: rgba(180, 220, 255, 0.32);
+}
+.guide-root .guide-aggregate-empty-btn:focus-visible {
+ outline: 2px solid rgba(139, 233, 253, 0.55);
+ outline-offset: 2px;
+}
+.guide-root .guide-aggregate-empty-btn--primary {
+ background: rgba(139, 233, 253, 0.12);
+ border-color: rgba(139, 233, 253, 0.55);
+ color: #cdf6ff;
+}
+.guide-root .guide-aggregate-empty-btn--primary:hover {
+ background: rgba(139, 233, 253, 0.22);
+ border-color: rgba(139, 233, 253, 0.75);
+ color: #ffffff;
+}
+
+/* Bottom-glow eyebrow — relocated tagline that previously sat under
+ * the header, now anchored at the page bottom so it lives inside the
+ * warm bottom-crescent zone. Exact same styling shape as the prior
+ * .guide-eyebrow rule (which was swept earlier): max-width container,
+ * JetBrains mono, dim color, centered. The bottom-crescent glow does
+ * the visual 'wrapping' work; the text itself stays plain prose. */
+.guide-root .guide-bottom-eyebrow {
+ max-width: 1600px;
+ margin: 0 auto;
+ padding: 32px 32px 36px;
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 11px;
+ color: rgba(241, 236, 224, 0.45);
+ text-align: center;
+ pointer-events: none;
+ user-select: none;
+}
+
+/* —— Table view (G-9) ——
+ * Dense sortable list of every live broadcast — for operators or anyone
+ * who wants to scan a long list at a glance. Sortable columns (click a
+ * header to sort, click again to flip direction). Click any row to open
+ * the broadcast (cinematic or inline depending on current playerMode). */
+
+.guide-root .guide-table-wrap {
+ width: 100%;
+ max-width: 1280px;
+ margin: 0 auto;
+ border-radius: 12px;
+ background: rgba(10, 14, 28, 0.55);
+ border: 1px solid rgba(180, 220, 255, 0.10);
+ overflow: hidden;
+}
+.guide-root .guide-table {
+ width: 100%;
+ border-collapse: collapse;
+ font-size: 13px;
+}
+.guide-root .guide-table-th {
+ padding: 12px 14px;
+ text-align: left;
+ background: rgba(8, 10, 22, 0.6);
+ border-bottom: 1px solid rgba(180, 220, 255, 0.08);
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 9px;
+ font-weight: 500;
+ letter-spacing: 0.22em;
+ text-transform: uppercase;
+ color: rgba(241, 236, 224, 0.45);
+}
+.guide-root .guide-table-th--live {
+ width: 28px;
+ padding-right: 0;
+}
+.guide-root .guide-table-th--action {
+ width: 110px;
+ padding-right: 22px;
+}
+.guide-root .guide-table-th--right {
+ text-align: right;
+}
+.guide-root .guide-table-th-btn {
+ display: inline-flex;
+ align-items: center;
+ gap: 5px;
+ padding: 0;
+ background: transparent;
+ border: none;
+ color: inherit;
+ font: inherit;
+ letter-spacing: inherit;
+ text-transform: inherit;
+ cursor: pointer;
+ transition: color 0.18s ease;
+}
+.guide-root .guide-table-th-btn:hover {
+ color: rgba(241, 236, 224, 0.85);
+}
+.guide-root .guide-table-th.is-active .guide-table-th-btn {
+ color: rgba(232, 192, 130, 0.92);
+}
+/* Sort indicator arrow — bigger / brighter on the active header so the
+ * default-sort column is unambiguously discoverable (per G-9 Opus
+ * critique that flagged the arrow as visually missing in the crop). */
+.guide-root .guide-table-th.is-active .guide-table-th-btn svg {
+ color: #e8c082;
+ filter: drop-shadow(0 0 6px rgba(232, 192, 130, 0.5));
+}
+.guide-root .guide-table-th--right .guide-table-th-btn {
+ width: 100%;
+ justify-content: flex-end;
+}
+
+.guide-root .guide-table-row {
+ cursor: pointer;
+ transition: background-color 0.18s ease;
+}
+.guide-root .guide-table-row:hover,
+.guide-root .guide-table-row:focus-visible {
+ background: rgba(217, 165, 90, 0.12);
+ outline: none;
+}
+.guide-root .guide-table-row:focus-visible {
+ box-shadow: inset 0 0 0 1px rgba(217, 165, 90, 0.45);
+}
+.guide-root .guide-table-row:hover .guide-table-td--city {
+ color: rgba(255, 240, 200, 1);
+}
+.guide-root .guide-table-td {
+ padding: 12px 14px;
+ border-bottom: 1px solid rgba(180, 220, 255, 0.04);
+ color: rgba(241, 236, 224, 0.78);
+ vertical-align: middle;
+}
+.guide-root .guide-table-row:last-child .guide-table-td {
+ border-bottom: none;
+}
+.guide-root .guide-table-td--live {
+ width: 28px;
+ padding-right: 0;
+}
+.guide-root .guide-table-td--city {
+ color: #ffffff;
+ font-weight: 500;
+}
+.guide-root .guide-table-td--title {
+ max-width: 360px;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+}
+.guide-root .guide-table-td--time {
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 12px;
+ color: rgba(232, 192, 130, 0.78);
+ text-align: right;
+ white-space: nowrap;
+}
+.guide-root .guide-table-td--action {
+ text-align: right;
+ padding-right: 22px;
+}
+.guide-root .guide-table-td--time {
+ padding-right: 22px;
+}
+.guide-root .guide-table-live-dot {
+ position: relative;
+ display: inline-block;
+ width: 7px;
+ height: 7px;
+ border-radius: 999px;
+ background: #e5484d;
+}
+.guide-root .guide-table-live-dot::before {
+ content: "";
+ position: absolute;
+ inset: 0;
+ border-radius: 999px;
+ background: #e5484d;
+ opacity: 0.7;
+ animation: guide-card-live-pulse 1.6s ease-out infinite;
+}
+.guide-root .guide-table-open {
+ display: inline-flex;
+ align-items: center;
+ gap: 5px;
+ padding: 5px 11px;
+ border: 1px solid rgba(180, 220, 255, 0.16);
+ border-radius: 999px;
+ background: rgba(15, 20, 36, 0.6);
+ color: rgba(241, 236, 224, 0.85);
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 10px;
+ font-weight: 500;
+ letter-spacing: 0.14em;
+ text-transform: uppercase;
+ cursor: pointer;
+ transition:
+ background-color 0.18s ease,
+ color 0.18s ease,
+ border-color 0.18s ease;
+}
+.guide-root .guide-table-open:hover {
+ background: rgba(217, 165, 90, 0.14);
+ color: #ffffff;
+ border-color: rgba(217, 165, 90, 0.45);
+}
+.guide-root .guide-table-empty {
+ max-width: 720px;
+ margin: 80px auto 0;
+ padding: 48px;
+ border: 1px dashed rgba(180, 220, 255, 0.16);
+ border-radius: 12px;
+ background: rgba(10, 14, 28, 0.45);
+ text-align: center;
+ color: rgba(241, 236, 224, 0.6);
+ font-size: 14px;
+ line-height: 1.55;
+}
+
+/* —— Empty / loading state inside the Map view ——
+ * Shown when streams.length === 0 or while loading. Reuses the
+ * placeholder pattern from G-1 but lighter; once cards exist, the
+ * placeholder is suppressed. */
+.guide-root .guide-deck-loading {
+ margin-top: 80px;
+ text-align: center;
+ color: rgba(241, 236, 224, 0.4);
+ font-size: 13px;
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ letter-spacing: 0.06em;
+}
+
+/* —— G-1 placeholder per-view content —— */
+.guide-root .guide-placeholder {
+ max-width: 720px;
+ margin: 80px auto 0;
+ padding: 48px;
+ border: 1px dashed rgba(180, 220, 255, 0.16);
+ border-radius: 12px;
+ background: rgba(10, 14, 28, 0.45);
+ backdrop-filter: blur(8px);
+ text-align: center;
+}
+.guide-root .guide-placeholder-eyebrow {
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 10px;
+ letter-spacing: 0.3em;
+ text-transform: uppercase;
+ color: rgba(139, 233, 253, 0.55);
+ margin-bottom: 16px;
+}
+.guide-root .guide-placeholder-title {
+ font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+ font-weight: 300;
+ font-size: 42px;
+ line-height: 1.05;
+ letter-spacing: -0.01em;
+ color: #ffffff;
+ margin: 0 0 16px;
+}
+.guide-root .guide-placeholder-sub {
+ font-size: 14px;
+ line-height: 1.55;
+ color: rgba(241, 236, 224, 0.6);
+ margin: 0 auto 24px;
+ max-width: 480px;
+}
+.guide-root .guide-placeholder-actions {
+ margin-top: 32px;
+ display: flex;
+ justify-content: center;
+ gap: 12px;
+}
+
+.guide-root .guide-placeholder-action {
+ font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+ font-size: 11px;
+ letter-spacing: 0.22em;
+ text-transform: uppercase;
+ color: rgba(217, 165, 90, 0.85);
+ background: transparent;
+ border: 1px solid rgba(217, 165, 90, 0.3);
+ padding: 12px 22px;
+ border-radius: 6px;
+ cursor: pointer;
+ transition:
+ color 200ms ease,
+ border-color 200ms ease,
+ background-color 200ms ease;
+}
+.guide-root .guide-placeholder-action:hover,
+.guide-root .guide-placeholder-action:focus-visible {
+ color: rgba(217, 165, 90, 1);
+ border-color: rgba(217, 165, 90, 0.7);
+ background: rgba(217, 165, 90, 0.08);
+ outline: none;
+}
+
+.guide-root .guide-aggregate-empty-link {
+ background: transparent;
+ border: none;
+ padding: 0;
+ margin: 0;
+ font: inherit;
+ color: rgba(139, 233, 253, 0.85);
+ text-decoration: underline;
+ text-underline-offset: 3px;
+ cursor: pointer;
+}
+.guide-root .guide-aggregate-empty-link:hover,
+.guide-root .guide-aggregate-empty-link:focus-visible {
+ color: #ffffff;
+ outline: none;
+}
+

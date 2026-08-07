@@ -1,0 +1,126 @@
+{
+  "county": "Pinal",
+  "state": "Arizona",
+  "city_count": 7,
+  "cities": [
+    {
+      "city": "Apache Junction",
+      "calendar_found": true,
+      "calendar_url": "https://apachejunction.legistar.com/Calendar.aspx",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Apache Junction",
+        "county": "Pinal County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 33.382766,
+        "lng": -111.540509,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:apache_junction",
+        "sample_meeting_count": 391,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Casa Grande",
+      "calendar_found": true,
+      "calendar_url": "https://casagrandeaz.gov/Calendar.aspx?CID=27",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Casa Grande",
+        "county": "Pinal County",
+        "coverage": "postponed",
+        "last_checked": null,
+        "lat": 32.906895,
+        "lng": -111.763503,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:casa_grande",
+        "sample_meeting_count": 139,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Coolidge",
+      "calendar_found": true,
+      "calendar_url": "https://coolidgecityaz.iqm2.com/Citizens/Calendar.aspx",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Coolidge",
+        "county": "Pinal County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 32.933616,
+        "lng": -111.523585,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:coolidge",
+        "sample_meeting_count": 925,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Eloy",
+      "calendar_found": true,
+      "calendar_url": "https://eloyaz.gov/574/Agendas-Minutes-Public-Notices",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Eloy",
+        "county": "Pinal County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 32.741255,
+        "lng": -111.594015,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:eloy",
+        "sample_meeting_count": 34,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Florence",
+      "calendar_found": true,
+      "calendar_url": "https://www.florenceaz.gov/calendar/",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Florence",
+        "county": "Pinal County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 33.069367,
+        "lng": -111.413992,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:florence",
+        "sample_meeting_count": 210,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Maricopa",
+      "calendar_found": true,
+      "calendar_url": "https://maricopa.legistar.com/Calendar.aspx",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Maricopa",
+        "county": "Pinal County",
+        "coverage": "postponed",
+        "last_checked": "2026-07-01T01:57:27Z",
+        "lat": 33.041942,
+        "lng": -111.999259,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:maricopa",
+        "sample_meeting_count": 7,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Queen Creek",
+      "calendar_found": true,
+      "calendar_url": "https://queencreekaz.granicus.com/ViewPublisher.php?view_id=3",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Queen Creek",
+        "county": "Pinal County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T04:04:27Z",
+        "lat": 33.239425,
+        "lng": -111.613319,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:queen_creek",
+        "sample_meeting_count": 100,
+        "state": "az"
+      }
+    }
+  ]
+}

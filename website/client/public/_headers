@@ -1,0 +1,39 @@
+# Cloudflare Pages security headers (Fable-5 audit A3, 2026-07-01).
+# Motivation: BYOK provider keys live in localStorage — any XSS reads every
+# user's key. The CSP is the blast-radius cut. Origins enumerated from the
+# actual codebase; if a feature breaks with a CSP violation in console,
+# extend the specific directive rather than removing the header.
+#
+# Per-origin rationale:
+# script-src cdn.jsdelivr.net (MediaPipe tasks-vision) + youtube.com /
+# s.ytimg.com (iframe API) + wasm-unsafe-eval (MediaPipe WASM)
+# connect-src generativelanguage.googleapis.com (BYOK Gemini direct —
+# Tier-1 key-blind path) + storage.googleapis.com (MediaPipe
+# model download) + cdn.jsdelivr.net (wasm fetch)
+# frame-src self (operator preview iframe) + YouTube + Vimeo + Granicus meeting players
+# media-src https: — per-city vendor MP4 hosts are arbitrary (Granicus,
+# Legistar variants); locking this breaks city players
+# img-src YouTube thumbs + CartoDB/OSM map tiles + data:/blob: canvases
+# + *.googleusercontent.com (Google OAuth profile-picture avatars —
+# added 2026-07-04 after prod login showed a 404 placeholder where
+# localhost showed the real avatar; CSP was silently blocking).
+# style-src unsafe-inline required (React style attributes + Vite)
+# Permissions-Policy: camera self-only (hand-tracking + /scan), mic/geo off
+# HSTS: 6-month max-age + includeSubDomains, no preload. Added per sol
+# pen-test Finding #14 as one authoritative source for HSTS at
+# the Pages layer. Cloudflare's own HSTS config (if any) should
+# be verified against this and made non-duplicative — the
+# browser tolerates multiple Strict-Transport-Security headers
+# by taking the first, but a single authoritative source keeps
+# config drift from becoming a silent security surface. No
+# `preload` directive on purpose: preload commits to HSTS
+# essentially forever (removal from browser preload lists is
+# slow); revisit only after a sustained public run with no
+# need to roll back.
+
+/*
+ Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval' https://cdn.jsdelivr.net https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://i.ytimg.com https://*.basemaps.cartocdn.com https://tile.openstreetmap.org https://*.googleusercontent.com; connect-src 'self' https://generativelanguage.googleapis.com https://storage.googleapis.com https://cdn.jsdelivr.net; media-src 'self' blob: https:; frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://player.vimeo.com https://*.granicus.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self'
+ X-Content-Type-Options: nosniff
+ Referrer-Policy: strict-origin-when-cross-origin
+ Permissions-Policy: camera=(self), microphone=(), geolocation=()
+ Strict-Transport-Security: max-age=15552000; includeSubDomains

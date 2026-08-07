@@ -1,75 +1,62 @@
-[TEMPORARILY DRAFTED BY AI. WILL BE REWRITTEN BY 8/4/2026]
+[TEMPORARILY DRAFTED BY AI. WILL BE REWRITTEN BY 8/10/2026]
 
 # Library catalog
 
-This catalog groups the published material by the question it can help a
-reader explore. You do not need to read the repository from top to bottom or
-adopt the whole project. Each shelf can stand on its own.
+This catalog groups the working parts of the library by the question they can
+help you explore. You do not need to read the repository from top to bottom or
+adopt the whole project. If you want to understand one idea or carry one part
+into your own work, start with the question closest to yours.
 
-## Begin with an idea
+## Watch and understand
 
 | If you are thinking about… | Start here |
 |---|---|
 | Watching the complete project walkthrough | [**Z-SPAN Is Born**](https://www.youtube.com/watch?v=HTpR9jRl314) |
-| Making local meetings easier to find | [`HomePage.tsx`](code/visitor-interface/src/pages/HomePage.tsx), then [`ChannelsPage.tsx`](code/visitor-interface/src/pages/ChannelsPage.tsx) |
-| Organizing records around a place | [`CityPage.tsx`](code/visitor-interface/src/pages/CityPage.tsx) and [`CityLedgerPage.tsx`](code/visitor-interface/src/pages/CityLedgerPage.tsx) |
-| Letting people search by subject | [`SearchPage.tsx`](code/visitor-interface/src/pages/SearchPage.tsx) |
-| Building a browsable meeting guide | [`GuideRoot.tsx`](code/visitor-interface/src/pages/GuideRoot.tsx) and [`components/guide/`](code/visitor-interface/src/components/guide/) |
-| Supporting several video hosts | [`ZspanPlayer.tsx`](code/visitor-interface/src/player/ZspanPlayer.tsx) and [`adapters.ts`](code/visitor-interface/src/player/adapters.ts) |
-| Relating timed text to source video | [`KaraokeStrip.tsx`](code/visitor-interface/src/player/KaraokeStrip.tsx) |
-| Explaining an integrity-related result | [`AuditPage.tsx`](code/visitor-interface/src/pages/AuditPage.tsx), [`WatermarkScanPage.tsx`](code/visitor-interface/src/pages/WatermarkScanPage.tsx), and [`WatermarkVerifyPage.tsx`](code/visitor-interface/src/pages/WatermarkVerifyPage.tsx) |
-| Turning a meeting into a short written digest | [`newsletter.md`](prompts/newsletter.md) |
-| Showing what happens after a meeting | [`whats_next.md`](prompts/whats_next.md) |
-| Describing the overall tone without editorializing | [`council_sentiment.md`](prompts/council_sentiment.md) |
-| Starting an independent public-meeting library for another country | [`respawn-kernel/README.md`](respawn-kernel/README.md), then [`respawn-kernel/BOOTSTRAP.md`](respawn-kernel/BOOTSTRAP.md) |
+| Understanding the library and its community model | [`README.md`](README.md) |
 
-## Code shelf
+## Read or adapt the interface
 
-The selected code lives under [`code/visitor-interface/`](code/visitor-interface/).
-Its internal `src/` layout remains intact so relative relationships among
-pages, guide components, playback adapters, and styles are still visible.
+| If you are thinking about… | Start here |
+|---|---|
+| Seeing how the visitor-facing application fits together | [`App.tsx`](website/client/src/App.tsx) |
+| Making local meetings easier to find | [`HomePage.tsx`](website/client/src/pages/HomePage.tsx), then [`ChannelsPage.tsx`](website/client/src/pages/ChannelsPage.tsx) |
+| Organizing records around a place | [`CityPage.tsx`](website/client/src/pages/CityPage.tsx) and [`CityLedgerPage.tsx`](website/client/src/pages/CityLedgerPage.tsx) |
+| Letting people search by subject | [`SearchPage.tsx`](website/client/src/pages/SearchPage.tsx) |
+| Building a browsable meeting guide | [`GuideRoot.tsx`](website/client/src/pages/GuideRoot.tsx) and [`components/guide/`](website/client/src/components/guide/) |
+| Supporting several video hosts | [`ZspanPlayer.tsx`](website/client/src/player/ZspanPlayer.tsx) and [`adapters.ts`](website/client/src/player/adapters.ts) |
+| Relating timed text to source video | [`KaraokeStrip.tsx`](website/client/src/player/KaraokeStrip.tsx) |
+| Explaining an integrity-related result | [`AuditPage.tsx`](website/client/src/pages/AuditPage.tsx) |
+| Scanning and checking a visible integrity ribbon | [`WatermarkScanPage.tsx`](website/client/src/pages/WatermarkScanPage.tsx) and [`WatermarkVerifyPage.tsx`](website/client/src/pages/WatermarkVerifyPage.tsx) |
 
-The code is published for close reading. It is not a complete application and
-does not include the private services, application wiring, package manifest,
-or configuration needed to run it.
+## Work with city sources
 
-## Prompt shelf
+| If you are thinking about… | Start here |
+|---|---|
+| Browsing Arizona parsers by county | [`parsers/Arizona/`](parsers/Arizona/) |
+| Comparing a smaller county shelf with a larger one | [`Mohave/`](parsers/Arizona/Mohave/) and [`Maricopa/`](parsers/Arizona/Maricopa/) |
+| Understanding a complete RSS-based parser | [`kingman_parser.py`](parsers/Arizona/Mohave/kingman_parser.py) |
+| Reading a parser that uses a structured civic-calendar API | [`surprise_parser.py`](parsers/Arizona/Maricopa/surprise_parser.py) |
+| Seeing how a county's rosters, calendars, and coverage fit together | [`brain/Arizona/Mohave.json`](brain/Arizona/Mohave.json) |
+| Checking the library-wide coverage summary | [`brain/coverage_index.json`](brain/coverage_index.json) |
 
-The [`prompts/`](prompts/) shelf contains three canonical prompt artifacts
-copied unchanged from the working project. They are small, self-contained
-examples that can be studied or adapted separately.
+## Add or review a city
 
-Their NotebookLM labels record the setting in which they were developed. They
-do not describe Z-SPAN's current private runtime, and the private prompt
-collection around them is not published.
+| If you are thinking about… | Start here |
+|---|---|
+| Adding the place where you live | [`documents/starter-kit/README.md`](documents/starter-kit/README.md) |
+| Writing a new city parser | [`_TEMPLATE_parser.py`](documents/starter-kit/_TEMPLATE_parser.py) |
+| Recording a council roster and its official sources | [`_TEMPLATE_city_intelligence.json`](documents/starter-kit/_TEMPLATE_city_intelligence.json) and [`_TEMPLATE_endpoint_row.json`](documents/starter-kit/_TEMPLATE_endpoint_row.json) |
+| Checking a starter-kit parser before opening a pull request | [`freshness_probe.py`](documents/starter-kit/freshness_probe.py) |
+| Reviewing an existing parser for source handling and honest empty results | [`kingman_parser.py`](parsers/Arizona/Mohave/kingman_parser.py) |
 
-## Respawn shelf
+## Build for another country
 
-[`respawn-kernel/`](respawn-kernel/) is a runnable, country-neutral starting
-point for an independently operated public-meeting library. It includes
-recursive jurisdiction and meeting contracts, localization support, a
-non-overwriting repository generator, deterministic validation, an Arizona
-reference adapter, and a standalone static presentation.
+| If you are thinking about… | Start here |
+|---|---|
+| Starting an independent public-meeting library for another country | [`documents/respawn-kernel/README.md`](documents/respawn-kernel/README.md), then [`documents/respawn-kernel/BOOTSTRAP.md`](documents/respawn-kernel/BOOTSTRAP.md) |
 
-This shelf is intentionally different from the selected visitor-interface
-source: it is designed to be copied into a new repository and continued. Its
-per-source collection recipes, credentials, local branding, and country
-decisions belong to the independent project rather than this public shelf.
+## Shelves still being prepared
 
-## Ideas and reading guides
-
-- [`docs/PROJECT_MODEL.md`](docs/PROJECT_MODEL.md) explains the project in the
-  simplest conceptual terms.
-- [`docs/DESIGN_PATTERNS.md`](docs/DESIGN_PATTERNS.md) collects portable design
-  ideas visible in the selected interface.
-- [`docs/REPOSITORY_GUIDE.md`](docs/REPOSITORY_GUIDE.md) follows several paths
-  through the code in a useful reading order.
-- [`PUBLICATION_SCOPE.md`](PUBLICATION_SCOPE.md) explains what this collection
-  can and cannot establish about the wider project.
-
-## Snapshot record
-
-[`docs/snapshots/2026-08-02.md`](docs/snapshots/2026-08-02.md) records the
-origin, size, and review state of the first approved source snapshot.
-[`docs/snapshots/2026-08-05-respawn-kernel.md`](docs/snapshots/2026-08-05-respawn-kernel.md)
-records the runnable Respawn release. Git history records later changes.
+The `transcription/` and `documents/` shelves are reserved for follow-on
+publication. This catalog will point to individual files once those shelves
+are populated.

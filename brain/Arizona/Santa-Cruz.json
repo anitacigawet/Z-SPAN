@@ -1,0 +1,58 @@
+{
+  "county": "Santa Cruz",
+  "state": "Arizona",
+  "city_count": 3,
+  "cities": [
+    {
+      "city": "Nogales",
+      "calendar_found": true,
+      "calendar_url": "https://www.nogalesaz.gov/AgendaCenter",
+      "notes": null,
+      "coverage": {
+        "city": "Nogales",
+        "county": "Santa Cruz County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T01:57:27Z",
+        "lat": 31.361928,
+        "lng": -110.93482,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:nogales",
+        "sample_meeting_count": null,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Patagonia",
+      "calendar_found": true,
+      "calendar_url": "https://patagonia-az.gov/mayor-council/council-meetings-agendas-minutes/",
+      "notes": null,
+      "coverage": {
+        "city": "Patagonia",
+        "county": "Santa Cruz County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 31.544744,
+        "lng": -110.745463,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:patagonia",
+        "sample_meeting_count": 46,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Rio Rico",
+      "calendar_found": true,
+      "calendar_url": "https://santacruzcoaz.portal.civicclerk.com/",
+      "notes": null,
+      "coverage": {
+        "city": "Rio Rico",
+        "county": "Santa Cruz County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T03:27:59Z",
+        "lat": 31.498168,
+        "lng": -110.987798,
+        "ocd_division_id": null,
+        "sample_meeting_count": 15,
+        "state": "az"
+      }
+    }
+  ]
+}

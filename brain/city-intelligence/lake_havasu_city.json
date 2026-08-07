@@ -1,0 +1,272 @@
+{
+  "canonical_name": "Lake Havasu City",
+  "county": "Mohave",
+  "state": "Arizona",
+  "council": {
+    "seats": 7,
+    "term_length_years": 4,
+    "elected_at_large_or_by_district": "at-large",
+    "vice_mayor_selection": "other",
+    "next_election_date": "2026-07-21",
+    "next_election_seats_up": [
+      "mayor",
+      "seat_1",
+      "seat_3",
+      "seat_4"
+    ]
+  },
+  "current_members": [
+    {
+      "name": "Cal Sheehy",
+      "role": "Mayor",
+      "seat_id": "mayor",
+      "term_started": "2018",
+      "term_ends": "2026",
+      "source_url": "https://www.lhcaz.gov/mayor-city-council"
+    },
+    {
+      "name": "David Diaz",
+      "role": "Vice Mayor",
+      "seat_id": "vice_mayor",
+      "term_started": "2024",
+      "term_ends": "2028",
+      "source_url": "https://www.lhcaz.gov/mayor-city-council"
+    },
+    {
+      "name": "Michele Lin",
+      "role": "Council Member",
+      "seat_id": "seat_1",
+      "term_started": "2014",
+      "term_ends": "2026",
+      "source_url": "https://www.lhcaz.gov/mayor-city-council"
+    },
+    {
+      "name": "Cameron Moses",
+      "role": "Council Member",
+      "seat_id": "seat_2",
+      "term_started": "2020",
+      "term_ends": "2028",
+      "source_url": "https://www.lhcaz.gov/mayor-city-council"
+    },
+    {
+      "name": "Jeni Coke",
+      "role": "Council Member",
+      "seat_id": "seat_3",
+      "term_started": "2014",
+      "term_ends": "2026",
+      "source_url": "https://www.lhcaz.gov/mayor-city-council"
+    },
+    {
+      "name": "Jim Dolan",
+      "role": "Council Member",
+      "seat_id": "seat_4",
+      "term_started": "2018",
+      "term_ends": "2026",
+      "source_url": "https://www.lhcaz.gov/mayor-city-council"
+    },
+    {
+      "name": "Nancy Campbell",
+      "role": "Council Member",
+      "seat_id": "seat_5",
+      "term_started": "2020",
+      "term_ends": "2028",
+      "source_url": "https://www.lhcaz.gov/mayor-city-council"
+    }
+  ],
+  "primary_source_url": "https://www.lhcaz.gov/mayor-city-council",
+  "verified_on": "2026-05-11",
+  "notes": "The Primary Election date for 2026 was moved from August 4 to July 21. Vice Mayor is appointed from within the Council.",
+  "meeting_patterns": [
+    {
+      "pattern_id": "city_council",
+      "meeting_type": "City Council",
+      "cadence": {
+        "frequency": "monthly_weeks",
+        "day_of_week": "Tuesday",
+        "weeks_of_month": [
+          2,
+          4
+        ]
+      },
+      "time_local": "5:30 PM",
+      "location": "City Council Chambers, 2330 N. McCulloch Boulevard, Lake Havasu City, AZ 86403",
+      "youtube_channel_url": null,
+      "exceptions": [],
+      "source_url": "https://www.lhcaz.gov/citycouncil",
+      "verified_on": "2026-06-02",
+      "notes": "27 instances over 8 months (Jan-Dec 2025); 24 of 27 fit the 2nd + 4th Tuesday cadence at 5:30 PM. 3 outliers are morning sessions (8:30/9:00 AM) on non-Tuesday weekdays — almost certainly budget work sessions, off the recurring cadence. Parser date format for Lake Havasu is M/D/YYYY (different from most cities' YYYY-MM-DD). Parser-coverage gap: only City Council captured; Planning Commission and other bodies not in scrape — fill via WebFetch fallback in a follow-up."
+    }
+  ],
+  "notebooklm_persona_preamble": "The city of Lake Havasu City is located in Mohave County, Arizona. The Lake Havasu City Council has 7 voting members elected at-large. The current members are: Mayor Cal Sheehy, Vice Mayor David Diaz, and Council Members Michele Lin, Cameron Moses, Jeni Coke, Jim Dolan, and Nancy Campbell. When transcribing or attributing quotes, use these exact spellings.",
+  "ocd_division_id": "ocd-division/country:us/state:az/place:lake_havasu_city",
+  "whisper_vocabulary_hints": [
+    {
+      "term": "Sheehy",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "Mayor Sheehy",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "Cal Sheehy",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "Diaz",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "Vice Mayor Diaz",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "David Diaz",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "Lin",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "Councilmember Lin",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "Michele Lin",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "Moses",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "Councilmember Moses",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "Cameron Moses",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "Coke",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "Councilmember Coke",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "Jeni Coke",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "Dolan",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "Councilmember Dolan",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "Jim Dolan",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "Campbell",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "Councilmember Campbell",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    },
+    {
+      "term": "Nancy Campbell",
+      "category": "person",
+      "promoted_at": "2026-06-21T05:29:29+00:00",
+      "first_seen": "2026-06-21T05:29:29+00:00",
+      "source": "D1: seeded from current_members for V1-RAG-3 quote extraction (post-C5 finding)",
+      "promoted_by": "developer-claude:c5-finding"
+    }
+  ]
+}

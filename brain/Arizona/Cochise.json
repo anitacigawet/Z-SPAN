@@ -1,0 +1,109 @@
+{
+  "county": "Cochise",
+  "state": "Arizona",
+  "city_count": 6,
+  "cities": [
+    {
+      "city": "Benson",
+      "calendar_found": true,
+      "calendar_url": "https://www.bensonaz.gov/government/city_council/agendas_minutes___public_notices.php",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Benson",
+        "county": "Cochise County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 31.914497,
+        "lng": -110.328552,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:benson",
+        "sample_meeting_count": "",
+        "state": "az"
+      }
+    },
+    {
+      "city": "Bisbee",
+      "calendar_found": true,
+      "calendar_url": "https://www.bisbeeaz.gov/agendacenter",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Bisbee",
+        "county": "Cochise County",
+        "coverage": "live",
+        "last_checked": "2026-07-01T02:43:53Z",
+        "lat": 31.398036,
+        "lng": -109.931834,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:bisbee",
+        "sample_meeting_count": 59,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Douglas",
+      "calendar_found": true,
+      "calendar_url": "https://www.douglasaz.gov/AgendaCenter/City-Council-2",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Douglas",
+        "county": "Cochise County",
+        "coverage": "live",
+        "last_checked": "2026-07-01T02:50:03Z",
+        "lat": 31.399274,
+        "lng": -109.541292,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:douglas",
+        "sample_meeting_count": 61,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Sierra Vista",
+      "calendar_found": true,
+      "calendar_url": "https://www.sierravistaaz.gov/our-city/advanced-components/list-detail-pages/calendar-list",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Sierra Vista",
+        "county": "Cochise County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 31.56541,
+        "lng": -110.314508,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:sierra_vista",
+        "sample_meeting_count": "",
+        "state": "az"
+      }
+    },
+    {
+      "city": "Tombstone",
+      "calendar_found": true,
+      "calendar_url": "https://cityoftombstoneaz.gov/events/category/city-council/",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Tombstone",
+        "county": "Cochise County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 31.720772,
+        "lng": -110.076701,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:tombstone",
+        "sample_meeting_count": "",
+        "state": "az"
+      }
+    },
+    {
+      "city": "Willcox",
+      "calendar_found": true,
+      "calendar_url": "https://willcox.az.gov/city-council-meetings-agendas-resolutions-1",
+      "notes": "Completed by User Instruction",
+      "coverage": {
+        "city": "Willcox",
+        "county": "Cochise County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T04:04:27Z",
+        "lat": 32.251804,
+        "lng": -109.835698,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:willcox",
+        "sample_meeting_count": 141,
+        "state": "az"
+      }
+    }
+  ]
+}

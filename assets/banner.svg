@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" role="img" aria-label="Z-SPAN — For All. A virtual library for local politics. Maintained by the people, for the people.">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1A2230"/>
+      <stop offset="1" stop-color="#0D1420"/>
+    </linearGradient>
+    <linearGradient id="sig" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6AA3EC" stop-opacity="0"/>
+      <stop offset=".2" stop-color="#6AA3EC" stop-opacity=".9"/>
+      <stop offset=".8" stop-color="#6AA3EC" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#6AA3EC" stop-opacity="0"/>
+    </linearGradient>
+    <style>
+      .wm { font: 700 138px/1 "Avenir Next Condensed","Arial Narrow",Impact,sans-serif; fill:#F5F6F4; letter-spacing:2px }
+      .st { fill:#6AA3EC }
+      .tag { font: 500 24px/1.4 "Avenir Next",Avenir,"Helvetica Neue",Arial,sans-serif; fill:#E8ECF2; letter-spacing:.5px }
+      .sub { font: italic 500 20px/1.4 Georgia,"Times New Roman",serif; fill:#8792A4 }
+      .kv { font: 600 12.5px/1 "SF Mono",Menlo,Consolas,monospace; fill:#8792A4; letter-spacing:2.5px; text-transform:uppercase }
+      .val { font: 700 12.5px/1 "SF Mono",Menlo,Consolas,monospace; fill:#E8ECF2; letter-spacing:1.5px }
+      .rule { stroke:#26334A; stroke-width:1 }
+      .glow { stroke:#6AA3EC; stroke-width:2; fill:none; opacity:.65 }
+    </style>
+  </defs>
+
+  <rect width="1200" height="320" fill="url(#sky)"/>
+
+  <line x1="0" y1="270" x2="1200" y2="270" class="rule"/>
+  <path class="glow" d="M0 270 L 60 270 L 72 260 L 84 280 L 96 250 L 108 285 L 120 270 L 260 270 L 268 262 L 276 278 L 284 258 L 292 282 L 300 270 L 480 270 L 490 260 L 500 280 L 510 254 L 520 286 L 530 270 L 720 270 L 730 258 L 740 282 L 750 250 L 760 285 L 770 270 L 940 270 L 952 262 L 964 278 L 976 260 L 988 282 L 1000 270 L 1200 270"/>
+  <line x1="0" y1="270" x2="1200" y2="270" stroke="url(#sig)" stroke-width="1.5"/>
+
+  <g transform="translate(60,140)">
+    <text class="wm" y="0">Z<tspan class="st">-</tspan>SPAN</text>
+    <text class="wm" style="font-size:44px;fill:#6AA3EC;letter-spacing:6px" y="46">FOR  ALL</text>
+  </g>
+
+  <g transform="translate(660,120)">
+    <text class="tag">
+      <tspan x="0" dy="0">A virtual library</tspan>
+      <tspan x="0" dy="30">for local politics.</tspan>
+    </text>
+    <text class="sub" y="96">
+      <tspan x="0" dy="0">Maintained by the people,</tspan>
+      <tspan x="0" dy="26">for the people.</tspan>
+    </text>
+  </g>
+
+  <g transform="translate(60,300)">
+    <text class="kv">LICENSE</text>
+    <text class="val" x="72">POLYFORM  NC  1.0</text>
+    <text class="kv" x="260">CITIES</text>
+    <text class="val" x="316">94</text>
+    <text class="kv" x="380">STATES  OPEN</text>
+    <text class="val" x="480">49</text>
+    <text class="kv" x="540">TRUSTEES</text>
+    <text class="val" x="622">1  →  YOU</text>
+  </g>
+</svg>

@@ -1,0 +1,92 @@
+{
+  "county": "Coconino",
+  "state": "Arizona",
+  "city_count": 5,
+  "cities": [
+    {
+      "city": "Flagstaff",
+      "calendar_found": true,
+      "calendar_url": "https://public.destinyhosted.com/agenda_publish.cfm?id=35247",
+      "notes": null,
+      "coverage": {
+        "city": "Flagstaff",
+        "county": "Coconino County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 35.185212,
+        "lng": -111.620698,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:flagstaff",
+        "sample_meeting_count": 2000,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Page",
+      "calendar_found": true,
+      "calendar_url": "https://pageaz.portal.civicclerk.com/",
+      "notes": null,
+      "coverage": {
+        "city": "Page",
+        "county": "Coconino County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T03:27:59Z",
+        "lat": 36.941815,
+        "lng": -111.513283,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:page",
+        "sample_meeting_count": "",
+        "state": "az"
+      }
+    },
+    {
+      "city": "Sedona",
+      "calendar_found": true,
+      "calendar_url": "https://www.sedonaaz.gov/i-want-to/advanced-components-not-displayed/calendar-meeting-list",
+      "notes": null,
+      "coverage": {
+        "city": "Sedona",
+        "county": "Yavapai County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 34.858517,
+        "lng": -111.793057,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:sedona",
+        "sample_meeting_count": 2836,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Tuba City",
+      "calendar_found": true,
+      "calendar_url": "https://tonaneesdizi.navajochapters.org/",
+      "notes": null,
+      "coverage": {
+        "city": "Tuba City",
+        "county": "Coconino County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 36.125081,
+        "lng": -111.246723,
+        "ocd_division_id": null,
+        "sample_meeting_count": 9,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Williams",
+      "calendar_found": true,
+      "calendar_url": "https://www.williamsaz.gov/government/meetings/city_council",
+      "notes": null,
+      "coverage": {
+        "city": "Williams",
+        "county": "Coconino County",
+        "coverage": "unassessed",
+        "last_checked": "2026-07-01T04:04:27Z",
+        "lat": 35.24664,
+        "lng": -112.183296,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:williams",
+        "sample_meeting_count": 5,
+        "state": "az"
+      }
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "county": "Apache",
+  "state": "Arizona",
+  "city_count": 7,
+  "cities": [
+    {
+      "city": "Chinle",
+      "calendar_found": true,
+      "calendar_url": "https://chinle.navajochapters.org/records/",
+      "notes": null,
+      "coverage": {
+        "city": "Chinle",
+        "county": "Apache County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 36.151148,
+        "lng": -109.578682,
+        "ocd_division_id": null,
+        "sample_meeting_count": 80,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Eagar",
+      "calendar_found": true,
+      "calendar_url": "https://www.eagaraz.gov/o/tofe/page/agendas-minutes",
+      "notes": null,
+      "coverage": {
+        "city": "Eagar",
+        "county": "Apache County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 34.10678,
+        "lng": -109.301221,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:eagar",
+        "sample_meeting_count": 56,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Fort Defiance",
+      "calendar_found": true,
+      "calendar_url": "https://ftdefiance.navajochapters.org/blog/category/chapter-meeting-agenda-and-minutes/",
+      "notes": null,
+      "coverage": {
+        "city": "Fort Defiance",
+        "county": "Apache County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 35.747502,
+        "lng": -109.068018,
+        "ocd_division_id": null,
+        "sample_meeting_count": 7,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Ganado",
+      "calendar_found": true,
+      "calendar_url": "https://ganado.navajochapters.org/870-2/",
+      "notes": null,
+      "coverage": {
+        "city": "Ganado",
+        "county": "Apache County",
+        "coverage": "unassessed",
+        "last_checked": null,
+        "lat": 35.691875,
+        "lng": -109.555727,
+        "ocd_division_id": null,
+        "sample_meeting_count": 21,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Springerville",
+      "calendar_found": true,
+      "calendar_url": "https://www.springervilleaz.gov/agendas",
+      "notes": null,
+      "coverage": {
+        "city": "Springerville",
+        "county": "Apache County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 34.171921,
+        "lng": -109.306892,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:springerville",
+        "sample_meeting_count": 20,
+        "state": "az"
+      }
+    },
+    {
+      "city": "St. Johns",
+      "calendar_found": true,
+      "calendar_url": "https://www.sjaz.us/meetings-agendas/",
+      "notes": null,
+      "coverage": {
+        "city": "St. Johns",
+        "county": "Apache County",
+        "coverage": "honest-empty",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 34.500368,
+        "lng": -109.37691,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:st_johns",
+        "sample_meeting_count": 106,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Window Rock",
+      "calendar_found": true,
+      "calendar_url": "https://www.navajonationcouncil.org/calendar/",
+      "notes": null,
+      "coverage": {
+        "city": "Window Rock",
+        "county": "Apache County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 35.670505,
+        "lng": -109.063037,
+        "ocd_division_id": null,
+        "sample_meeting_count": 486,
+        "state": "az"
+      }
+    }
+  ]
+}

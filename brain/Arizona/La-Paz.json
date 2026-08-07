@@ -1,0 +1,53 @@
+{
+  "county": "La Paz",
+  "state": "Arizona",
+  "city_count": 4,
+  "cities": [
+    {
+      "city": "Bouse",
+      "calendar_found": false,
+      "calendar_url": null,
+      "notes": "CDP - No municipal government"
+    },
+    {
+      "city": "Parker",
+      "calendar_found": true,
+      "calendar_url": "https://www.townofparkeraz.com/events",
+      "notes": null,
+      "coverage": {
+        "city": "Parker",
+        "county": "La Paz County",
+        "coverage": "live",
+        "last_checked": "2026-07-01T09:26:00Z",
+        "lat": 34.034006,
+        "lng": -114.228109,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:parker",
+        "sample_meeting_count": 52,
+        "state": "az"
+      }
+    },
+    {
+      "city": "Quartzsite",
+      "calendar_found": true,
+      "calendar_url": "https://www.ci.quartzsite.az.us/calendar.php",
+      "notes": null,
+      "coverage": {
+        "city": "Quartzsite",
+        "county": "La Paz County",
+        "coverage": "needs-repair",
+        "last_checked": "2026-07-01T02:27:17Z",
+        "lat": 33.667507,
+        "lng": -114.217041,
+        "ocd_division_id": "ocd-division/country:us/state:az/place:quartzsite",
+        "sample_meeting_count": "",
+        "state": "az"
+      }
+    },
+    {
+      "city": "Salome",
+      "calendar_found": false,
+      "calendar_url": null,
+      "notes": "CDP - No municipal government"
+    }
+  ]
+}
