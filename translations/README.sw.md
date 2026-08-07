@@ -2,7 +2,7 @@
 
 # Z-SPAN
 
-[English](README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.id.md) · [Filipino](README.fil.md) · [Português (Brasil)](README.pt-BR.md) · [**Kiswahili**](README.sw.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [Tiếng Việt](README.vi.md)
+[English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.id.md) · [Filipino](README.fil.md) · [Português (Brasil)](README.pt-BR.md) · [**Kiswahili**](README.sw.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [Tiếng Việt](README.vi.md)
 
 **Maktaba pepe ya siasa za mitaa.**
 
@@ -25,13 +25,13 @@ wazo la urambazaji, mpaka ulio wazi wa uchezaji wa video, njia ya kuweka
 vyanzo vya awali vionekane, au kanuni ya usanifu inayoweza kutumika katika
 mradi mwingine unaojitegemea.
 
-[Respawn Kernel](respawn-kernel/README.md) ndiyo sehemu inayoweza kuendeshwa:
+[Respawn Kernel](../documents/respawn-kernel/README.md) ndiyo sehemu inayoweza kuendeshwa:
 mwanzo huru wa kujenga maktaba ya mikutano ya umma kwa nchi yoyote. Mwongozo
 kamili wa kiufundi unapatikana kwa Kiingereza kwa sasa.
 
 > Ukurasa huu ni tafsiri ya README ya Kiingereza iliyotayarishwa kwa msaada wa
 > AI. Marekebisho kupitia pull request kutoka kwa watu wanaojua Kiswahili vizuri
-> yanakaribishwa. Iwapo maana zitatofautiana, [README ya Kiingereza](README.md),
+> yanakaribishwa. Iwapo maana zitatofautiana, [README ya Kiingereza](../README.md),
 > [LICENSE](LICENSE) na [NOTICE](NOTICE) ndizo marejeo rasmi. Nyaraka nyingine
 > zilizounganishwa bado ziko kwa Kiingereza.
 

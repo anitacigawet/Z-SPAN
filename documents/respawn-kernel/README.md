@@ -26,7 +26,7 @@ Z-SPAN — Arizona remains the reference implementation. Projects created from t
 
 **The Z-SPAN Trinity is simple: the internet carries it, civic records ground it, and people keep it alive.**
 
-![The Z-SPAN Trinity: the internet carries it, civic records ground it, and people keep it alive](../docs/zspan-trinity.svg)
+![The Z-SPAN Trinity: the internet carries it, civic records ground it, and people keep it alive](../repository-assets/zspan-trinity.svg)
 
 The kernel is the “here is how.” It publishes the reusable library structure without creating a central authority over the projects that grow from it. A country project belongs to the people who operate it, contribute to it, verify it, and decide what it publishes.
 

@@ -2,7 +2,7 @@
 
 # Z-SPAN
 
-[English](README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.id.md) · [Filipino](README.fil.md) · [Português (Brasil)](README.pt-BR.md) · [Kiswahili](README.sw.md) · [简体中文](README.zh-CN.md) · [**繁體中文**](README.zh-TW.md) · [Tiếng Việt](README.vi.md)
+[English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.id.md) · [Filipino](README.fil.md) · [Português (Brasil)](README.pt-BR.md) · [Kiswahili](README.sw.md) · [简体中文](README.zh-CN.md) · [**繁體中文**](README.zh-TW.md) · [Tiếng Việt](README.vi.md)
 
 **一座關於地方政治的虛擬圖書館。**
 
@@ -16,7 +16,7 @@ Z-SPAN 嘗試讓地方政府的公開會議更容易找到、觀看和理解。�
 
 它不是正式運作系統的完整副本。多數書架提供的是精選參考資料：一種導覽思路、一條播放邊界、一種讓原始資料始終可見的方法，或一項可以用於其他獨立專案的設計原則。[`respawn-kernel/`](respawn-kernel/) 是刻意設置的例外：它是一個可獨立執行、不預設國家結構的公共會議圖書館起點。
 
-> 本頁是英文 README 的 AI 輔助翻譯，歡迎能熟練使用正體中文的讀者透過 pull request 提出修正。若各語言版本的意義有出入，請以 [英文 README](README.md)、[LICENSE](LICENSE) 和 [NOTICE](NOTICE) 為準。所連結的其他文件目前仍為英文。
+> 本頁是英文 README 的 AI 輔助翻譯，歡迎能熟練使用正體中文的讀者透過 pull request 提出修正。若各語言版本的意義有出入，請以 [英文 README](../README.md)、[LICENSE](LICENSE) 和 [NOTICE](NOTICE) 為準。所連結的其他文件目前仍為英文。
 
 ---
 
@@ -34,7 +34,7 @@ Z-SPAN 嘗試讓地方政府的公開會議更容易找到、觀看和理解。�
 
 > **引語的繁體中文譯文：** 中央情報局、國家安全局，甚至五角大廈，都受限於其中工作人員有限的任期。Z-SPAN 不受這種限制。Z-SPAN 由人民推動、為人民服務，因此需要整個社群的充分參與和透明運作。如果你希望為自己的國家營運這座圖書館，方法就在這裡。
 
-從 [Respawn Kernel](respawn-kernel/README.md) 開始。輸入一個國家、一個由當地選擇的專案名稱和主要語言，它就會建立一個獨立儲存庫，其中包含不預設國家結構的資料契約、遞迴行政區模型、翻譯支援、驗證工具和一座可獨立執行的公共圖書館。
+從 [Respawn Kernel](../documents/respawn-kernel/README.md) 開始。輸入一個國家、一個由當地選擇的專案名稱和主要語言，它就會建立一個獨立儲存庫，其中包含不預設國家結構的資料契約、遞迴行政區模型、翻譯支援、驗證工具和一座可獨立執行的公共圖書館。
 
 任何國家，無一例外。從美利堅合眾國到中國。每個獨立專案都擁有自己的名稱、來源、決定、發布選擇和相應責任。完整步驟見[國家啟動指南](respawn-kernel/BOOTSTRAP.md)。
 
@@ -62,7 +62,7 @@ Z-SPAN 是一種正在實踐中的答案，但不是唯一答案。這個儲存�
 3. 瀏覽[值得帶到其他專案中的設計方法](docs/DESIGN_PATTERNS.md)，瞭解介面背後的思路。
 4. 使用[儲存庫導覽](docs/REPOSITORY_GUIDE.md)，沿著一條具體的訪客路徑閱讀已公開的原始碼。
 5. 在對更大的 Z-SPAN 系統作出判斷前，先查看[哪些內容已公開、哪些沒有](PUBLICATION_SCOPE.md)。
-6. 使用 [Respawn Kernel](respawn-kernel/README.md) 開始建立一座獨立的國家級圖書館。
+6. 使用 [Respawn Kernel](../documents/respawn-kernel/README.md) 開始建立一座獨立的國家級圖書館。
 7. 查看 [Respawn 發布快照](docs/snapshots/2026-08-05-respawn-kernel.md)，瞭解可執行版本的確切範圍和審查狀態。
 
 ## 🗂️ 書架上有什麼
@@ -85,7 +85,7 @@ Z-SPAN 是一種正在實踐中的答案，但不是唯一答案。這個儲存�
 
 精選的訪客介面原始碼不是獨立應用程式，其中不包含啟動亞利桑那正式系統所需的私有服務、應用程式連接方式或正式環境設定。
 
-Respawn 不同：它可以使用 Python 3 直接執行，建立新的國家儲存庫，驗證儲存庫結構，並建置多語言圖書館預覽。完整指令見 [Respawn README](respawn-kernel/README.md)。
+Respawn 不同：它可以使用 Python 3 直接執行，建立新的國家儲存庫，驗證儲存庫結構，並建置多語言圖書館預覽。完整指令見 [Respawn README](../documents/respawn-kernel/README.md)。
 
 ## 儲存庫的組織方式
 

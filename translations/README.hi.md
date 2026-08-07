@@ -2,7 +2,7 @@
 
 # Z-SPAN
 
-[English](README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [**हिन्दी**](README.hi.md) · [Bahasa Indonesia](README.id.md) · [Filipino](README.fil.md) · [Português (Brasil)](README.pt-BR.md) · [Kiswahili](README.sw.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [Tiếng Việt](README.vi.md)
+[English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [**हिन्दी**](README.hi.md) · [Bahasa Indonesia](README.id.md) · [Filipino](README.fil.md) · [Português (Brasil)](README.pt-BR.md) · [Kiswahili](README.sw.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [Tiếng Việt](README.vi.md)
 
 **स्थानीय राजनीति के लिए एक वर्चुअल लाइब्रेरी।**
 
@@ -24,13 +24,13 @@ Z-SPAN इंस्टेंस चलाने के लिए नहीं �
 देते रहने का तरीका, या ऐसा डिज़ाइन सिद्धांत जिसे किसी स्वतंत्र काम में आगे
 ले जाया जा सके।
 
-[Respawn Kernel](respawn-kernel/README.md) चलाया जा सकने वाला अपवाद है: किसी
+[Respawn Kernel](../documents/respawn-kernel/README.md) चलाया जा सकने वाला अपवाद है: किसी
 भी देश के लिए सार्वजनिक बैठकों की स्वतंत्र लाइब्रेरी बनाने का शुरुआती आधार।
 पूरी तकनीकी मार्गदर्शिका फिलहाल अंग्रेज़ी में है।
 
 > यह अंग्रेज़ी README का AI-सहायित अनुवाद है। हिन्दी में दक्ष पाठकों द्वारा
 > pull request के माध्यम से सुधारों का स्वागत है। अर्थ में किसी अंतर की स्थिति
-> में [अंग्रेज़ी README](README.md) को मानक मानें; लाइसेंस की शर्तों के लिए
+> में [अंग्रेज़ी README](../README.md) को मानक मानें; लाइसेंस की शर्तों के लिए
 > [LICENSE](LICENSE) और आवश्यक श्रेय तथा Z-SPAN नाम के उपयोग की सीमा के लिए
 > [NOTICE](NOTICE) मानक दस्तावेज़ हैं। लिंक किए गए अन्य दस्तावेज़ अभी अंग्रेज़ी में हैं।
 

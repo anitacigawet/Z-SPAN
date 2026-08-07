@@ -2,7 +2,7 @@
 
 # Z-SPAN
 
-[English](README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.id.md) · [**Filipino**](README.fil.md) · [Português (Brasil)](README.pt-BR.md) · [Kiswahili](README.sw.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [Tiếng Việt](README.vi.md)
+[English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.id.md) · [**Filipino**](README.fil.md) · [Português (Brasil)](README.pt-BR.md) · [Kiswahili](README.sw.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [Tiếng Việt](README.vi.md)
 
 **Isang virtual na aklatan tungkol sa lokal na politika.**
 
@@ -27,7 +27,7 @@ malinaw na hangganan para sa pagpapatugtog ng video, isang paraan upang manatili
 nakikita ang mga pinagkunan, o isang prinsipyo sa disenyo na maaaring dalhin sa
 isang hiwalay na proyekto.
 
-Ang [Respawn Kernel](respawn-kernel/README.md) ang maaaring patakbuhing
+Ang [Respawn Kernel](../documents/respawn-kernel/README.md) ang maaaring patakbuhing
 eksepsiyon: isang hiwalay na panimulang punto para sa pagbuo ng aklatan ng mga
 pampublikong pulong sa alinmang bansa. Sa Ingles pa lamang ang buong teknikal
 na gabay.
@@ -35,7 +35,7 @@ na gabay.
 > Ang pahinang ito ay salin ng English README na ginawa sa tulong ng AI.
 > Malugod na tinatanggap ang mga pagwawasto sa pamamagitan ng pull request mula
 > sa mga bihasa sa Filipino. Kung may pagkakaiba sa kahulugan, ang
-> [English README](README.md), [LICENSE](LICENSE), at [NOTICE](NOTICE) ang
+> [English README](../README.md), [LICENSE](LICENSE), at [NOTICE](NOTICE) ang
 > masusunod. Nasa English pa ang iba pang naka-link na dokumento.
 
 ---

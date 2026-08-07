@@ -2,7 +2,7 @@
 
 # Z-SPAN
 
-[English](README.md) · [العربية](README.ar.md) · [**Español**](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.id.md) · [Filipino](README.fil.md) · [Português (Brasil)](README.pt-BR.md) · [Kiswahili](README.sw.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [Tiếng Việt](README.vi.md)
+[English](../README.md) · [العربية](README.ar.md) · [**Español**](README.es.md) · [فارسی](README.fa.md) · [Français](README.fr.md) · [हिन्दी](README.hi.md) · [Bahasa Indonesia](README.id.md) · [Filipino](README.fil.md) · [Português (Brasil)](README.pt-BR.md) · [Kiswahili](README.sw.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [Tiếng Việt](README.vi.md)
 
 **Una biblioteca virtual sobre política local.**
 
@@ -25,14 +25,14 @@ una idea de navegación, un límite claro para la reproducción, una forma de
 mantener visibles las fuentes o un principio de diseño que pueda trasladarse a
 un proyecto independiente.
 
-El [Respawn Kernel](respawn-kernel/README.md) es la excepción ejecutable: un
+El [Respawn Kernel](../documents/respawn-kernel/README.md) es la excepción ejecutable: un
 punto de partida independiente para crear una biblioteca de reuniones públicas
 en cualquier país. La guía técnica completa está disponible por ahora en inglés.
 
 > Esta es una traducción del README en inglés realizada con ayuda de IA. Se
 > agradecen correcciones mediante pull request de personas que dominen el
 > español. Si existe alguna diferencia de significado, prevalecen el
-> [README en inglés](README.md), la [LICENSE](LICENSE) y el [NOTICE](NOTICE).
+> [README en inglés](../README.md), la [LICENSE](LICENSE) y el [NOTICE](NOTICE).
 > Los demás documentos enlazados todavía están en inglés.
 
 ---
