@@ -1,0 +1,27 @@
+Z-SPAN
+Copyright (c) 2026 James Jones
+
+Required Notice: Copyright 2026 James Jones (https://zspan.org)
+
+This software is licensed under the PolyForm Noncommercial License 1.0.0.
+The full license text is in the LICENSE file at the root of this repository
+and at https://polyformproject.org/licenses/noncommercial/1.0.0.
+
+The license applies only to rights the licensor owns in the Z-SPAN
+application source, bundled assets, and documentation. Government records,
+third-party websites, and other third-party material are not relicensed by
+Z-SPAN and remain subject to applicable law and their own terms. Source files
+that identify CC0-derived material in adjacent comments retain that separate
+status.
+
+The license does not grant rights in the Z-SPAN name, logo, or other
+trademarks beyond uses allowed by applicable law. Independent forks should
+use distinct branding and must not imply endorsement.
+
+Z-SPAN uses public meeting sources collected in the separately published
+National Civics Catalog:
+https://github.com/anitacigawet/national-civics-catalog
+
+National Civics Catalog has its own license and notice. It contains source
+endpoints and provenance, not Z-SPAN's parser implementations, meetings,
+transcripts, summaries, or other processed content.

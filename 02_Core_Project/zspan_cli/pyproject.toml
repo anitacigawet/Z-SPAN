@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "zspan-cli"
+version = "0.1.0"
+description = "Process your city's public meetings on your own computer, with your own AI key — the Z-SPAN self-serve client."
+readme = "README.md"
+license = { text = "PolyForm-Noncommercial-1.0.0" }
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.28",
+    # The process pipeline — the wheel must run end-to-end on a
+    # stranger's machine, so these are real dependencies, not extras.
+    # Kept in sync with requirements.txt (the run-from-clone list).
+    "yt-dlp>=2026.7.4",
+    "faster-whisper>=1.0",
+    "fastembed>=0.3",
+    "numpy>=1.26",
+]
+
+[project.urls]
+Homepage = "https://zspan.org"
+Source = "https://github.com/anitacigawet/Z-SPAN"
+
+[project.scripts]
+zspan = "zspan_cli.cli:main"
+
+[tool.setuptools]
+# zspan_cli.tests is deliberately excluded: tests ship in the source tree
+# for local + CI runs but NEVER go into the built wheel. CI runs them via
+# `PYTHONPATH=. python -m zspan_cli.tests.test_zspan_cli`, which uses
+# the source-tree copy, not the installed package.
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["zspan_cli*"]
+exclude = ["zspan_cli.tests*"]
+
+[tool.setuptools.package-data]
+# The vendored prompts corpus (setup.py's build hook copies it in at
+# build time; absent in the working tree, present in built wheels).
+zspan_cli = ["_prompts/*.md"]

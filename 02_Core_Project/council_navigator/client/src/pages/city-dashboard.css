@@ -1,0 +1,775 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+/* City Dashboard V0 — pixel-art overlay pane on the painted scene.
+ *
+ * Same technique as HQ V2: aspect-locked scene box, overlays as
+ * percentages of that box (not viewport). The painted background is
+ * 2754×1536 (aspect 1.793). Overlay rects were grid-measured from the
+ * mock and are all in scene-box % — CSS handles the letterbox math.
+ */
+
+.cdash-root {
+  min-height: 100vh;
+  background: #0a0d18;
+  color: #eaf2ff;
+}
+
+/* --- Scene box: same math as HQ V2's .scene --- */
+.cdash-scene {
+  position: relative;
+  width: min(100vw, calc(100vh * 2754 / 1536));
+  height: min(100vh, calc(100vw * 1536 / 2754));
+  margin: 0 auto;
+  background: #0b0d18;
+  overflow: hidden;
+}
+
+.cdash-scene-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  image-rendering: pixelated;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* --- Top nav strip: over the painted nav band (px 790..1815, 243..312) --- */
+/* All panel coords locked 2026-07-03 from the operator's stylus positioning
+ * via ?layout=1. Values pulled from the persisted localStorage state after
+ * he confirmed 'perfect' — see [[stylus-layout-editor-for-pixel-precise-overlay-positioning]] */
+/* Nav bar — v2 (2026-07-03, redesigned again against side-by-side crops).
+ * The mock is straight pixel-arcade: bevel-shaded letters via 2-tone
+ * text-shadow, corner-bracket neon frames instead of full borders,
+ * Press Start 2P (or thick mono fallback) for the letter shapes, LIVE
+ * as its own detached red-neon box with its own corner brackets. */
+.cdash-nav {
+  position: absolute;
+  top: 15.71%;
+  left: 28.29%;
+  width: 43.05%;
+  height: 6.05%;
+  background:
+    linear-gradient(to bottom, #131b32, #0a0f1e);
+  padding: 0 4px;
+  background: #06090d;
+  border: 1px solid rgba(120, 200, 255, 0.3);
+  border-radius: 4px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  padding: 0 4px;
+  gap: 2px;
+  z-index: 5;
+}
+
+/* No corner accents on the main nav (operator direction 2026-07-03). */
+
+.cdash-nav-item {
+  all: unset;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 96%;
+  padding: 0;
+  font-family: "Press Start 2P", "Courier New", monospace;
+  font-size: clamp(8px, 1vmin, 13px);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: filter 160ms ease;
+  text-align: center;
+}
+
+/* Press Start 2P is already a bitmap-style pixel font; a subtle drop
+ * shadow + neon glow is all the depth we need. The earlier 3-layer stack
+ * created chromatic-aberration smear at these sizes. */
+.cdash-nav-home {
+  color: #eef4ff;
+  text-shadow: 0 1px 0 rgba(0, 20, 50, 0.55), 0 0 6px rgba(140, 210, 255, 0.6);
+}
+.cdash-nav-volunteer {
+  color: #d590ff;
+  text-shadow: 0 1px 0 rgba(40, 10, 60, 0.6), 0 0 6px rgba(210, 140, 255, 0.6);
+}
+.cdash-nav-events {
+  color: #7fdae0;
+  text-shadow: 0 1px 0 rgba(0, 30, 40, 0.6), 0 0 6px rgba(130, 230, 240, 0.6);
+}
+.cdash-nav-watchdog {
+  color: #dfe8f2;
+  text-shadow: 0 1px 0 rgba(0, 15, 30, 0.55), 0 0 6px rgba(200, 220, 240, 0.45);
+}
+
+.cdash-nav-item:hover { filter: brightness(1.25); }
+/* Active state: no inset background (mock has none). Just brighten the
+ * text glow + underline the item with a cyan-glowing horizontal line
+ * (mock has cyan for HOME even though HOME's letters are white — the
+ * indicator is a separate cyan chip). */
+.cdash-nav-item.is-on { filter: brightness(1.15); }
+.cdash-nav-item.is-on::after {
+  content: "";
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  bottom: 3px;
+  height: 2px;
+  background: #61c0ff;
+  box-shadow: 0 0 6px #61c0ff, 0 0 2px #61c0ff;
+  border-radius: 1px;
+}
+
+/* LIVE breaks OUT into its own detached red-neon box with corner brackets
+ * on TOP-RIGHT + BOTTOM-RIGHT (mirroring the cyan brackets on the main
+ * bar's left corners). Mock-accurate: no full red border, only the two
+ * corner accents. */
+.cdash-nav-live {
+  position: relative;
+  align-self: stretch;
+  margin: 2px 2px 2px 6px;
+  padding: 0 6px;
+  background: linear-gradient(to bottom, #3a1010, #1e0808);
+  font-family: "Press Start 2P", "Courier New", monospace;
+  font-size: clamp(8px, 1vmin, 13px);
+  letter-spacing: 0.02em;
+}
+/* No corner accents on the LIVE box either — the red gradient background
+ * + the pulse on the on-state are the affordance. */
+.cdash-nav-live.is-off {
+  color: #ff9a9a;
+  text-shadow: 0 1px 0 rgba(50, 5, 5, 0.7), 0 0 6px rgba(255, 100, 100, 0.55);
+  cursor: default;
+}
+.cdash-nav-live.is-on {
+  color: #fff;
+  background: linear-gradient(to bottom, #d43535, #a01010);
+  text-shadow: 0 1px 0 rgba(80, 0, 0, 0.8), 0 0 8px #ff5555;
+  animation: cdash-live-pulse 1.4s ease-in-out infinite;
+}
+@keyframes cdash-live-pulse {
+  0%, 100% { filter: brightness(1); }
+  50%      { filter: brightness(1.3); }
+}
+
+/* --- City chip (top-right corner over the moon area) --- */
+/* City chip retired 2026-07-03 (Opus F4) — city identity now folded
+ * into the player-chrome title bar as `📍 KINGMAN · CITY DESK`, where a
+ * real broadcast station's identifier lives. The floating chip read as
+ * a debug badge in the dusk-sky pixels. */
+.cdash-player-title {
+  flex: 1;
+  text-align: left;
+  padding-left: 10px;
+  letter-spacing: 0.16em;
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.62);
+  font-family: var(--mono, ui-monospace, monospace);
+  text-shadow: 0 0 6px rgba(127, 216, 255, 0.35);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* --- Player window --- */
+.cdash-player {
+  position: absolute;
+  top: 24.12%;
+  left: 26.37%;
+  width: 47.35%;
+  height: 53.81%;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgba(255, 255, 255, 0.06);
+  background: #06090d;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+.cdash-player-chrome {
+  height: 22px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px;
+  background: rgba(20, 24, 40, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.cdash-player-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.16);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+}
+.cdash-player-dot--min::before { content: "_"; font-size: 10px; line-height: 0.4; color: rgba(255,255,255,0.55); }
+.cdash-player-dot--max::before { content: "◻"; font-size: 8px; color: rgba(255,255,255,0.55); }
+.cdash-player-close {
+  all: unset;
+  cursor: pointer;
+  padding: 2px;
+  background: rgba(230, 70, 70, 0.75);
+  color: #fff;
+}
+.cdash-player-close:hover { background: rgba(255, 90, 90, 1); color: #fff; }
+
+.cdash-player-screen {
+  flex: 1;
+  min-height: 0; /* let flex actually shrink around the ticker + controls */
+  position: relative;
+  background: #05070d;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.cdash-player-empty {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 12px;
+  font-style: italic;
+}
+.cdash-player-video {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+.cdash-player-poster {
+  all: unset;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: block;
+}
+.cdash-player-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.72);
+}
+.cdash-player-poster-live {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 3px 7px;
+  background: rgba(255, 60, 60, 0.9);
+  color: #fff;
+  font-family: var(--mono, monospace);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  border-radius: 3px;
+}
+.cdash-player-play {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  opacity: 0.85;
+}
+.cdash-player-poster:hover .cdash-player-play { opacity: 1; }
+
+.cdash-player-ticker {
+  padding: 4px 0;
+  background: rgba(160, 40, 30, 0.8);
+  color: #ffe3b3;
+  font-family: var(--mono, monospace);
+  font-size: clamp(9px, 1.1vmin, 14px);
+  letter-spacing: 0.06em;
+  border-top: 1px solid rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  position: relative;
+}
+.cdash-player-ticker-track {
+  display: inline-flex;
+  gap: 3em;
+  white-space: nowrap;
+  animation: cdash-marquee 32s linear infinite;
+  will-change: transform;
+}
+.cdash-player-ticker-lead {
+  color: #fff;
+  font-weight: 700;
+  margin-right: 0.4em;
+}
+/* Two-copy seamless marquee (Opus F6): translate -50% so the second copy
+ * lands exactly where the first started, eliminating the wraparound gap. */
+@keyframes cdash-marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cdash-player-ticker-track { animation: none; padding-left: 0.6em; }
+}
+
+.cdash-player-controls {
+  height: 26px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  background: rgba(16, 20, 34, 0.9);
+}
+.cdash-player-controls button {
+  all: unset;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 3px;
+  border-radius: 2px;
+}
+.cdash-player-controls button:hover { color: #fff; background: rgba(255, 255, 255, 0.06); }
+.cdash-player-progress {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.cdash-player-progress-fill {
+  width: 24%;
+  height: 100%;
+  background: rgba(220, 70, 60, 0.85);
+}
+
+/* --- Left column: weather + market --- */
+.cdash-weather,
+.cdash-market {
+  position: absolute;
+  z-index: 4;
+  border: 2px solid rgba(255, 255, 255, 0.07);
+  background: #06090d;
+  border-radius: 4px;
+  padding: 8px 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  color: #eaf2ff;
+  font-family: var(--mono, monospace);
+}
+
+/* Frame-mask-precise painted bounds (2026-07-03 remeasure). The overlays
+ * now match painted panel frames pixel-for-pixel via a mauve-border
+ * color mask on the actual WebP — no gap, no overhang, no painted-title
+ * bleed at any edge. Operator ask: "please have the box match the
+ * actual box the picture has (yours is slightly larger horizontally)". */
+.cdash-weather {
+  top: 24.14%;
+  left: 3.90%;
+  width: 19.83%;
+  height: 38.59%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 12px 8px;
+}
+
+.cdash-market {
+  top: 66.69%;
+  left: 3.90%;
+  width: 19.87%;
+  height: 23.18%;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cdash-panel-title {
+  font-size: clamp(10px, 1.2vmin, 14px);
+  letter-spacing: 0.16em;
+  color: #7fd8ff;
+  text-shadow: 0 0 8px rgba(60, 190, 255, 0.55);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cdash-panel-x {
+  all: unset;
+  cursor: pointer;
+  color: rgba(255, 120, 120, 0.7);
+  padding: 2px;
+}
+.cdash-panel-x:hover { color: #fff; }
+
+.cdash-weather-empty {
+  padding: 8px 2px;
+  color: rgba(255, 255, 255, 0.4);
+  font-style: italic;
+  font-size: 11px;
+}
+.cdash-weather-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: clamp(11px, 1.3vmin, 16px);
+}
+.cdash-weather-icon { font-size: 26px; line-height: 1; }
+.cdash-weather-temp {
+  font-size: clamp(22px, 2.8vmin, 36px);
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.cdash-weather-side {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--mono, monospace);
+  font-size: clamp(9.5px, 1vmin, 12px);
+}
+.cdash-weather-side-lbl {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #7fd8ff;
+}
+.cdash-weather-side-icon { font-size: 14px; }
+.cdash-weather-side-cond {
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: clamp(8.5px, 0.9vmin, 10.5px);
+}
+.cdash-weather-city {
+  font-family: var(--mono, monospace);
+  font-size: clamp(9px, 1vmin, 11.5px);
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.08em;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.cdash-weather-strip-title {
+  font-family: var(--mono, monospace);
+  font-size: clamp(8.5px, 0.9vmin, 10.5px);
+  color: #7fd8ff;
+  letter-spacing: 0.18em;
+  padding-top: 2px;
+}
+.cdash-weather-strip-viewport {
+  overflow: hidden;
+  position: relative;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 4px 0;
+}
+.cdash-weather-strip {
+  display: inline-flex;
+  gap: 6px;
+  animation: cdash-forecast-drift 45s linear infinite;
+  will-change: transform;
+}
+.cdash-weather-strip-run {
+  display: inline-flex;
+  gap: 6px;
+  padding: 0 6px;
+}
+.cdash-weather-day {
+  min-width: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 3px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.28);
+  transition: background 180ms ease;
+}
+.cdash-weather-day:hover { background: rgba(127, 216, 255, 0.14); }
+.cdash-weather-day.is-today {
+  background: rgba(127, 216, 255, 0.10);
+  border: 1px solid rgba(127, 216, 255, 0.35);
+  padding: 3px 2px;
+  box-shadow: 0 0 0 0 rgba(127, 216, 255, 0);
+  animation: cdash-today-breathe 4.5s ease-in-out infinite;
+}
+@keyframes cdash-today-breathe {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(127, 216, 255, 0); }
+  50%      { box-shadow: 0 0 12px 2px rgba(127, 216, 255, 0.35); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cdash-weather-day.is-today { animation: none; }
+}
+.cdash-weather-day-name {
+  font-family: var(--mono, monospace);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.55);
+}
+.cdash-weather-day.is-today .cdash-weather-day-name { color: #7fd8ff; }
+.cdash-weather-day-icon { font-size: 18px; line-height: 1; }
+.cdash-weather-day-high {
+  font-family: var(--mono, monospace);
+  font-size: 12px;
+  color: #ffe3b3;
+  font-weight: 600;
+}
+.cdash-weather-day-low {
+  font-family: var(--mono, monospace);
+  font-size: 10.5px;
+  color: rgba(179, 200, 255, 0.75);
+}
+.cdash-weather-source,
+.cdash-panel-note {
+  font-size: 9.5px;
+  color: rgba(255, 255, 255, 0.35);
+  font-style: italic;
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+  margin-top: 8px; /* sits right under the strip, no orphan gap */
+}
+@keyframes cdash-forecast-drift {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cdash-weather-strip { animation: none; }
+}
+
+.cdash-market-rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.cdash-market-rows li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: clamp(10px, 1.1vmin, 13px);
+  color: rgba(255, 255, 255, 0.75);
+}
+.cdash-market-rows .v.pos { color: #34D399; }
+.cdash-market-rows .v.neg { color: #F87171; }
+
+/* --- Right column: news feed --- */
+.cdash-news {
+  position: absolute;
+  top: 24.03%;
+  left: 76.23%;
+  width: 19.81%;
+  height: 65.87%;
+  z-index: 4;
+  border: 2px solid rgba(255, 255, 255, 0.07);
+  background: #06090d;
+  border-radius: 4px;
+  padding: 8px 12px 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.cdash-news-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.cdash-news-list::-webkit-scrollbar { width: 6px; }
+.cdash-news-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+
+.cdash-news-item {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  padding: 6px 6px;
+  color: #eaf2ff;
+  border-left: 2px solid transparent;
+  transition: background 140ms ease, border-left-color 140ms ease, padding-left 140ms ease;
+}
+.cdash-news-item:hover {
+  background: rgba(127, 216, 255, 0.06);
+  border-left-color: #7fd8ff;
+  padding-left: 8px;
+}
+.cdash-news-item:hover .cdash-news-title { color: #7fd8ff; }
+.cdash-news-meta { margin-top: 2px; }
+.cdash-news-title {
+  font-family: var(--mono, monospace);
+  font-size: clamp(10px, 1.15vmin, 13.5px);
+  line-height: 1.3;
+  color: #eaf2ff;
+  transition: color 140ms ease;
+}
+.cdash-news-meta {
+  margin-top: 3px;
+  font-family: var(--mono, monospace);
+  font-size: clamp(8.5px, 1vmin, 11px);
+  color: rgba(255, 255, 255, 0.4);
+}
+.cdash-news-empty {
+  color: rgba(255, 255, 255, 0.4);
+  font-style: italic;
+  font-size: 11px;
+  padding: 12px 4px;
+}
+.cdash-news-empty.is-err { color: #F87171; }
+
+/* --- Drawer for non-home tabs --- */
+.cdash-drawer {
+  padding: 24px 20px 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.cdash-drawer-inner { max-width: 900px; margin: 0 auto; }
+.cdash-drawer-back {
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  padding: 4px 0;
+}
+.cdash-drawer-back:hover { color: #7fd8ff; }
+.cdash-drawer h2 {
+  margin: 16px 0 6px;
+  font-size: 22px;
+  font-weight: 600;
+}
+.cdash-drawer-hint { color: rgba(255,255,255,0.55); font-size: 13px; margin-bottom: 12px; }
+.cdash-drawer-empty { color: rgba(255,255,255,0.4); font-style: italic; padding: 12px 0; }
+.cdash-drawer-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.cdash-drawer-list li {
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.85);
+}
+.cdash-drawer-date {
+  color: #7fd8ff;
+  font-family: var(--mono, monospace);
+  font-size: 12px;
+}
+.cdash-drawer-link {
+  all: unset;
+  cursor: pointer;
+  display: inline-block;
+  margin-top: 14px;
+  padding: 8px 14px;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.5);
+  color: #7fd8ff;
+  border-radius: 4px;
+  font-size: 13px;
+}
+.cdash-drawer-link:hover {
+  background: rgba(59, 130, 246, 0.25);
+}
+
+/* ── Stylus layout editor (?layout=1) ────────────────────────────────
+ * Operator toggles this to drag + resize each overlay pixel-precise
+ * with their stylus, then Claude reads the coords back and locks them
+ * into the CSS above. */
+.cdash-edit-handle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(135deg, transparent 50%, rgba(127, 216, 255, 0.9) 50%);
+  cursor: nwse-resize;
+  touch-action: none;
+  z-index: 999;
+}
+.cdash-layout-editor {
+  position: fixed;
+  top: 60px;
+  right: 12px;
+  z-index: 50;
+  width: 240px;
+  padding: 10px 12px 12px;
+  background: rgba(6, 10, 22, 0.94);
+  border: 1px solid rgba(127, 216, 255, 0.4);
+  border-radius: 6px;
+  font-family: var(--mono, ui-monospace, monospace);
+  color: #eaf2ff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55);
+}
+.cdash-layout-editor-title {
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  color: #7fd8ff;
+  margin-bottom: 4px;
+}
+.cdash-layout-editor-hint {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+.cdash-layout-editor-list {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.cdash-layout-editor-list li {
+  padding: 6px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+.cdash-layout-editor-list li.is-selected {
+  border-color: rgba(127, 216, 255, 0.55);
+  background: rgba(127, 216, 255, 0.06);
+}
+.cdash-layout-editor-key {
+  font-size: 10.5px;
+  color: #eaf2ff;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.cdash-layout-editor-vals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 8px;
+  font-size: 10px;
+  color: rgba(179, 200, 255, 0.75);
+}
+.cdash-layout-editor-copy {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  padding: 6px 10px;
+  background: rgba(127, 216, 255, 0.15);
+  border: 1px solid rgba(127, 216, 255, 0.45);
+  color: #7fd8ff;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
+.cdash-layout-editor-copy:hover { background: rgba(127, 216, 255, 0.25); }
+
+/* Keyboard focus states (Opus F12) — every interactive surface got its
+ * default focus ring wiped by `all: unset`; add them back in a single
+ * cyan-outline rule that composes across the whole dashboard. */
+.cdash-nav-item:focus-visible,
+.cdash-player-poster:focus-visible,
+.cdash-player-close:focus-visible,
+.cdash-news-item:focus-visible,
+.cdash-player-controls button:focus-visible,
+.cdash-panel-x:focus-visible,
+.cdash-drawer-back:focus-visible,
+.cdash-drawer-link:focus-visible {
+  outline: 2px solid #7fd8ff;
+  outline-offset: 2px;
+  border-radius: 3px;
+}

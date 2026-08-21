@@ -1,0 +1,36 @@
+# Sol pen-test Finding #12c — supply-chain hygiene for GitHub Actions.
+#
+# Actions in .github/workflows/ are pinned to full commit SHAs (not movable
+# @vN tags). Dependabot bumps the SHAs when upstream releases a new patch;
+# the operator merges the PR to accept the new pin.
+#
+# Only the github-actions ecosystem is enabled today because it's the only
+# lock surface. Python + Node dependency updates ride their own tracks:
+#   - Python: requirements.txt (pinned) + eventual requirements.lock (Finding #12b)
+#   - Node:   pnpm-lock.yaml (in-tree)
+#
+# Actions is currently disabled account-side per the operator's session-93
+# direction — when Actions is re-enabled, Dependabot will start opening PRs.
+
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "10:00"
+      timezone: America/Phoenix
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(actions)"
+      include: scope
+    labels:
+      - dependencies
+      - github-actions
+    groups:
+      # Group all Actions bumps into one PR per week so the operator has
+      # one review surface, not four.
+      actions-weekly:
+        patterns:
+          - "*"

@@ -1,0 +1,469 @@
+.invite-page {
+  --invite-night: color-mix(in srgb, var(--civic-blue-deep) 76%, var(--canvas));
+  --invite-paper: color-mix(in srgb, var(--primary) 94%, var(--engagement-orange));
+  --invite-ink: color-mix(in srgb, var(--civic-blue-deep) 84%, var(--canvas));
+  --invite-stroke: color-mix(in srgb, var(--info-blue) 30%, var(--invite-night));
+  --invite-glow: color-mix(in srgb, var(--info-blue) 55%, var(--primary));
+
+  min-height: 100vh;
+  padding: clamp(1rem, 4vw, 3.5rem);
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 12% 12%, color-mix(in srgb, var(--info-blue) 18%, transparent), transparent 32%),
+    var(--invite-night);
+  color: var(--invite-ink);
+}
+
+.invite-page,
+.invite-page * {
+  box-sizing: border-box;
+}
+
+.invite-shell {
+  width: min(100%, 70rem);
+  min-height: min(44rem, calc(100vh - 4rem));
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(22rem, 0.95fr);
+  overflow: hidden;
+  border: 1px solid var(--invite-stroke);
+  border-radius: calc(var(--radius) * 3);
+  box-shadow: 0 2rem 5rem color-mix(in srgb, var(--canvas) 70%, transparent);
+}
+
+.invite-brand {
+  position: relative;
+  min-height: 34rem;
+  overflow: hidden;
+  padding: clamp(2rem, 5vw, 4rem);
+  background: var(--invite-night);
+  color: var(--primary);
+}
+
+.invite-sun {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: var(--invite-stroke);
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0.88;
+}
+
+.invite-sign {
+  position: relative;
+  z-index: 1;
+  width: fit-content;
+  padding: 0.32em 0.46em 0.26em;
+  border: 2px solid var(--invite-glow);
+  border-radius: calc(var(--radius) * 0.9);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--invite-night) 62%, var(--invite-glow)),
+    0 0 1.25rem color-mix(in srgb, var(--invite-glow) 32%, transparent),
+    inset 0 0 0.8rem color-mix(in srgb, var(--invite-glow) 14%, transparent);
+  color: var(--invite-glow);
+  font-family: "Manrope", "Helvetica Neue", Helvetica, system-ui, sans-serif;
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: 0.015em;
+  text-shadow: 0 0 0.55rem color-mix(in srgb, var(--invite-glow) 62%, transparent);
+}
+
+.invite-brand-copy {
+  position: absolute;
+  z-index: 1;
+  left: clamp(2rem, 5vw, 4rem);
+  right: clamp(2rem, 5vw, 4rem);
+  bottom: clamp(2.2rem, 6vw, 4.8rem);
+}
+
+.invite-brand-copy p,
+.invite-kicker {
+  margin: 0 0 1rem;
+  font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.invite-brand-copy p {
+  color: var(--invite-glow);
+}
+
+.invite-brand-copy h2 {
+  max-width: 13ch;
+  margin: 0;
+  color: var(--primary);
+  font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  font-size: clamp(2.2rem, 5vw, 4.25rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+}
+
+.invite-entry {
+  min-height: 34rem;
+  display: grid;
+  align-items: center;
+  padding: clamp(2.25rem, 5vw, 5rem);
+  background: var(--invite-paper);
+}
+
+.invite-entry-inner {
+  width: min(100%, 28rem);
+  margin-inline: auto;
+}
+
+.invite-kicker {
+  color: color-mix(in srgb, var(--invite-ink) 58%, transparent);
+}
+
+.invite-entry h1 {
+  margin: 0;
+  color: var(--invite-ink);
+  font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  font-size: clamp(4rem, 8vw, 6.5rem);
+  font-weight: 500;
+  line-height: 0.84;
+  letter-spacing: -0.045em;
+}
+
+.invite-lede {
+  max-width: 31ch;
+  margin: 1.8rem 0 0;
+  color: color-mix(in srgb, var(--invite-ink) 78%, transparent);
+  font-size: clamp(1.05rem, 2vw, 1.22rem);
+  line-height: 1.55;
+}
+
+.invite-rule {
+  width: 4rem;
+  height: 1px;
+  margin: 2rem 0;
+  background: var(--invite-stroke);
+}
+
+.invite-message,
+.invite-footnote,
+.invite-unavailable {
+  color: color-mix(in srgb, var(--invite-ink) 70%, transparent);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.invite-message {
+  margin: 0 0 1.4rem;
+}
+
+.invite-success,
+.invite-unavailable {
+  margin: 0 0 0.65rem;
+  color: var(--invite-ink);
+  font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.invite-primary,
+.invite-secondary {
+  min-height: 3.15rem;
+  padding: 0.75rem 1.3rem;
+  border-radius: calc(var(--radius) * 1.2);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.invite-primary {
+  border: 1px solid var(--invite-night);
+  background: var(--invite-night);
+  color: var(--primary);
+  box-shadow: 0 0.8rem 1.8rem color-mix(in srgb, var(--invite-night) 18%, transparent);
+}
+
+.invite-secondary {
+  border: 1px solid color-mix(in srgb, var(--invite-ink) 30%, transparent);
+  background: transparent;
+  color: var(--invite-ink);
+}
+
+.invite-primary:hover,
+.invite-secondary:hover {
+  transform: translateY(-1px);
+}
+
+.invite-actions {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.invite-actions .invite-primary,
+.invite-actions .invite-secondary {
+  width: 100%;
+}
+
+.invite-message a {
+  color: inherit;
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+}
+
+.invite-primary:focus-visible,
+.invite-secondary:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--info-blue) 42%, transparent);
+  outline-offset: 3px;
+}
+
+.invite-footnote {
+  margin: 2.2rem 0 0;
+  font-size: 0.78rem;
+}
+
+.login-shell {
+  min-height: min(48rem, calc(100vh - 4rem));
+}
+
+.login-entry {
+  padding-block: clamp(2rem, 4vw, 3.5rem);
+}
+
+.login-entry-inner {
+  width: min(100%, 25rem);
+}
+
+.login-entry h1 {
+  font-size: clamp(3.2rem, 6vw, 5rem);
+  line-height: 0.92;
+}
+
+.login-entry .invite-lede {
+  margin-top: 1.25rem;
+}
+
+.login-google,
+.login-submit {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.login-google {
+  min-height: 3.15rem;
+  padding: 0.75rem 1.3rem;
+  border: 1px solid color-mix(in srgb, var(--invite-ink) 30%, transparent);
+  border-radius: calc(var(--radius) * 1.2);
+  background: color-mix(in srgb, var(--primary) 72%, transparent);
+  color: var(--invite-ink);
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.login-google:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--invite-ink) 52%, transparent);
+}
+
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 1rem 0;
+  color: color-mix(in srgb, var(--invite-ink) 45%, transparent);
+  font-size: 0.75rem;
+}
+
+.login-divider::before,
+.login-divider::after {
+  flex: 1;
+  height: 1px;
+  background: color-mix(in srgb, var(--invite-ink) 16%, transparent);
+  content: "";
+}
+
+.login-form {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.login-form label {
+  display: grid;
+  gap: 0.38rem;
+}
+
+.login-form label > span {
+  color: color-mix(in srgb, var(--invite-ink) 72%, transparent);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.login-form input,
+.login-invitation-entry input {
+  width: 100%;
+  min-height: 2.85rem;
+  padding: 0.68rem 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--invite-ink) 24%, transparent);
+  border-radius: var(--radius);
+  outline: none;
+  background: color-mix(in srgb, var(--primary) 78%, transparent);
+  color: var(--invite-ink);
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.login-form input:focus,
+.login-invitation-entry input:focus {
+  border-color: var(--info-blue);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--info-blue) 18%, transparent);
+}
+
+.login-submit {
+  margin-top: 0.35rem;
+}
+
+.login-submit:disabled {
+  cursor: wait;
+  opacity: 0.66;
+}
+
+.login-error {
+  margin: 0;
+  color: color-mix(in srgb, var(--destructive) 76%, var(--invite-ink));
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.login-text-button,
+.login-home-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: color-mix(in srgb, var(--invite-ink) 70%, transparent);
+  font: inherit;
+  font-size: 0.8rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.login-text-button {
+  margin-top: 1rem;
+}
+
+.login-home-link {
+  margin-top: 0.85rem;
+}
+
+.login-invitation-entry {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid color-mix(in srgb, var(--invite-ink) 14%, transparent);
+}
+
+.login-invitation-entry p {
+  margin: 0 0 0.55rem;
+  color: color-mix(in srgb, var(--invite-ink) 72%, transparent);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.login-invitation-entry > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.55rem;
+}
+
+.login-invitation-entry button {
+  padding-inline: 0.9rem;
+  border: 1px solid var(--invite-night);
+  border-radius: var(--radius);
+  background: var(--invite-night);
+  color: var(--primary);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.invite-pulse {
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-right: 0.65rem;
+  border-radius: 50%;
+  background: var(--info-blue);
+  animation: invite-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes invite-pulse {
+  50% { opacity: 0.35; transform: scale(0.82); }
+}
+
+@media (max-width: 760px) {
+  .invite-page {
+    padding: 0;
+    place-items: stretch;
+  }
+
+  .invite-shell {
+    min-height: 100vh;
+    grid-template-columns: 1fr;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .invite-brand {
+    min-height: 20rem;
+    padding: 2rem;
+  }
+
+  .invite-sign {
+    font-size: clamp(2rem, 13vw, 3.2rem);
+  }
+
+  .invite-brand-copy {
+    left: 2rem;
+    right: 2rem;
+    bottom: 2.25rem;
+  }
+
+  .invite-brand-copy h2 {
+    font-size: clamp(2.15rem, 11vw, 3.3rem);
+  }
+
+  .login-brand .invite-brand-copy h2 {
+    max-width: none;
+    font-size: clamp(2.05rem, 9vw, 2.75rem);
+  }
+
+  .invite-entry {
+    min-height: 31rem;
+    padding: 3.5rem 2rem 4rem;
+  }
+
+  .login-entry {
+    min-width: 0;
+    padding-top: 3rem;
+  }
+
+  .login-entry-inner {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .invite-pulse { animation: none; }
+  .invite-primary,
+  .invite-secondary { transition: none; }
+}

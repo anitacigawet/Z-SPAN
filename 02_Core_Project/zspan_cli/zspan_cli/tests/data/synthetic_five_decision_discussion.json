@@ -1,0 +1,33 @@
+{
+  "fixture_kind": "synthetic",
+  "meeting_id": 900001,
+  "key_decisions": "1. <core>Approved the library roof replacement contract</core> for the fictional Exampleville Public Library.\n\n2. <core>Approved the community kitchen lease</core> for a fictional city-owned building at **42 Sample Avenue**.\n\n3. <core>Approved the Cedar Loop trail repair contract</core>, <nuance>using a fictional parks improvement grant</nuance>.\n\n4. <core>Approved the regional fiber access agreement</core> with fictional Example County.\n\n5. <core>Approved the jury services agreement</core> with the fictional Example County Superior Court.",
+  "expected_timestamps": {
+    "1": 10.0,
+    "2": 30.0,
+    "3": 50.0,
+    "4": 70.0,
+    "5": 90.0
+  },
+  "words": [
+    ["library", 10.0, 10.4],
+    ["roof", 10.4, 10.8],
+    ["replacement", 10.8, 11.4],
+    ["contract", 11.4, 11.9],
+    ["community", 30.0, 30.5],
+    ["kitchen", 30.5, 30.9],
+    ["lease", 30.9, 31.3],
+    ["Cedar", 50.0, 50.4],
+    ["Loop", 50.4, 50.8],
+    ["trail", 50.8, 51.1],
+    ["repair", 51.1, 51.5],
+    ["contract", 51.5, 52.0],
+    ["regional", 70.0, 70.5],
+    ["fiber", 70.5, 70.9],
+    ["access", 70.9, 71.3],
+    ["agreement", 71.3, 71.8],
+    ["jury", 90.0, 90.4],
+    ["services", 90.4, 90.9],
+    ["agreement", 90.9, 91.4]
+  ]
+}

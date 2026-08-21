@@ -1,0 +1,2966 @@
+/* Z-SPAN HQ lobby — scene styles.
+ *
+ * EVERYTHING is scoped under .hq-root so none of it leaks into the rest of the
+ * app (the source artifact set global body/#root rules that would have broken
+ * every other page). The scene keeps its own warm-dusk / LED palette as local
+ * vars — this is the HQ's deliberate look (per the Stitch layout spec), not the
+ * global civic tokens. Status colors echo the Z-SPAN palette where they align.
+ */
+
+.hq-root {
+  --night: #0a0e1c;
+  --sky-warm: #f08a4b;
+  --neon: #8be9fd;
+  --amber: #ffb84d;
+  --green: #5cf08a;
+  --red: #ff6b6b;
+  --pixel: "VT323", ui-monospace, monospace;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+  --ui: "Inter", system-ui, sans-serif;
+
+  position: relative;
+  width: 100%;
+  /* Skybox (75vh, V3 polish) stacks above the building scene (100vh) — the
+   * page is vertical-scrollable, the user starts at the bottom (building)
+   * and scrolls up to reveal the sky. The OLED background fills any gap. */
+  min-height: 175vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #000;
+  color: #e6e6e6;
+  font-family: var(--ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+.hq-root * {
+  box-sizing: border-box;
+}
+
+/* vignette — viewport-anchored so it only frames the visible portion (the
+ * building scene); over OLED-black sky it's a no-op. */
+.hq-root::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 60%, transparent 40%, rgba(0, 0, 0, 0.55) 100%);
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* —— scene container —— stacks below the skybox in normal flow.
+ * Background fades from the skybox's horizon-blue at the top into the
+ * scene image's dark colour at the bottom. When the building image is
+ * letterboxed inside this 100vh container (any window size where the
+ * image's 1376:768 aspect doesn't match the viewport), the letterbox
+ * band at the top now blends into the sky above it — no visible seam.
+ * (V3 fix 2026-05-29 — replaces the hard #000 gap James caught.) */
+.hq-root .scene-wrap {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: linear-gradient(
+    to bottom,
+    #1b2754 0%,    /* matches skybox horizon */
+    #0c0e1f 22%,
+    #06070d 55%,
+    #06070d 100%   /* matches .scene background */
+  );
+  /* Above the page background but below the canvas/overlays. */
+  z-index: 1;
+}
+.hq-root .scene {
+  position: relative;
+  width: min(100vw, calc(100vh * 1376 / 768));
+  height: min(100vh, calc(100vw * 768 / 1376));
+  background: #06070d;
+}
+.hq-root .scene img.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  image-rendering: pixelated;
+  user-select: none;
+  pointer-events: none;
+}
+
+.hq-root .ov {
+  position: absolute;
+}
+
+/* —— Top chrome —— */
+.hq-root .chrome {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: #cdd6f4;
+  text-transform: uppercase;
+  background: rgba(10, 14, 28, 0.62);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(139, 233, 253, 0.18);
+  border-radius: 999px;
+  padding: 7px 14px;
+}
+.hq-root .chrome .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  animation: hq-pulse 1.6s ease-in-out infinite;
+}
+.hq-root .chrome.degraded .dot {
+  background: var(--amber);
+  box-shadow: 0 0 8px var(--amber);
+}
+.hq-root .chrome.maintenance .dot {
+  background: var(--red);
+  box-shadow: 0 0 8px var(--red);
+}
+.hq-root .chrome.no-feed .dot {
+  background: rgba(205, 214, 244, 0.35);
+  box-shadow: none;
+  animation: none;
+}
+@keyframes hq-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.82); }
+}
+.hq-root .chrome .sep { opacity: 0.45; }
+.hq-root .chrome .key { opacity: 0.6; }
+
+.hq-root .clock {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 40;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: #cdd6f4;
+  text-transform: uppercase;
+  background: rgba(10, 14, 28, 0.62);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(139, 233, 253, 0.18);
+  border-radius: 999px;
+  padding: 7px 14px;
+}
+
+/* —— Billboard ticker — opaque LED panel that covers the baked-in art —— */
+.hq-root .ticker {
+  overflow: hidden;
+  background: #06070d;
+  border-top: 1px solid rgba(0, 0, 0, 0.9);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.9);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+  isolation: isolate;
+}
+.hq-root .ticker::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 4px 4px;
+  pointer-events: none;
+  opacity: 0.5;
+  z-index: 2;
+}
+.hq-root .ticker-track {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: max-content;
+  animation: hq-scroll-left var(--dur, 38s) linear infinite;
+  will-change: transform;
+  position: relative;
+  z-index: 1;
+}
+@keyframes hq-scroll-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.hq-root .ticker-item {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 4vmin;
+  font-family: var(--pixel);
+  color: var(--neon);
+  text-shadow:
+    0 0 3px rgba(139, 233, 253, 0.9),
+    0 0 9px rgba(139, 233, 253, 0.45);
+  font-size: clamp(13px, 2.2vmin, 26px);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.hq-root .ticker-item.amber {
+  color: var(--amber);
+  text-shadow:
+    0 0 3px rgba(255, 184, 77, 0.9),
+    0 0 9px rgba(255, 184, 77, 0.45);
+}
+.hq-root .ticker-item .pip {
+  display: inline-block;
+  width: 0.55em;
+  height: 0.55em;
+  margin-right: 0.6em;
+  background: currentColor;
+  box-shadow: 0 0 6px currentColor;
+  transform: translateY(-0.06em);
+}
+.hq-root .ticker-item .sep {
+  margin: 0 0.55em;
+  opacity: 0.45;
+}
+
+/* —— Entrance hotspot —— */
+.hq-root .entrance {
+  cursor: pointer;
+  border-radius: 4px;
+  transition: filter 180ms ease;
+}
+.hq-root .entrance::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 90%, rgba(255, 204, 128, 0) 30%, rgba(255, 204, 128, 0) 70%);
+  transition: background 200ms ease;
+  pointer-events: none;
+}
+.hq-root .entrance:hover::after {
+  background: radial-gradient(ellipse at 50% 70%, rgba(255, 217, 140, 0.45) 0%, rgba(255, 180, 80, 0.18) 50%, transparent 75%);
+}
+.hq-root .entrance-label {
+  position: absolute;
+  bottom: -34px;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  color: #ffe1b3;
+  text-transform: uppercase;
+  background: rgba(20, 12, 4, 0.85);
+  border: 1px solid rgba(255, 184, 77, 0.45);
+  border-radius: 999px;
+  padding: 6px 12px;
+  opacity: 0;
+  transition: opacity 180ms ease, transform 180ms ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.hq-root .entrance-label::before {
+  content: "›  ";
+  color: #ffb84d;
+}
+.hq-root .entrance:hover .entrance-label {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* —— Department window —— a cutaway opening in the facade. Departments WITH
+   agents render an open, lit interior (the in-window CLI roster of workers);
+   quiet departments render their office window panes instead (.dept-windows). —— */
+.hq-root .dept {
+  cursor: default;
+  border-radius: 2px;
+  transition: box-shadow 200ms ease, background 200ms ease;
+}
+/* Quiet (no agents) — nearly frameless so the panes blend into the facade. */
+.hq-root .dept:not(.is-open) {
+  box-shadow: inset 0 0 0 1px rgba(205, 214, 244, 0.06);
+}
+/* Open (agents on the floor) — the wall is cut away to reveal the lit room. */
+.hq-root .dept.is-open {
+  background: linear-gradient(180deg, rgba(2, 4, 9, 0.94) 0%, rgba(6, 9, 18, 0.88) 60%, rgba(10, 14, 26, 0.82) 100%);
+  box-shadow:
+    inset 0 4px 9px rgba(0, 0, 0, 0.72),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(139, 233, 253, 0.08);
+}
+.hq-root .dept.is-open[data-state="running"] {
+  background:
+    radial-gradient(ellipse at 50% 125%, rgba(255, 184, 77, 0.2), transparent 70%),
+    linear-gradient(180deg, rgba(3, 5, 11, 0.93), rgba(7, 10, 20, 0.9));
+}
+.hq-root .dept.is-open[data-state="escalated"] {
+  background:
+    radial-gradient(ellipse at 50% 125%, rgba(255, 107, 107, 0.22), transparent 70%),
+    linear-gradient(180deg, rgba(11, 4, 6, 0.93), rgba(15, 7, 10, 0.9));
+  animation: hq-esc-flash 1.8s ease-in-out infinite;
+}
+@keyframes hq-esc-flash {
+  0%, 100% { box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.65), inset 0 0 0 1.5px rgba(255, 107, 107, 0.3); }
+  50% { box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.65), inset 0 0 0 1.5px rgba(255, 107, 107, 0.6); }
+}
+.hq-root .dept:hover {
+  box-shadow:
+    inset 0 3px 7px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1.5px rgba(139, 233, 253, 0.45);
+}
+
+.hq-root .dept-tag {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgba(8, 11, 22, 0.78);
+  border: 1px solid rgba(139, 233, 253, 0.18);
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #cdd6f4;
+  line-height: 1;
+  pointer-events: none;
+  max-width: calc(100% - 6px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hq-root .dept-tag .led {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 4px var(--green);
+  flex-shrink: 0;
+}
+.hq-root .dept[data-state="idle"] .dept-tag .led {
+  background: #6c7388;
+  box-shadow: none;
+}
+.hq-root .dept[data-state="running"] .dept-tag .led {
+  background: var(--amber);
+  box-shadow: 0 0 5px var(--amber);
+  animation: hq-blink 1.4s ease-in-out infinite;
+}
+.hq-root .dept[data-state="escalated"] .dept-tag .led {
+  background: var(--red);
+  box-shadow: 0 0 6px var(--red);
+  animation: hq-blink 0.7s ease-in-out infinite;
+}
+.hq-root .dept[data-state="offline"] .dept-tag .led {
+  background: #444;
+  box-shadow: none;
+}
+@keyframes hq-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* windows grid inside the dept box — visualises state */
+.hq-root .dept-windows {
+  position: absolute;
+  inset: 18px 4px 4px 4px;
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 4), 1fr);
+  grid-template-rows: repeat(var(--rows, 3), 1fr);
+  gap: 2px;
+  pointer-events: none;
+}
+.hq-root .dept-windows .w {
+  /* 2026-07-04 session-33: default grey placeholder so every dept has
+   * a visible window pattern (operator feedback: the hover target read
+   * as a single window instead of a grid). State-specific rules
+   * below override for running/escalated/offline. */
+  background: rgba(180, 195, 220, 0.14);
+  border-radius: 1px;
+  box-shadow: inset 0 0 0 1px rgba(140, 160, 190, 0.18);
+}
+.hq-root .dept[data-state="running"] .dept-windows .w {
+  background: rgba(255, 184, 77, 0.35);
+  box-shadow: inset 0 0 4px rgba(255, 184, 77, 0.5);
+}
+.hq-root .dept[data-state="running"] .dept-windows .w.flicker {
+  animation: hq-flicker 1.8s ease-in-out infinite;
+}
+.hq-root .dept[data-state="running"] .dept-windows .w.dim {
+  background: rgba(255, 184, 77, 0.1);
+  box-shadow: none;
+}
+@keyframes hq-flicker {
+  0%, 100% { opacity: 1; }
+  45% { opacity: 0.55; }
+  50% { opacity: 0.9; }
+  55% { opacity: 0.5; }
+}
+/* 2026-07-04 session-33: idle depts now render the same subtle grey
+ * placeholder as the default rule above (previously they were transparent
+ * per the 2026-07-02 pass — operator has since re-scoped: every dept
+ * should visibly read as a set of hoverable windows, so the alignment
+ * concern is downweighted against consistency). */
+.hq-root .dept[data-state="idle"] .dept-windows .w.lit {
+  background: rgba(255, 220, 150, 0.22);
+  box-shadow: inset 0 0 3px rgba(255, 220, 150, 0.3);
+}
+.hq-root .dept[data-state="escalated"] .dept-windows .w {
+  background: rgba(255, 107, 107, 0.35);
+  box-shadow: inset 0 0 4px rgba(255, 107, 107, 0.55);
+  animation: hq-esc-window 1.1s ease-in-out infinite;
+}
+.hq-root .dept[data-state="escalated"] .dept-windows .w.dim {
+  animation-delay: 0.4s;
+  opacity: 0.7;
+}
+@keyframes hq-esc-window {
+  0%, 100% { opacity: 0.95; }
+  50% { opacity: 0.45; }
+}
+.hq-root .dept[data-state="offline"] .dept-windows .w {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+/* —— Callout (shared) —— */
+.hq-root .callout {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  width: 320px;
+  background: rgba(8, 11, 22, 0.96);
+  border: 1px solid rgba(139, 233, 253, 0.32);
+  border-radius: 6px;
+  padding: 12px 14px;
+  color: #e6e6e6;
+  font-family: var(--ui);
+  font-size: 12.5px;
+  line-height: 1.45;
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(0, 0, 0, 0.4);
+  animation: hq-fade-up 140ms ease-out both;
+}
+@keyframes hq-fade-up {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hq-root .callout .head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.hq-root .callout .name {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--neon);
+}
+.hq-root .callout .badge {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(92, 240, 138, 0.12);
+  color: var(--green);
+  border: 1px solid rgba(92, 240, 138, 0.4);
+}
+.hq-root .callout .badge[data-state="idle"] {
+  background: rgba(205, 214, 244, 0.08);
+  color: #cdd6f4;
+  border-color: rgba(205, 214, 244, 0.3);
+}
+.hq-root .callout .badge[data-state="running"] {
+  background: rgba(255, 184, 77, 0.12);
+  color: var(--amber);
+  border-color: rgba(255, 184, 77, 0.4);
+}
+.hq-root .callout .badge[data-state="escalated"] {
+  background: rgba(255, 107, 107, 0.12);
+  color: #ff8b8b;
+  border-color: rgba(255, 107, 107, 0.4);
+}
+.hq-root .callout .badge[data-state="offline"] {
+  background: rgba(120, 120, 120, 0.1);
+  color: #888;
+  border-color: rgba(120, 120, 120, 0.3);
+}
+.hq-root .callout .obj {
+  color: #e6e6e6;
+  margin-bottom: 6px;
+}
+.hq-root .callout .meta {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  color: #8088a8;
+  text-transform: uppercase;
+}
+
+/* —— In-window CLI roster (the workers on a department's floor) —— */
+/* 2026-07-04 session-33: position:relative + z-index promotes the roster
+ * above the always-rendered .dept-windows placeholder grid. Without this,
+ * the absolutely-positioned grid paints over the static-flow roster and
+ * hides it. */
+.hq-root .win-roster {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 17px 4px 5px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-family: var(--mono);
+}
+.hq-root .win-agent {
+  display: grid;
+  grid-template-columns: 6px auto minmax(0, 1fr);
+  align-items: center;
+  gap: 5px;
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-size: 8px;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  cursor: help;
+  transition: background 120ms ease;
+}
+.hq-root .win-agent:hover {
+  background: rgba(139, 233, 253, 0.12);
+}
+.hq-root .win-agent-glyph {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #6c7388;
+}
+.hq-root .win-agent-model {
+  color: #e6ecff;
+  font-weight: 500;
+}
+.hq-root .win-agent-obj {
+  color: #8b93b0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hq-root .win-agent[data-astatus="in-progress"] .win-agent-glyph {
+  background: var(--amber);
+  box-shadow: 0 0 4px var(--amber);
+  animation: hq-blink 1.5s ease-in-out infinite;
+}
+.hq-root .win-agent[data-astatus="escalated"] .win-agent-glyph {
+  background: var(--red);
+  box-shadow: 0 0 5px var(--red);
+  animation: hq-blink 0.8s ease-in-out infinite;
+}
+.hq-root .win-agent[data-astatus="awaiting-review"] .win-agent-glyph {
+  background: #c4b5fd;
+  box-shadow: 0 0 5px rgba(196, 181, 253, 0.7);
+}
+.hq-root .win-agent[data-astatus="queued"] .win-agent-glyph {
+  background: #6c7388;
+}
+.hq-root .win-agent[data-astatus="done"] .win-agent-glyph {
+  background: var(--green);
+  box-shadow: 0 0 4px var(--green);
+}
+
+/* per-worker in-depth panel (opens outward from the window on line hover) */
+.hq-root .callout.agent-detail {
+  width: 250px;
+}
+.hq-root .callout.agent-detail .obj {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #cdd6f4;
+}
+.hq-root .callout.agent-detail .detail {
+  margin-top: 7px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #aeb6d4;
+}
+/* badge colours for individual agent statuses (dept-status set is above) */
+.hq-root .callout .badge[data-state="in-progress"] {
+  background: rgba(255, 184, 77, 0.12);
+  color: var(--amber);
+  border-color: rgba(255, 184, 77, 0.4);
+}
+.hq-root .callout .badge[data-state="awaiting-review"] {
+  background: rgba(196, 181, 253, 0.12);
+  color: #c4b5fd;
+  border-color: rgba(196, 181, 253, 0.4);
+}
+.hq-root .callout .badge[data-state="queued"] {
+  background: rgba(140, 147, 176, 0.12);
+  color: #8b93b0;
+  border-color: rgba(140, 147, 176, 0.35);
+}
+.hq-root .callout .badge[data-state="done"] {
+  background: rgba(92, 240, 138, 0.12);
+  color: var(--green);
+  border-color: rgba(92, 240, 138, 0.4);
+}
+
+/* CLI-style per-agent roster inside the callout */
+.hq-root .callout .agent-list {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.hq-root .callout .agent-row {
+  display: grid;
+  grid-template-columns: 9px 1fr auto;
+  gap: 8px;
+  align-items: start;
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.35;
+}
+.hq-root .callout .agent-glyph {
+  width: 7px;
+  height: 7px;
+  margin-top: 3px;
+  border-radius: 50%;
+  background: #6c7388;
+}
+.hq-root .callout .agent-row[data-astatus="in-progress"] .agent-glyph {
+  background: var(--amber);
+  box-shadow: 0 0 6px var(--amber);
+  animation: hq-blink 1.4s ease-in-out infinite;
+}
+.hq-root .callout .agent-row[data-astatus="escalated"] .agent-glyph {
+  background: var(--red);
+  box-shadow: 0 0 6px var(--red);
+  animation: hq-blink 0.7s ease-in-out infinite;
+}
+.hq-root .callout .agent-row[data-astatus="awaiting-review"] .agent-glyph {
+  background: var(--amber);
+  box-shadow: 0 0 5px var(--amber);
+}
+.hq-root .callout .agent-row[data-astatus="queued"] .agent-glyph {
+  background: #6c7388;
+}
+.hq-root .callout .agent-row[data-astatus="done"] .agent-glyph {
+  background: var(--green);
+}
+.hq-root .callout .agent-obj {
+  color: #d6dcf0;
+}
+.hq-root .callout .agent-stat {
+  font-size: 8.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8088a8;
+  white-space: nowrap;
+  padding-top: 2px;
+}
+.hq-root .callout .agent-row[data-astatus="escalated"] .agent-stat {
+  color: #ff8b8b;
+}
+.hq-root .callout .agent-row[data-astatus="awaiting-review"] .agent-stat {
+  color: var(--amber);
+}
+
+/* active-agent count appended to the building tag (e.g. INGEST ·4) */
+.hq-root .dept-tag .dept-count {
+  color: #8088a8;
+  letter-spacing: 0.05em;
+}
+
+/* —— Generator LEDs + hover-revealed annotation —— */
+/* Invisible mouse target over the generator outbuilding. */
+.hq-root .infra-trigger {
+  position: absolute;
+  z-index: 22;
+}
+/* —— Service-down → windows dim —— */
+/* When a non-core service is down/degraded, the corresponding dept zone's
+ * windows dim. Sits above the V1 photo (z=12) but below the dept-zone
+ * tags (z=24) so the dept label + status LED still read clearly. */
+.hq-root .window-dimmer {
+  position: absolute;
+  pointer-events: none;
+  z-index: 12;
+  border-radius: 3px;
+}
+.hq-root .window-dimmer.is-down {
+  background: rgba(0, 0, 0, 0.78);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.45);
+}
+.hq-root .window-dimmer.is-degraded {
+  background: rgba(0, 0, 0, 0.42);
+  animation: hq-blink 2.4s ease-in-out infinite;
+}
+
+/* —— Subway entrance (external-link exit) —— */
+.hq-root .svg-subway {
+  transition: filter 240ms ease, transform 240ms ease;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.55));
+}
+.hq-root .svg-subway.is-hover {
+  filter: drop-shadow(0 6px 18px rgba(139, 233, 253, 0.32))
+          drop-shadow(0 4px 12px rgba(0, 0, 0, 0.55));
+  transform: translateY(-1px);
+}
+.hq-root .svg-subway-hint {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, 4px);
+  margin-top: 4px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: rgba(205, 214, 244, 0.65);
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: none;
+}
+.hq-root .svg-subway.is-hover .svg-subway-hint { opacity: 1; }
+
+/* —— Leaving-site confirmation modal —— */
+.hq-root .leave-site-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hq-root .leave-site-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 6, 14, 0.72);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+.hq-root .leave-site-card {
+  position: relative;
+  width: min(440px, 92vw);
+  background: linear-gradient(180deg, #0b1325 0%, #0a1020 100%);
+  border: 1px solid rgba(139, 233, 253, 0.22);
+  border-radius: 8px;
+  padding: 24px 26px 22px;
+  color: #cdd6f4;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  font-family: var(--mono);
+}
+.hq-root .leave-site-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(139, 233, 253, 0.7);
+  margin-bottom: 10px;
+}
+.hq-root .leave-site-title {
+  font-family: var(--pixel, var(--mono));
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  margin: 0 0 12px;
+  color: #e6e6f0;
+}
+.hq-root .leave-site-body {
+  font-size: 13px;
+  line-height: 1.55;
+  color: #aeb6d4;
+  margin: 0 0 14px;
+}
+.hq-root .leave-site-url {
+  font-family: var(--mono);
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(139, 233, 253, 0.14);
+  border-radius: 4px;
+  padding: 8px 10px;
+  color: #8be9fd;
+  word-break: break-all;
+  margin-bottom: 18px;
+}
+.hq-root .leave-site-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.hq-root .leave-site-cancel,
+.hq-root .leave-site-continue {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 9px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease;
+}
+.hq-root .leave-site-cancel {
+  background: transparent;
+  border: 1px solid rgba(205, 214, 244, 0.22);
+  color: #cdd6f4;
+}
+.hq-root .leave-site-cancel:hover {
+  background: rgba(205, 214, 244, 0.06);
+  border-color: rgba(205, 214, 244, 0.35);
+}
+.hq-root .leave-site-continue {
+  background: rgba(139, 233, 253, 0.16);
+  border: 1px solid rgba(139, 233, 253, 0.55);
+  color: #cdf6ff;
+}
+.hq-root .leave-site-continue:hover {
+  background: rgba(139, 233, 253, 0.28);
+  border-color: rgba(139, 233, 253, 0.8);
+}
+
+/* —— Whole-building maintenance tint —— */
+/* Covers the entire scene; sits above the V1 photo + service window
+ * dimmers (z=12) but below dept tags (z=24) so labels still read. The
+ * "maintenance" cast is a cool blue-grey desat; "degraded" is a much
+ * gentler version of the same. */
+.hq-root .maintenance-tint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 18;
+}
+.hq-root .maintenance-tint.is-degraded {
+  background: rgba(30, 38, 70, 0.14);
+}
+.hq-root .maintenance-tint.is-maintenance {
+  background: rgba(20, 28, 56, 0.36);
+  box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.35);
+}
+/* Five LEDs baked onto the V1 photo's housing front — always visible. */
+.hq-root .infra-led-bake {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 7px var(--green), 0 0 1px #000, inset 0 0 1px rgba(0, 0, 0, 0.55);
+  transform: translate(-50%, -50%);
+  z-index: 21;
+  pointer-events: none;
+}
+.hq-root .infra-led-bake[data-s="degraded"] {
+  background: var(--amber);
+  box-shadow: 0 0 8px var(--amber), 0 0 1px #000, inset 0 0 1px rgba(0, 0, 0, 0.55);
+  animation: hq-blink 1.4s ease-in-out infinite;
+}
+.hq-root .infra-led-bake[data-s="down"] {
+  background: var(--red);
+  box-shadow: 0 0 9px var(--red), 0 0 1px #000, inset 0 0 1px rgba(0, 0, 0, 0.55);
+  animation: hq-blink 0.7s ease-in-out infinite;
+}
+/* Speech-bubble annotation sits in the sky above the generator, slides
+ * in on hover. Civic-cyan border matches the dept callout vocabulary. */
+.hq-root .infra-bubble {
+  position: absolute;
+  top: 33%;
+  left: 79.5%;
+  width: 174px;
+  z-index: 27;
+  background: rgba(8, 11, 22, 0.94);
+  border: 1px solid rgba(81, 209, 246, 0.32);
+  border-radius: 7px;
+  padding: 10px 13px 11px;
+  font-family: var(--mono);
+  color: #cdd6f4;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 220ms ease, transform 220ms ease;
+  pointer-events: none;
+}
+.hq-root .infra-bubble.is-on {
+  opacity: 1;
+  transform: translateY(0);
+}
+.hq-root .infra-bubble-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--neon);
+  padding-bottom: 7px;
+  margin-bottom: 7px;
+  border-bottom: 1px solid rgba(81, 209, 246, 0.18);
+}
+.hq-root .infra-bubble.warn .infra-bubble-title { color: #ff8b8b; }
+.hq-root .infra-bubble.degraded .infra-bubble-title { color: var(--amber); }
+.hq-root .infra-bubble-status {
+  font-size: 8.5px;
+  letter-spacing: 0.18em;
+  opacity: 0.7;
+}
+.hq-root .infra-bubble-row {
+  display: grid;
+  grid-template-columns: 8px 1fr;
+  align-items: center;
+  gap: 9px;
+  padding: 3px 0;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #cdd6f4;
+}
+.hq-root .infra-bubble-led {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 4px var(--green);
+}
+.hq-root .infra-bubble-led[data-s="degraded"] {
+  background: var(--amber);
+  box-shadow: 0 0 4px var(--amber);
+}
+.hq-root .infra-bubble-led[data-s="down"] {
+  background: var(--red);
+  box-shadow: 0 0 5px var(--red);
+}
+.hq-root .infra-bubble-lbl {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* Dashed connector line from bubble bottom-right down to the LEDs. */
+.hq-root .infra-connector {
+  position: absolute;
+  top: 50%;
+  left: 88%;
+  width: 4.5%;
+  height: 37%;
+  z-index: 26;
+  opacity: 0;
+  transition: opacity 240ms ease 60ms;
+  pointer-events: none;
+}
+.hq-root .infra-connector.is-on { opacity: 1; }
+.hq-root .infra-connector svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* —— Press board hover-bubble (V2 painted-scene, 2026-07-03) —— The
+ * operator's repaint paints the smartboard's broadcast content + the
+ * podium speaker into the base art, so V2 retires the always-on flat
+ * panel + HTML legs + SVG podium (V1 keeps them via PressScreen below).
+ * Live funding data moves to an infra-style hover bubble above the
+ * board — same interaction grammar as the generator shack. */
+.hq-root .press-trigger {
+  position: absolute;
+  z-index: 22;
+}
+.hq-root .press-bubble {
+  position: absolute;
+  top: 53.8%;
+  left: 4.5%;
+  width: 190px;
+  z-index: 27;
+  background: rgba(8, 11, 22, 0.94);
+  border: 1px solid rgba(81, 209, 246, 0.32);
+  border-radius: 7px;
+  padding: 10px 13px 11px;
+  font-family: var(--mono);
+  color: #cdd6f4;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 220ms ease, transform 220ms ease;
+  pointer-events: none;
+}
+.hq-root .press-bubble.is-on {
+  opacity: 1;
+  transform: translateY(0);
+}
+.hq-root .press-bubble-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 9px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--neon);
+  padding-bottom: 7px;
+  margin-bottom: 7px;
+  border-bottom: 1px solid rgba(81, 209, 246, 0.18);
+}
+.hq-root .press-bubble-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 8.5px;
+  letter-spacing: 0.18em;
+  color: #ff8b8b;
+}
+.hq-root .press-bubble-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 5px var(--red);
+  animation: hq-blink 2.4s ease-in-out infinite;
+}
+.hq-root .press-bubble-big {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #eaf2ff;
+  margin: 2px 0 6px;
+}
+.hq-root .press-bubble-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 0;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #cdd6f4;
+}
+.hq-root .press-bubble-row .v { color: #eaf2ff; }
+.hq-root .press-connector {
+  position: absolute;
+  top: 66.5%;
+  left: 7.5%;
+  width: 3%;
+  height: 12%;
+  z-index: 26;
+  opacity: 0;
+  transition: opacity 240ms ease 60ms;
+  pointer-events: none;
+}
+.hq-root .press-connector.is-on { opacity: 1; }
+.hq-root .press-connector svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* —— Press-conference broadcaster TV —— */
+.hq-root .press-screen {
+  overflow: hidden;
+  border: 2px solid #0a1325;
+  border-radius: 4px;
+  /* Smartboard bezel (2026-07-02) — charcoal frame ring + dark outline +
+   * a soft underside drop, matching the original painted board. */
+  box-shadow:
+    0 0 0 5px #262c3a,
+    0 0 0 7px #14181f,
+    0 6px 10px rgba(0, 0, 0, 0.45);
+  background: linear-gradient(180deg, #07142a 0%, #0a1a36 60%, #07142a 100%);
+  color: var(--neon);
+  font-family: var(--pixel);
+  /* Fixed-px padding — CSS percent-padding is calculated against parent
+   * WIDTH, which made the TV explode vertically when the rect itself is
+   * sized by height. Top padding clears the ident + LIVE badges. */
+  padding: 14px 12px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.15em;
+  box-shadow:
+    inset 0 0 0 1px rgba(139, 233, 253, 0.18),
+    inset 0 0 14px rgba(139, 233, 253, 0.12),
+    inset 0 0 32px rgba(0, 0, 0, 0.55);
+  cursor: help;
+}
+/* CRT pixel-grid + scanlines stacked via ::before / ::after */
+.hq-root .press-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(139, 233, 253, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 233, 253, 0.05) 1px, transparent 1px);
+  background-size: 3px 3px;
+  pointer-events: none;
+}
+.hq-root .press-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 0, 0, 0.13) 1px,
+    rgba(0, 0, 0, 0) 2px
+  );
+  background-size: 100% 2.5px;
+  pointer-events: none;
+}
+.hq-root .press-screen > * {
+  position: relative;
+  z-index: 1;
+}
+/* Station ident — top-left corner */
+.hq-root .press-screen .press-ident {
+  position: absolute;
+  top: 5%;
+  left: 6%;
+  font-family: var(--mono);
+  font-size: clamp(6px, 0.78vmin, 9px);
+  letter-spacing: 0.28em;
+  color: rgba(139, 233, 253, 0.68);
+  text-transform: uppercase;
+  z-index: 2;
+}
+/* LIVE indicator — top-right corner */
+.hq-root .press-screen .press-live {
+  position: absolute;
+  top: 5%;
+  right: 6%;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--mono);
+  font-size: clamp(6px, 0.78vmin, 9px);
+  letter-spacing: 0.2em;
+  color: #ff8c8c;
+  text-transform: uppercase;
+  z-index: 2;
+}
+.hq-root .press-screen .press-live-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 5px var(--red);
+  animation: hq-blink 1.6s ease-in-out infinite;
+}
+
+/* —— Infographic mode (daily cinematic image from NotebookLM) ——
+ * Minimal flat-panel TV per James 2026-06-02 — no internal CRT chrome,
+ * no Z-SPAN ident, no LIVE pill. Just: bezel-framed image filling
+ * edge-to-edge + a thin bottom-bezel strip with the live freshness
+ * indicator. Pipeline: parsers/financial_reports/README.md */
+.hq-root .press-screen.is-infographic {
+  padding: 0;
+  background: #07080d;
+  display: flex;
+  flex-direction: column;
+}
+/* Hide the CRT grid + scanline pseudo-elements in infographic mode. */
+.hq-root .press-screen.is-infographic::before,
+.hq-root .press-screen.is-infographic::after {
+  display: none;
+}
+.hq-root .press-screen .press-image-area {
+  flex: 1 1 auto;
+  overflow: hidden;
+  background: #000;
+  min-height: 0;
+}
+.hq-root .press-screen .press-image-area .press-infographic {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.hq-root .press-screen .press-bezel-bottom {
+  flex: 0 0 auto;
+  background: #0a0e18;
+  padding: 3px 4px 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(139, 233, 253, 0.78);
+  white-space: nowrap;
+  border-top: 1px solid rgba(139, 233, 253, 0.18);
+  overflow: hidden;
+}
+.hq-root .press-screen .press-bezel-bottom .dot {
+  opacity: 0.45;
+}
+
+/* —— TV mounting pillars (twin posts to floor) —— */
+/* Per V1 reference: very thin dark vertical post. Simpler than the
+ * earlier gradient + double-border version (James 2026-06-02). */
+.hq-root .press-pillar {
+  position: absolute;
+  width: 0.8%;
+  background: #0a0d16;
+  z-index: 7;
+  pointer-events: none;
+}
+
+/* —— Hover-expanded view (Amazon-style zoom) —— */
+/* When the user hovers the small TV, a larger floating panel appears
+ * above it in the sky area, showing the same infographic at ~3x size.
+ * Mouse leave on the TV OR the panel dismisses. */
+.hq-root .press-expanded {
+  position: absolute;
+  top: 8%;
+  left: 1%;
+  width: 56%;
+  height: 56%;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  background: #07080d;
+  border: 2px solid #0a1325;
+  border-radius: 5px;
+  box-shadow:
+    inset 0 0 0 1px rgba(139, 233, 253, 0.22),
+    0 14px 48px rgba(0, 0, 0, 0.75);
+  pointer-events: auto;
+  animation: press-expand-in 200ms ease-out;
+}
+@keyframes press-expand-in {
+  from { opacity: 0; transform: translateY(8px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.hq-root .press-expanded .press-expanded-image-area {
+  flex: 1 1 auto;
+  overflow: hidden;
+  background: #000;
+  min-height: 0;
+}
+.hq-root .press-expanded .press-expanded-image-area img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.hq-root .press-expanded .press-expanded-bezel {
+  flex: 0 0 auto;
+  background: #0a0e18;
+  padding: 6px 10px 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(139, 233, 253, 0.82);
+  white-space: nowrap;
+  border-top: 1px solid rgba(139, 233, 253, 0.2);
+}
+.hq-root .press-expanded .press-expanded-bezel .dot {
+  opacity: 0.5;
+}
+.hq-root .press-screen .label {
+  font-size: clamp(6px, 0.85vmin, 10px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  color: var(--neon);
+  text-shadow: 0 0 3px rgba(139, 233, 253, 0.55);
+  white-space: nowrap;
+}
+.hq-root .press-screen .big {
+  font-size: clamp(12px, 2.4vmin, 28px);
+  line-height: 1;
+  color: #cdf6ff;
+  margin: 3% 0 5% 0;
+  text-shadow:
+    0 0 4px rgba(139, 233, 253, 0.9),
+    0 0 12px rgba(139, 233, 253, 0.5);
+  white-space: nowrap;
+}
+.hq-root .press-screen .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: clamp(7px, 1vmin, 11px);
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+  color: rgba(139, 233, 253, 0.75);
+  white-space: nowrap;
+  gap: 6px;
+}
+.hq-root .press-screen .row .v {
+  color: #cdf6ff;
+  text-shadow: 0 0 3px rgba(139, 233, 253, 0.6);
+}
+
+/* —— Entrance hint —— (V3 2026-05-29; replaces the V1/V2 fixed-bottom .hint)
+ * Sits in the scene coordinate space as a small label just above the
+ * front doors. Tracks the building's scale on resize because it uses the
+ * same % positioning the entrance + other overlays use. */
+/* Ballroom-gilt entrance sign (2026-07-04 redesign — session-32).
+ * Operator direction: "semi-cursive golden emboss on a nice
+ * background... like the Trump ballroom sign." Previous shape read
+ * as a court-video-game plaque (uppercase serif on walnut with
+ * ◆ ornaments); replaced with a Playfair-style italic script in
+ * warm gold on a deeper midnight-walnut, single subtle gold hairline
+ * frame, no ornaments. Text-shadow stack does the embossed lift
+ * without the multi-inset shine that read as decoration. */
+.hq-root .entrance-hint {
+  position: absolute;
+  /* 2026-07-04 session-33: coords locked from operator's stylus-editor
+   * drag (localStorage payload was
+   * {"top":94.80649669002675,"left":70.48901779196088,"widthPct":16.505169175492505}).
+   * Rounded to 2 decimals for CSS-file readability; the pixel difference
+   * is imperceptible. Position anchors the bottom-center of the plaque
+   * over the drainage-pipe area to the right of the ground entrance. */
+  top: 94.81%;
+  left: 70.49%;
+  width: 16.51%;
+  transform: translate(-50%, -100%);
+  z-index: 35;
+  font-family: "Playfair Display", "Bodoni Moda", Didot, "Georgia", serif;
+  font-style: italic;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: #e6c17a;
+  text-shadow:
+    0 1px 0 rgba(20, 12, 4, 0.95),
+    0 2px 3px rgba(0, 0, 0, 0.75),
+    0 -1px 0 rgba(255, 232, 178, 0.35);
+  background:
+    linear-gradient(180deg, #1a1108 0%, #120a04 50%, #0a0602 100%);
+  border: 1px solid rgba(200, 158, 82, 0.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 220, 150, 0.14),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.85),
+    0 3px 6px rgba(0, 0, 0, 0.55);
+  border-radius: 3px;
+  padding: 6.5px 18px;
+  pointer-events: none;
+  /* whitespace wraps because width is now bounded; the italic script
+   * flows to 2 lines at typical viewport widths. */
+  white-space: normal;
+  text-align: center;
+}
+/* .entrance-hint-orn class retired 2026-07-04 (session-32) — operator
+ * removed the ◆ ornaments. Class stays defined for legacy remounts but
+ * hides itself if it appears. */
+.hq-root .entrance-hint-orn { display: none; }
+
+/* Live-status fetch state — small top-of-viewport pill that hints the data
+   is in flight (initial load) or that the scene is rendering placeholder
+   data because /api/hq/status couldn't be reached. The scene still renders
+   from the bundled mock either way; this just makes the state honest. */
+.hq-root .hq-status-tag {
+  position: fixed;
+  top: 56px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: rgba(8, 11, 22, 0.72);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(139, 233, 253, 0.18);
+  border-radius: 2px;
+  padding: 5px 12px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.hq-root .hq-status-tag--loading {
+  color: rgba(205, 214, 244, 0.7);
+  animation: hq-status-pulse 1.4s ease-in-out infinite;
+}
+.hq-root .hq-status-tag--mock {
+  color: rgba(243, 200, 100, 0.85);
+  border-color: rgba(243, 200, 100, 0.28);
+}
+@keyframes hq-status-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+/* While the first fetch is in flight, dim the scene very slightly so the
+   loading tag has something to read against without hiding the building. */
+.hq-root.hq-loading .scene-wrap {
+  filter: brightness(0.92);
+  transition: filter 240ms ease;
+}
+
+/* maintenance tint when a core service is down */
+.hq-root .maintenance-tint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: rgba(180, 40, 40, 0.1);
+  mix-blend-mode: multiply;
+  opacity: 0;
+  transition: opacity 400ms ease;
+  z-index: 5;
+}
+.hq-root .maintenance-tint.on {
+  opacity: 1;
+}
+
+/* entrance → navigate flash */
+.hq-root .enter-flash {
+  position: fixed;
+  inset: 0;
+  background: #ffd98a;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 420ms ease;
+}
+.hq-root .enter-flash.on {
+  opacity: 0.92;
+}
+
+@media (max-width: 720px) {
+  .hq-root .chrome,
+  .hq-root .clock,
+  .hq-root .hint,
+  .hq-root .look-up-hint {
+    font-size: 9px;
+    padding: 6px 10px;
+  }
+  .hq-root .callout {
+    width: 280px;
+    font-size: 11.5px;
+  }
+  .hq-root .dept-tag {
+    font-size: 7px;
+  }
+}
+
+/* —— Skybox (post-Logstalgia, 2026-05-29; V2 polish 2026-05-29) ——
+ * Vertical-scroll region above the building. Layered depth (back to front):
+ *   .skybox-bg        — vertical gradient: HQ warm dusk → OLED black
+ *   .skybox-nebula    — subtle violet ellipse (screen blend) for void depth
+ *   .skybox-stars-bg  — one-shot procedural background star field (canvas)
+ *   .skybox-canvas    — long-exposure shooting stars (StarField, accumulator)
+ *   .skybox-haze      — atmospheric haze at the building/sky seam
+ */
+.hq-root .skybox {
+  position: relative;
+  width: 100%;
+  /* V3 polish 2026-05-29: shortened to 75vh per James — less drama on
+   * the scroll up, and tighter gradient lets OLED dominate the upper
+   * half rather than getting only ~10% at the very top. */
+  height: 75vh;
+  overflow: hidden;
+  background: #000;
+  z-index: 0;
+}
+.hq-root .skybox-bg {
+  position: absolute;
+  inset: 0;
+  /* Getting Over It ending palette: dark royal blue at horizon → violet
+   * aurora through the mid → OLED black takes the upper half. Transition
+   * compressed into the bottom ~52% so OLED black is properly reserved
+   * (not just a thin band at the very top). */
+  background: linear-gradient(
+    to top,
+    #1b2754 0%,    /* horizon: dark royal blue (matches the scene-wrap top) */
+    #251c52 8%,    /* blue-violet (quick lift off the horizon) */
+    #1c1042 18%,   /* aurora violet (peak colour) */
+    #120931 30%,   /* deep purple void */
+    #07051a 42%,   /* near-OLED */
+    #000 52%,      /* OLED arrives at the midpoint */
+    #000 100%      /* zenith: pure OLED dominates the upper half */
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+.hq-root .skybox-nebula {
+  position: absolute;
+  /* 2026-06-02 (James push-back): replaced the violet tilted ellipse —
+   * it sat at top:14% (in the OLED-black zone) and degraded the pure
+   * darkness James wanted at the zenith. Now a subtle diagonal Milky
+   * Way band sitting LOWER in the sky (in the violet aurora zone, well
+   * below the OLED dominant top half) with a dust lane through its
+   * spine. Reads as galaxy backdrop, doesn't encroach on the OLED. */
+  top: 52%;
+  left: -8%;
+  width: 116%;
+  height: 36%;
+  background:
+    /* Dust lane — darker streak through the spine of the galaxy */
+    linear-gradient(
+      108deg,
+      transparent 22%,
+      rgba(8, 4, 22, 0.30) 46%,
+      rgba(8, 4, 22, 0.42) 50%,
+      rgba(8, 4, 22, 0.30) 54%,
+      transparent 78%
+    ),
+    /* Subtle warm-yellow core where the galactic bulge would be */
+    radial-gradient(ellipse 18% 28% at 50% 50%,
+      rgba(255, 235, 205, 0.10) 0%,
+      rgba(255, 215, 175, 0.06) 35%,
+      transparent 70%
+    ),
+    /* Galaxy spine — soft diagonal starlight band, peaking at center */
+    linear-gradient(
+      108deg,
+      transparent 4%,
+      rgba(200, 215, 245, 0.06) 18%,
+      rgba(220, 230, 250, 0.13) 36%,
+      rgba(240, 245, 255, 0.18) 50%,
+      rgba(220, 230, 250, 0.13) 64%,
+      rgba(200, 215, 245, 0.06) 82%,
+      transparent 96%
+    );
+  filter: blur(14px);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 1;
+}
+.hq-root .skybox-stars-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  z-index: 2;
+}
+.hq-root .skybox-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  z-index: 3;
+}
+/* .skybox-haze REMOVED 2026-05-29 — the orange warm-dusk haze read as
+ * "horizon glow" and broke the OLED-space framing. The sky now flows
+ * dark-blue → violet → OLED black uninterrupted, and the building image
+ * provides whatever warm horizon exists below it. */
+
+/* —— Cloud divider —— HQ V1 chunk 1+2, 2026-05-31. Horizontal cloud band
+ * at the skybox/scene-wrap seam (y ≈ 75vh in .hq-root coords). Two jobs:
+ * hide the seam (atmospheric layer instead of hairline cut) AND host the
+ * settings entry point (the distinct, hoverable "settings cloud" opens
+ * the SettingsCloudPanel). Pure CSS radial gradients — no image asset, no
+ * upscale artifacts, ports unchanged to V2 background rebuild.
+ *
+ * Container is pointer-events: none so it never intercepts clicks on the
+ * DeptZones / Entrance / Billboards underneath; only the settings button
+ * claims pointer-events: auto. Sits at z-index 15 — above the scene-wrap
+ * (z:1), below the chrome (z:40) and vignette (z:50). */
+.hq-root .cloud-divider {
+  position: absolute;
+  /* Center the band ON the seam: top puts container start 6vh above the
+   * seam, height 14vh extends 8vh below. The mid-line lands on the seam
+   * at ~y=75vh in .hq-root coords. */
+  top: calc(75vh - 6vh);
+  left: 0;
+  width: 100%;
+  height: 14vh;
+  z-index: 15;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3vw;
+}
+
+.hq-root .cloud-divider { gap: 0; }
+
+/* Decorative puffs — softer + slightly smaller than the settings cloud
+ * so the settings cloud reads as the focal affordance. Layered radial
+ * gradients give a multi-bubble cloud shape rather than a single ellipse.
+ * Alphas tuned to read as cloud cover against the OLED sky AND the
+ * warm-dusk building above the seam (V1 polish 2026-05-31). */
+.hq-root .cloud-divider-puff {
+  width: 22vw;
+  height: 10vh;
+  margin: 0 -2vw; /* overlap so the band reads continuous, not five separate blobs */
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse 70% 80% at 30% 50%, rgba(190, 210, 240, 0.42), transparent 72%),
+    radial-gradient(ellipse 80% 70% at 70% 60%, rgba(170, 195, 225, 0.34), transparent 72%),
+    radial-gradient(ellipse 60% 60% at 50% 40%, rgba(210, 230, 250, 0.28), transparent 72%);
+  filter: blur(6px);
+  pointer-events: none;
+}
+.hq-root .cloud-divider-puff--left-far { transform: translateX(-1vw) translateY(0.4vh) scale(0.92); opacity: 0.78; }
+.hq-root .cloud-divider-puff--left-near { transform: translateX(0.5vw) translateY(-0.2vh) scale(1.0); opacity: 0.92; }
+.hq-root .cloud-divider-puff--right-near { transform: translateX(-0.5vw) translateY(-0.2vh) scale(1.0); opacity: 0.92; }
+.hq-root .cloud-divider-puff--right-far { transform: translateX(1vw) translateY(0.4vh) scale(0.92); opacity: 0.78; }
+
+/* The settings cloud — distinct, hoverable, clickable. More luminous +
+ * bigger + carries the "Settings" hint text that brightens on hover.
+ * Reads as the focal affordance in the cloud band. */
+.hq-root .cloud-divider-settings {
+  position: relative;
+  appearance: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  width: 24vw;
+  height: 13vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  transition: transform 220ms ease, filter 220ms ease;
+}
+.hq-root .cloud-divider-settings:hover,
+.hq-root .cloud-divider-settings:focus-visible {
+  transform: translateY(-2px) scale(1.04);
+  filter: brightness(1.18);
+  outline: none;
+}
+.hq-root .cloud-divider-settings-puff {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse 75% 80% at 30% 50%, rgba(215, 230, 250, 0.58), transparent 68%),
+    radial-gradient(ellipse 80% 70% at 70% 55%, rgba(190, 210, 235, 0.46), transparent 72%),
+    radial-gradient(ellipse 65% 60% at 50% 40%, rgba(230, 240, 255, 0.36), transparent 72%);
+  filter: blur(5px);
+}
+.hq-root .cloud-divider-settings-hint {
+  position: relative;
+  z-index: 2;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(220, 235, 255, 0.65);
+  text-shadow: 0 0 8px rgba(100, 150, 200, 0.35);
+  opacity: 0.6;
+  transition: opacity 220ms ease, color 220ms ease;
+}
+.hq-root .cloud-divider-settings:hover .cloud-divider-settings-hint,
+.hq-root .cloud-divider-settings:focus-visible .cloud-divider-settings-hint {
+  opacity: 1;
+  color: rgba(240, 250, 255, 0.95);
+}
+
+/* ============================================================
+ *  V2 Fog Band — hypnotic SF-fog accent across the seam
+ * ============================================================
+ * Replaces V1's CloudDivider for the V2 composite. Three motion layers
+ * (procedural feTurbulence + 3 photographic CC0 SF-fog cutouts) drift at
+ * different speeds and counter-directions to produce a hypnotic morph
+ * that hides the Skybox/scene-wrap horizon line. WHOLE BAND is the click
+ * target (vs V1's single settings-cloud puff) — a "Settings" hint fades
+ * in on hover so the affordance stays discoverable. James 2026-06-02. */
+
+.hq-root .hq-v2-fog-band {
+  position: absolute;
+  /* "Honest haze" 2026-06-02 v5 per Opus structural verdict + James OK.
+   * Three CSS cumulus iterations (v3 cotton balls, v4 soap-bubble foam)
+   * confirmed radial-gradient masks can't escape circle-stamp regularity.
+   * v5 strips the cumulus pretension: small horizontal fog blanket that's
+   * HONEST about what it is (low-altitude advection fog covering the seam)
+   * instead of pretending to be cumulus. Size dropped from 32vh to 12vh —
+   * sits only on the seam between Skybox (75vh) and scene-wrap, exactly
+   * where it was meant to. Photoreal cumulus upgrade via Gemini/Flow is
+   * pinned for soon (TASKS V2-fog-2).
+   *
+   * 2026-07-04 (session-33): offset bumped from -6vh to -11vh — operator
+   * flagged the band was covering ~1/5 of the Z-SPAN sign at the current
+   * viewport size. Sits ~5vh higher so it barely kisses the sign's top
+   * edge instead of overlapping it. */
+  top: calc(75vh - 11vh);
+  left: 0;
+  width: 100%;
+  height: 12vh;
+  z-index: 15;
+  /* Reset button defaults */
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  overflow: hidden;
+  font: inherit;
+  color: inherit;
+  /* Drop shadow softens the band's silhouette against the dusk above */
+  filter: drop-shadow(0 4px 12px rgba(8, 14, 32, 0.35));
+  transition: filter 240ms ease;
+}
+.hq-root .hq-v2-fog-band:hover {
+  filter: drop-shadow(0 4px 12px rgba(8, 14, 32, 0.35)) brightness(1.08);
+}
+.hq-root .hq-v2-fog-band:focus-visible {
+  outline: 2px solid rgba(140, 200, 240, 0.55);
+  outline-offset: -2px;
+}
+
+/* Procedural turbulence backplate — feTurbulence with animated
+ * baseFrequency + seed gives the morphing churn underneath the
+ * photographic accents. Sits at the back; everything else is over it.
+ *
+ * 2026-06-02 Opus critique: original used `mix-blend-mode: screen` which
+ * over-lightened the noise against the navy sky. Dropped to normal blend
+ * + lower opacity so the procedural layer reads as subtle morph, not
+ * dominant brightness.  */
+.hq-root .hq-v2-fog-band__noise {
+  position: absolute;
+  inset: -8% -4%;
+  width: 108%;
+  height: 116%;
+  pointer-events: none;
+  opacity: 0.38;
+  animation: hq-v2-fog-noise-drift 110s linear infinite;
+  /* Soft elliptical mask so the procedural noise dissolves at every
+   * edge of the band (not just left/right) — keeps the band's overall
+   * silhouette from reading as a sharp rectangle. */
+  mask-image: radial-gradient(ellipse 92% 78% at 50% 50%,
+    black 25%, rgba(0,0,0,0.6) 60%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 92% 78% at 50% 50%,
+    black 25%, rgba(0,0,0,0.6) 60%, transparent 100%);
+}
+@keyframes hq-v2-fog-noise-drift {
+  0%   { transform: translateX(-3%) translateY(0); }
+  50%  { transform: translateX(3%) translateY(-1%); }
+  100% { transform: translateX(-3%) translateY(0); }
+}
+
+/* Photographic fog layers — repeat-x background drifts horizontally,
+ * but the BAND-SHAPE comes from a per-layer cloud-puff mask (multiple
+ * radial gradients = irregular silhouette). The photo TEXTURE drifts
+ * inside a fixed cloud silhouette, like real fog — broad shape stays
+ * stable while the details billow.
+ *
+ * James push-back 2026-06-02: a uniform-feathered band reads as a flat
+ * horizontal beam, not clouds. Cloud-shaped radial-gradient masks fix
+ * the rectangular silhouette. Per-layer mask variation makes the
+ * stacked composite silhouette truly irregular. */
+.hq-root .hq-v2-fog-band__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: repeat-x;
+  background-size: auto 100%;
+  background-position: 0 center;
+  pointer-events: none;
+  will-change: background-position, transform;
+  mix-blend-mode: soft-light;
+}
+
+/* HONEST HAZE — 2026-06-02 v5 per Opus structural verdict + James OK.
+ * Three CSS cumulus iterations (v3 cotton-balls, v4 soap-bubble foam)
+ * confirmed radial-gradient masks can't escape circle-stamp regularity
+ * — they fundamentally produce circles, no matter how stacked. v5
+ * abandons the cumulus pretension entirely: the photos ARE blanket fog
+ * (SF advection fog from Library of Congress), so let them be blanket
+ * fog. Simple vertical feather, parallax drift, no fake cloud-shape
+ * masks. Stopgap until the Gemini/Flow photoreal cumulus upgrade. */
+
+/* All three photo layers share the same vertical feather — fog at the
+ * center of the band, fading to alpha at top + bottom. No radial shape
+ * carving. The brightness-as-alpha tinting from the retired process_fog.py
+ * preprocessing gives the photo texture its natural fog-density variation
+ * inside this band. */
+.hq-root .hq-v2-fog-band__photo--a,
+.hq-root .hq-v2-fog-band__photo--b,
+.hq-root .hq-v2-fog-band__photo--c {
+  --mask: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(0,0,0,0.4) 18%,
+    black 38%,
+    black 62%,
+    rgba(0,0,0,0.4) 82%,
+    transparent 100%);
+  mask-image: var(--mask);
+  -webkit-mask-image: var(--mask);
+}
+
+/* Layer C — back, broadest, slow L→R drift. */
+.hq-root .hq-v2-fog-band__photo--c {
+  background-image: url("/hq/fog/fog_layer_c.png");
+  opacity: 0.72;
+  animation: hq-v2-fog-drift-lr 132s linear infinite;
+}
+
+/* Layer A — mid, counter R→L drift + vertical breathe. */
+.hq-root .hq-v2-fog-band__photo--a {
+  background-image: url("/hq/fog/fog_layer_a.png");
+  opacity: 0.58;
+  animation:
+    hq-v2-fog-drift-rl 86s linear infinite,
+    hq-v2-fog-breathe 42s ease-in-out infinite;
+}
+
+/* Layer B — detail layer, fastest, phase-offset so seams don't sync. */
+.hq-root .hq-v2-fog-band__photo--b {
+  background-image: url("/hq/fog/fog_layer_b.png");
+  opacity: 0.48;
+  animation: hq-v2-fog-drift-lr 58s linear infinite;
+  animation-delay: -27s;
+}
+
+@keyframes hq-v2-fog-drift-lr {
+  from { background-position-x: 0%; }
+  to   { background-position-x: -100%; }
+}
+@keyframes hq-v2-fog-drift-rl {
+  from { background-position-x: -100%; }
+  to   { background-position-x: 0%; }
+}
+@keyframes hq-v2-fog-breathe {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3%); }
+}
+
+/* Affordance hint — fades in on hover so the whole-band-clickable
+ * model is discoverable. Center-anchored.
+ *
+ * 2026-06-02 Opus critique: floating uppercase text alone reads as
+ * decorative typography, not as a click target. Added a soft pill bg
+ * + subtle border so the eye registers "this is interactive." */
+.hq-root .hq-v2-fog-band__hint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 6px 18px;
+  border-radius: 999px;
+  background: rgba(10, 18, 36, 0.55);
+  border: 1px solid rgba(140, 200, 240, 0.35);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(225, 238, 255, 0.92);
+  text-shadow: 0 0 6px rgba(80, 130, 190, 0.5);
+  box-shadow:
+    0 4px 14px rgba(8, 14, 32, 0.5),
+    0 0 0 1px rgba(140, 200, 240, 0.12) inset;
+  opacity: 0;
+  transition: opacity 280ms ease, transform 280ms ease;
+  pointer-events: none;
+  user-select: none;
+}
+.hq-root .hq-v2-fog-band:hover .hq-v2-fog-band__hint,
+.hq-root .hq-v2-fog-band:focus-visible .hq-v2-fog-band__hint {
+  opacity: 0.98;
+  transform: translate(-50%, calc(-50% - 3px));
+}
+
+/* Reduce-motion: respect the user's pref. Animations become static. */
+@media (prefers-reduced-motion: reduce) {
+  .hq-root .hq-v2-fog-band__noise,
+  .hq-root .hq-v2-fog-band__photo--a,
+  .hq-root .hq-v2-fog-band__photo--b,
+  .hq-root .hq-v2-fog-band__photo--c {
+    animation: none;
+  }
+}
+
+/* —— Settings cloud panel —— opens on click of the settings cloud.
+ * Centered modal with a translucent dim backdrop. Click-away dismisses;
+ * Escape also closes (wired in the component). HQ V1 chunk 2. */
+.hq-root .settings-cloud-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(2, 6, 14, 0.50);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: settings-cloud-overlay-in 160ms ease-out;
+}
+@keyframes settings-cloud-overlay-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.hq-root .settings-cloud-panel {
+  width: min(440px, 92vw);
+  max-height: 80vh;
+  overflow: auto;
+  background: rgba(10, 16, 28, 0.96);
+  border: 1px solid rgba(120, 200, 255, 0.30);
+  border-radius: 4px;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.4),
+    0 20px 60px rgba(0, 0, 0, 0.65),
+    0 0 28px rgba(120, 200, 255, 0.10);
+  color: rgba(220, 235, 255, 0.95);
+  font-family: var(--ui);
+  animation: settings-cloud-panel-in 180ms ease-out;
+}
+@keyframes settings-cloud-panel-in {
+  from { opacity: 0; transform: translateY(-6px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.hq-root .settings-cloud-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(120, 200, 255, 0.18);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(180, 220, 255, 0.85);
+}
+.hq-root .settings-cloud-close {
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: rgba(180, 220, 255, 0.7);
+  font-family: var(--mono);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 2px;
+  transition: background 150ms ease, color 150ms ease;
+}
+.hq-root .settings-cloud-close:hover {
+  background: rgba(120, 200, 255, 0.10);
+  color: rgba(240, 250, 255, 1);
+}
+.hq-root .settings-cloud-body {
+  padding: 16px;
+}
+.hq-root .settings-cloud-placeholder {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(180, 220, 255, 0.65);
+  font-family: var(--mono);
+}
+
+/* —— Sections inside the settings cloud panel —— each control group
+ * (variant switcher / mock-inject / view-mode toggle) sits in its own
+ * <section> with a thin divider above. HQ V1 chunk 3+ (2026-05-31). */
+.hq-root .settings-cloud-section {
+  padding-bottom: 14px;
+}
+.hq-root .settings-cloud-section + .settings-cloud-section,
+.hq-root .settings-cloud-section + .settings-cloud-placeholder {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(120, 200, 255, 0.10);
+}
+
+/* Owner-section boundary marker (V2-17c, iterated). Sits inside <OwnerOnly>
+ * as the first child, signals the viewer→owner transition explicitly so
+ * Render Mode + Mock Inject don't read as siblings of the viewer-facing
+ * Variant section. Decorative furniture per D-054 (the eye
+ * learns to skip it), not content the user reads. */
+.hq-root .settings-cloud-owner-eyebrow {
+  margin-top: 22px;
+  padding-top: 14px;
+  padding-bottom: 4px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(139, 233, 253, 0.55);
+  border-top: 1px solid rgba(139, 233, 253, 0.24);
+}
+/* Suppress the default section-to-section border for the first owner section
+ * — the eyebrow above already carries the boundary signal. */
+.hq-root .settings-cloud-owner-eyebrow + .settings-cloud-section--owner {
+  margin-top: 6px;
+  padding-top: 0;
+  border-top: none;
+}
+
+/* —— HQ mode picker (V2-17c) —— owner-only 3-segment toggle (V2 / V1 /
+ * Compare) living inside the settings cloud panel. Replaced the retired
+ * top-center HQModePillBar — operator now flips render mode from the same
+ * cloud-panel surface as the variant switcher + mock-inject. */
+.hq-root .settings-cloud-mode {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: var(--mono);
+}
+.hq-root .settings-cloud-mode-head {
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(139, 233, 253, 0.7);
+}
+.hq-root .settings-cloud-mode-group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
+  background: rgba(10, 14, 28, 0.55);
+  border: 1px solid rgba(139, 233, 253, 0.22);
+  border-radius: 999px;
+}
+.hq-root .settings-cloud-mode-btn {
+  flex: 1;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(205, 214, 244, 0.6);
+  cursor: pointer;
+  transition:
+    color 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease;
+}
+.hq-root .settings-cloud-mode-btn:hover {
+  color: #cdf6ff;
+}
+/* Active treatment: outline-only (NOT solid-fill).
+ * The variant rows above use solid-cyan-fill for active (a "one-of-N from
+ * a growing set" pattern). The mode pill is a 3-way segmented toggle —
+ * different conceptual shape, different active treatment so the eye reads
+ * them as answers to DIFFERENT questions, not the same one. Per V2-17c
+ * Opus visual critique 2026-06-02. */
+.hq-root .settings-cloud-mode-btn.is-active {
+  color: #cdf6ff;
+  background: rgba(139, 233, 253, 0.10);
+  border-color: rgba(139, 233, 253, 0.75);
+}
+.hq-root .settings-cloud-mode-btn.is-active:hover {
+  color: #ffffff;
+  background: rgba(139, 233, 253, 0.16);
+}
+.hq-root .settings-cloud-mode-foot {
+  font-size: 11px;
+  line-height: 1.4;
+  color: rgba(180, 220, 255, 0.55);
+}
+
+/* —— Variant switcher controls —— retired the floating bottom-left
+ * panel; lives inside the settings cloud panel as of chunk 3. Same
+ * visual language as before: terminal mono, 2px corners, `›` active
+ * prefix, neon-cyan accent on active row. */
+.hq-root .variant-controls {
+  font-family: var(--mono);
+  color: rgba(180, 220, 255, 0.92);
+}
+.hq-root .variant-controls-head {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin-bottom: 8px;
+}
+.hq-root .variant-controls-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hq-root .variant-controls-row {
+  appearance: none;
+  background: transparent;
+  border: 1px solid rgba(120, 200, 255, 0.18);
+  border-radius: 2px;
+  color: rgba(180, 220, 255, 0.85);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  padding: 5px 8px;
+  text-align: left;
+  line-height: 1.2;
+  transition: background 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+.hq-root .variant-controls-row:hover {
+  background: rgba(120, 200, 255, 0.08);
+  border-color: rgba(120, 200, 255, 0.30);
+}
+.hq-root .variant-controls-row.is-active {
+  background: rgba(120, 200, 255, 0.18);
+  border-color: rgba(120, 200, 255, 0.55);
+  color: rgba(220, 245, 255, 1);
+}
+.hq-root .variant-controls-prefix {
+  display: inline-block;
+  width: 10px;
+  opacity: 0.7;
+  margin-right: 6px;
+}
+.hq-root .variant-controls-foot {
+  margin-top: 8px;
+  font-size: 9px;
+  opacity: 0.55;
+  line-height: 1.4;
+}
+
+/* —— Mock-inject controls —— retired the floating bottom-right panel;
+ * lives inside the settings cloud panel as of chunk 4 (2026-05-31).
+ * Mirrors the floating MockInjectPanel's look exactly minus the
+ * position: fixed wrapper. Owner-only via OwnerOnly gate in the panel. */
+.hq-root .mock-inject-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--mono);
+}
+.hq-root .mock-inject-controls-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(139, 233, 253, 0.7);
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(139, 233, 253, 0.10);
+  margin-bottom: 4px;
+}
+.hq-root .mock-inject-controls-pip {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(92, 240, 138, 0.18);
+  box-shadow: none;
+  transition: background 80ms ease-out, box-shadow 220ms ease-out;
+}
+.hq-root .mock-inject-controls-pip.lit {
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green), 0 0 14px rgba(92, 240, 138, 0.4);
+}
+.hq-root .mock-inject-controls-row {
+  display: flex;
+  gap: 4px;
+}
+.hq-root .mock-inject-controls button {
+  flex: 1;
+  padding: 5px 9px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #cdd6f4;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+.hq-root .mock-inject-controls button::before {
+  content: "› ";
+  opacity: 0.55;
+}
+.hq-root .mock-inject-controls button:hover {
+  background: rgba(139, 233, 253, 0.1);
+  border-color: rgba(139, 233, 253, 0.5);
+  color: #cdf6ff;
+}
+.hq-root .mock-inject-controls button:hover::before { opacity: 1; }
+.hq-root .mock-inject-controls button[data-kind="bad"] {
+  color: #ff8b8b;
+  border-color: rgba(255, 107, 107, 0.3);
+}
+.hq-root .mock-inject-controls button[data-kind="bad"]:hover {
+  background: rgba(255, 107, 107, 0.1);
+  border-color: rgba(255, 107, 107, 0.55);
+}
+.hq-root .mock-inject-controls button:disabled {
+  opacity: 0.4;
+  cursor: progress;
+}
+.hq-root .mock-inject-controls-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(205, 214, 244, 0.45);
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin-top: 2px;
+}
+.hq-root .mock-inject-controls-foot .v {
+  color: #cdf6ff;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+/* —— Ganymede moon —— a realistic small moon sitting in the OLED-black
+ * space portion of the skybox.
+ *
+ * **Position-absolute within .hq-root** (NOT fixed-to-viewport) so the
+ * moon belongs to the SKY — it scrolls with the page. When the user is
+ * looking at the building (scrolled to bottom), the moon is above the
+ * viewport. When they scroll up to the sky, the moon is in the top-
+ * right of the space part. This matches the spec: *"only on the space
+ * part"* (James 2026-06-01).
+ *
+ * Sits at top: 6vh within .hq-root (well within the skybox's 75vh region
+ * AND in the OLED-black upper portion, above the dusk gradient band).
+ * z-index between the StarField canvas (z:3) and the chrome (z:40). */
+.hq-root .ganymede {
+  position: absolute;
+  /* Tucked tight to the top-right corner of the skybox. The clock
+   * chrome (top: 18px, right: 18px area) sits at z-index: 40 above this,
+   * so the corner overlaps visually but the clock stays readable. The
+   * moon itself (cx=62, cy=32 in viewBox) lands well below the clock. */
+  top: 2vh;
+  right: 8px;
+  width: 240px;
+  height: 240px;
+  z-index: 22;
+  pointer-events: none;
+}
+.hq-root .ganymede-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* —— The moon body —— a soft drop-shadow gives it a quiet glow against
+ * the OLED-black space. The radial-gradient fill is defined inline in
+ * the SVG <defs> (ganymede-moon-shade) — directional light from the
+ * upper-left, shadow lower-right. */
+.hq-root .ganymede-moon-body {
+  filter:
+    drop-shadow(0 0 2px rgba(255, 250, 230, 0.45))
+    drop-shadow(0 0 5px rgba(255, 240, 200, 0.20));
+}
+
+/* —— "Look up" discovery hint —— V2: chevron-only, gentle pulse + drift.
+ * More in-world than the V1 labeled pill. Fades on first scroll. */
+.hq-root .look-up-hint {
+  position: fixed;
+  top: 84px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 41;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 700ms ease;
+}
+.hq-root .look-up-hint .chev {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 30px;
+  line-height: 1;
+  color: rgba(205, 214, 244, 0.55);
+  text-shadow:
+    0 0 8px rgba(139, 233, 253, 0.35),
+    0 0 18px rgba(139, 233, 253, 0.18);
+  animation: hq-look-up 2.6s ease-in-out infinite;
+}
+@keyframes hq-look-up {
+  0%, 100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.95;
+    transform: translateY(-6px);
+  }
+}
+.hq-root .look-up-hint.hidden {
+  opacity: 0;
+}
+
+/* —— Mock-traffic injection panel (owner-only) — operator-terminal V2 ——
+ * Reskinned 2026-05-29: tight 2-3px corners, mono labels, terminal-style
+ * `›` button prefixes, green PIP that lights on fire, running "SENT"
+ * counter. Matches the HQ's existing voice (.infra-panel, .callout) so
+ * it reads as part of the operation, not a Bootstrap drop-in. */
+.hq-root .mock-inject-panel {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  z-index: 42;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 9px 11px 10px;
+  background: rgba(8, 11, 22, 0.88);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(139, 233, 253, 0.22);
+  border-radius: 3px;
+  color: #cdd6f4;
+  font-family: var(--mono);
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.4),
+    0 8px 24px rgba(0, 0, 0, 0.55);
+}
+.hq-root .mock-inject-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(139, 233, 253, 0.7);
+  margin-bottom: 4px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(139, 233, 253, 0.14);
+}
+.hq-root .mock-inject-pip {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(92, 240, 138, 0.18);
+  box-shadow: none;
+  transition: background 80ms ease-out, box-shadow 220ms ease-out;
+}
+.hq-root .mock-inject-pip.lit {
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green), 0 0 14px rgba(92, 240, 138, 0.4);
+}
+.hq-root .mock-inject-row {
+  display: flex;
+  gap: 4px;
+}
+.hq-root .mock-inject-panel button {
+  flex: 1;
+  padding: 5px 9px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #cdd6f4;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(139, 233, 253, 0.2);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+  white-space: nowrap;
+  text-align: left;
+}
+.hq-root .mock-inject-panel button::before {
+  content: "› ";
+  opacity: 0.55;
+}
+.hq-root .mock-inject-panel button:hover {
+  background: rgba(139, 233, 253, 0.1);
+  border-color: rgba(139, 233, 253, 0.5);
+  color: #cdf6ff;
+}
+.hq-root .mock-inject-panel button:hover::before {
+  opacity: 1;
+}
+.hq-root .mock-inject-panel button[data-kind="bad"] {
+  color: #ff8b8b;
+  border-color: rgba(255, 107, 107, 0.3);
+}
+.hq-root .mock-inject-panel button[data-kind="bad"]:hover {
+  background: rgba(255, 107, 107, 0.1);
+  border-color: rgba(255, 107, 107, 0.55);
+}
+.hq-root .mock-inject-panel button:disabled {
+  opacity: 0.4;
+  cursor: progress;
+}
+.hq-root .mock-inject-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(205, 214, 244, 0.45);
+  padding-top: 6px;
+  margin-top: 2px;
+  border-top: 1px solid rgba(139, 233, 253, 0.1);
+}
+.hq-root .mock-inject-foot .v {
+  color: #cdf6ff;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+/* —— HQ V2 background rebuild — side-by-side compare mode ——
+ * Mounts via ?view=hq&compare=true. V1 (image overlay) renders on the left
+ * 50vw column, V2 (code-built) on the right. The .scene override below
+ * constrains the inner aspect-locked stage to its 50vw container — without
+ * it the V1 .scene would use `min(100vw, ...)` and bleed across the seam.
+ * Per HQ_V2_BACKGROUND_REBUILD_PLAN.md § 4. */
+.hq-compare {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-height: 100vh;
+  background: #000;
+  /* Each pane scrolls in lockstep with the page (no per-pane scroll), so
+   * the building-and-sky vertical scroll model from V1 works identically
+   * across both halves. */
+  overflow-x: hidden;
+}
+.hq-compare-pane {
+  position: relative;
+  width: 50vw;
+  flex: 0 0 50vw;
+  min-width: 0;
+  overflow-x: hidden;
+}
+.hq-compare-pane--v1 {
+  border-right: 1px solid rgba(139, 233, 253, 0.22);
+}
+
+/* Constrain the inner aspect-locked .scene to the 50vw pane width. Without
+ * this override .scene resolves to `min(100vw, calc(100vh * 1376/768))` and
+ * overflows the pane. Using `100%` here means "50vw" (the pane width), and
+ * the height matches the 50vw-derived aspect. */
+.hq-compare-pane .hq-root .scene {
+  width: min(100%, calc(100vh * 1376 / 768));
+  height: min(100vh, calc(50vw * 768 / 1376));
+}
+
+/* The dev-mode pane label — small pill at the top of each column so the
+ * operator can tell which half is which at a glance. Positioned ABSOLUTELY
+ * to the pane (not fixed to the viewport) so it scrolls naturally with
+ * the content if the page scrolls. */
+.hq-compare-label {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #cdf6ff;
+  background: rgba(10, 14, 28, 0.78);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(139, 233, 253, 0.28);
+  border-radius: 999px;
+  padding: 5px 14px;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* —— V2 scaffolding placeholder (V2-1 only; replaced by real layers in
+ *    V2-5 through V2-14). Same vertical sky→ground gradient as the V1
+ *    scene-wrap so the empty V2 pane reads as "the stage is set up,
+ *    layers are coming" rather than "page is broken". —— */
+/* V2 inherits V1's 175vh hq-root via the base `.hq-root` rule — Skybox
+ * fills the upper 75vh, scene-wrap fills the lower 100vh, just like V1.
+ * (Earlier iterations of V2 used min-height: 100vh and a margin-top: 75vh
+ * hack to push scene-wrap into V1's vertical position; both are retired
+ * now that V2 mounts the real Skybox component, which provides the
+ * leading 75vh of in-flow content naturally.) */
+
+/* V2 .scene must be TRANSPARENT — V1's .scene has bg #06070d because
+ * the V1 photo covers it; V2 has no photo, so a near-black .scene bg
+ * covers the dusk gradient on scene-wrap and ALL V2 layers end up
+ * rendering near-black on near-black. Transparent .scene lets the
+ * scene-wrap gradient (and any layer behind .scene) show through. */
+.hq-root--v2 .scene {
+  background: transparent;
+}
+/* And V2's scene-wrap needs the full sky gradient including the warm
+ * horizon band that V1's photo paints — V1's scene-wrap only handles
+ * the blue→black transition because the photo paints the rest. */
+.hq-root--v2 .scene-wrap {
+  /* Re-saturated 2026-06-02 after V1 vs V2 column diff (James caught
+   * V2 reading as washed-out). RGB-sampled deltas: V1 stays bright
+   * warm horizon while V2 was dropping to dark brown — a ~+130 R
+   * delta. Restored + extended the warm-horizon band; Opus second-pass
+   * caught the orange overshoot (cc7548 instead of d97a4a) + top-sky
+   * flatness (added 8% + 22% intermediate stops for atmospheric
+   * variation). The stipple lands as an overlay below. */
+  background: linear-gradient(
+    to bottom,
+    #181e3f 0%,    /* top — deeper civic dark blue */
+    #1d2247 8%,    /* atmospheric warm undertone */
+    #21204c 14%,   /* dusk blue-violet */
+    #2a2548 22%,   /* atmospheric cooler shift */
+    #3a304c 32%,   /* horizon transition */
+    #794250 50%,   /* warm rose bridge */
+    #cc7548 70%,   /* warm horizon (dusty terracotta, not pure orange) */
+    #8a3a28 88%,   /* warm dark below horizon */
+    #2a1018 100%   /* foreground / plaza floor */
+  );
+  position: relative;
+}
+/* Ben-Day-dot stipple overlay — two overlaid dot patterns at different
+ * scales + offset positions to break the regular-grid feel that a single
+ * dot pattern creates. V1's stipple was hand-painted (organic, varied);
+ * this is the closest CSS approximation without an SVG noise filter. */
+.hq-root--v2 .scene-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 30% 50%, rgba(255, 180, 130, 0.16) 0.6px, transparent 1.2px),
+    radial-gradient(circle at 70% 30%, rgba(255, 180, 130, 0.12) 0.5px, transparent 1px);
+  background-size: 5px 5px, 7px 7px;
+  background-position: 0 0, 2px 3px;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: overlay;
+}
+.hq-v2-scaffolding {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: 0 24px;
+  text-align: center;
+  background: linear-gradient(
+    to bottom,
+    #1b2754 0%,
+    #0c0e1f 22%,
+    #06070d 55%,
+    #06070d 100%
+  );
+  font-family: var(--mono);
+  color: rgba(205, 214, 244, 0.7);
+}
+.hq-v2-scaffolding__eyebrow {
+  font-size: 9.5px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(139, 233, 253, 0.7);
+  margin: 0 0 16px 0;
+}
+.hq-v2-scaffolding__title {
+  font-family: var(--ui);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #e6f5ff;
+  margin: 0 0 14px 0;
+}
+.hq-v2-scaffolding__sub {
+  font-family: var(--ui);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: rgba(205, 214, 244, 0.55);
+  margin: 0;
+  max-width: 360px;
+}
+
+/* —— V2 layer visibility panel (V2-2) ——
+ * Anchored bottom-left of the V2 pane via position:absolute against
+ * .hq-root--v2 (which has position:relative). In compare mode that's the
+ * 50vw right pane; in V2-solo mode (post-V2-17) that's the full viewport.
+ * The panel itself is a small civic-cyan-trimmed dev surface that the V2-5
+ * → V2-14 layer chunks plug into. */
+.hq-root--v2 {
+  position: relative;
+}
+.hq-v2-layers {
+  position: absolute;
+  z-index: 20;
+  left: 18px;
+  bottom: 18px;
+  background: rgba(10, 14, 28, 0.82);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 233, 253, 0.22);
+  border-radius: 10px;
+  padding: 11px 13px 11px 13px;
+  font-family: var(--mono);
+  color: #cdd6f4;
+  min-width: 160px;
+  max-width: 220px;
+  pointer-events: auto;
+  user-select: none;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+.hq-v2-layers__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 9px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(139, 233, 253, 0.12);
+}
+.hq-v2-layers__title {
+  font-size: 9.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(139, 233, 253, 0.78);
+}
+.hq-v2-layers__reset {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(205, 214, 244, 0.55);
+  cursor: pointer;
+  transition: color 0.18s ease;
+}
+.hq-v2-layers__reset:hover {
+  color: #cdf6ff;
+}
+.hq-v2-layers__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.hq-v2-layers__row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--ui);
+  font-size: 11.5px;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  padding: 2px 0;
+  color: rgba(230, 245, 255, 0.88);
+  transition: color 0.18s ease;
+}
+.hq-v2-layers__row input[type="checkbox"] {
+  width: 12px;
+  height: 12px;
+  accent-color: #8be9fd;
+  cursor: pointer;
+  margin: 0;
+}
+.hq-v2-layers__row:hover {
+  color: #cdf6ff;
+}
+.hq-v2-layers__foot {
+  margin: 9px 0 0 0;
+  padding-top: 7px;
+  border-top: 1px solid rgba(139, 233, 253, 0.08);
+  font-family: var(--ui);
+  font-size: 9.5px;
+  line-height: 1.45;
+  color: rgba(205, 214, 244, 0.42);
+  letter-spacing: 0.01em;
+}
+
+/* —— HQ V2 tier window grids (V2-8) ——
+ * Each tier's grid is positioned absolutely within the .scene container.
+ * Cells are tiny — pixel-art windows — and get one of three states:
+ * lit (warm amber, with flicker), dim (low-amber, no glow), dark
+ * (near-black, dead). The grid container itself has a small gap so the
+ * cells read as separate windows rather than a solid block. */
+.hq-v2-windows {
+  /* Layout: per-instance positioning lives inline via the TierWindows
+   *  style prop. Transparent background — the building silhouette
+   *  (drawn underneath) is the concrete-divider color between cells.
+   *  Tight gap reads as the inter-window concrete joinery. */
+  gap: 0.4px;
+  padding: 0;
+  background: transparent;
+}
+.hq-v2-window {
+  /* No outline — the grid gap on a dark background already creates
+   *  the inter-cell divider lines. Faint inner highlight on the top
+   *  edge sells the "window frame" feel without per-cell stroke cost. */
+  box-shadow: inset 0 0.5px 0 rgba(255, 255, 255, 0.06);
+}
+.hq-v2-window[data-state="lit"] {
+  background: #f5a524;
+  animation: hq-v2-window-flicker 7s ease-in-out infinite;
+}
+.hq-v2-window[data-state="dim"] {
+  background: rgba(245, 165, 36, 0.18);
+}
+.hq-v2-window[data-state="dark"] {
+  background: #08080a;
+}
+/* Slow flicker — most of the cycle the window is fully lit, brief dip
+ *  every 7 seconds. Staggered per cell via animation-delay (set inline
+ *  by the TierWindows component) so the building doesn't pulse in unison. */
+@keyframes hq-v2-window-flicker {
+  0%,
+  88%,
+  100% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 0.72;
+  }
+  94% {
+    opacity: 1;
+  }
+  96% {
+    opacity: 0.85;
+  }
+}
+
+/* —— HQ V2 billboard frames (V2-10) — the LED panel housings.
+ * The actual ticker mechanism mounts inside via V2-15 (V1 Billboard
+ * re-target). For V2-10 this is just the bordered panel with the
+ * scanline overlay echoing V1's `.hq-root .ticker::before`. */
+.hq-v2-billboard-frame {
+  background: #06070d;
+  border-top: 1px solid rgba(0, 0, 0, 0.9);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.9);
+  border-left: 1px solid rgba(139, 233, 253, 0.18);
+  border-right: 1px solid rgba(139, 233, 253, 0.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+  z-index: 5;
+}
+.hq-v2-billboard-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 4px 4px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* —— HQ V2 generator status light (V2-12) —— */
+.hq-v2-generator__status {
+  animation: hq-v2-status-pulse 1.8s ease-in-out infinite;
+}
+@keyframes hq-v2-status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* —— HQ V2 rooftop sign beacon (V2-9) —— */
+.hq-v2-sign__beacon {
+  animation: hq-v2-beacon-pulse 2.2s ease-in-out infinite;
+}
+@keyframes hq-v2-beacon-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 1px rgba(255, 84, 84, 0.9));
+  }
+  50% {
+    opacity: 0.35;
+    filter: drop-shadow(0 0 0.5px rgba(255, 84, 84, 0.4));
+  }
+}
+
+/* —— "Thank you for visiting!" farewell sky (V2-fog-2 realized 2026-07-02) ——
+ * Cloud-lettered text + civic red/white/blue long-exposure streaks + golden
+ * octagon spirals, built from the operator's Gemini mock of this exact sky.
+ * The layer floats over the Skybox (75vh) and under the FogBand's z-15;
+ * pointer-events:none so the fog keeps the whole-band Settings click. */
+.hq-root .hq-v2-thankyou {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 75vh;
+  overflow: hidden;
+  z-index: 5;
+  pointer-events: none;
+}
+.hq-root .hq-v2-thankyou__svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.hq-root .hq-ty-text {
+  font-family: "Baloo 2", "Arial Rounded MT Bold", "Nunito", ui-rounded,
+    -apple-system, sans-serif;
+  /* 700 + wide tracking (was 800/0.01em): the cloud filter eats counter
+   * space — the a/e/i holes filled in and "Thank" read "Thonk". Lighter
+   * weight + air between glyphs keeps the words readable through the
+   * dilate+blur. */
+  font-weight: 700;
+  font-size: 106px;
+  letter-spacing: 0.075em;
+}
+
+/* Entrance choreography — streaks draw in left-to-right (long-exposure
+ * being "written"), heads pop after their streak lands, the cloud text
+ * rises + fades in once the shower is underway. */
+.hq-root .hq-ty-streak {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: hq-ty-draw 1.7s cubic-bezier(0.33, 0.8, 0.4, 1) forwards;
+}
+.hq-root .hq-ty-head {
+  opacity: 0;
+  animation: hq-ty-pop 0.7s ease-out forwards;
+}
+.hq-root .hq-ty-cloudtext {
+  opacity: 0;
+  animation: hq-ty-rise 2.2s cubic-bezier(0.22, 0.9, 0.35, 1) 0.9s forwards;
+}
+.hq-root .hq-ty-sparkle {
+  opacity: 0;
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: hq-ty-twinkle 3.4s ease-in-out 2.6s infinite;
+}
+@keyframes hq-ty-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes hq-ty-pop {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes hq-ty-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes hq-ty-twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.82) rotate(0deg);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.08) rotate(14deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hq-root .hq-ty-streak {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .hq-root .hq-ty-head,
+  .hq-root .hq-ty-cloudtext {
+    animation: none;
+    opacity: 1;
+  }
+  .hq-root .hq-ty-sparkle {
+    animation: none;
+    opacity: 0.7;
+  }
+}
+
+/* Cloud-text drift — synced to the FogBand's weather (layer A: 42s breathe,
+ * 86s drift). Transforms on these wrappers move a composited layer; the
+ * cloud filters render once and never recompute during the motion. */
+.hq-root .hq-ty-drift-x,
+.hq-root .hq-ty-drift-y {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+.hq-root .hq-ty-drift-x {
+  animation: hq-ty-drift-x 86s ease-in-out infinite;
+}
+.hq-root .hq-ty-drift-y {
+  animation: hq-ty-breathe 42s ease-in-out infinite;
+}
+@keyframes hq-ty-drift-x {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(-9px); }
+}
+@keyframes hq-ty-breathe {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hq-root .hq-ty-drift-x,
+  .hq-root .hq-ty-drift-y {
+    animation: none;
+  }
+}
+
+/* —— Sky-offscreen perf gate (2026-07-02) —— When the visitor is at the
+ * building view the whole sky is out of the viewport; this class (set by
+ * HQPageV2's IntersectionObserver) stops the expensive always-on work:
+ * the FogBand's two SMIL-animated turbulence rects stop painting
+ * (display:none — SMIL clocks keep running so the fog is seamless on
+ * return), and the CSS-driven drifts pause in place. The StarField rAF
+ * is gated in its component. Zero visual change while the sky is on screen. */
+.hq-root.sky-offscreen .hq-v2-fog-band__noise {
+  display: none;
+}
+.hq-root.sky-offscreen .hq-v2-fog-band__photo,
+.hq-root.sky-offscreen .hq-ty-drift-x,
+.hq-root.sky-offscreen .hq-ty-drift-y,
+.hq-root.sky-offscreen .hq-ty-sparkle {
+  animation-play-state: paused;
+}
+
+/* —— July-4 fireworks (seasonal, 2026-07-02) —— animation moved to SMIL
+ * inside the components (SvgFireworkBarrel + ThankYouClouds' fw group):
+ * Blink refuses to interpolate var()-bearing transforms in CSS keyframes
+ * (the rocket teleported; particle scale pivoted on the viewBox corner
+ * and slid in diagonally). CSS keeps only the reduced-motion gate. */
+@media (prefers-reduced-motion: reduce) {
+  .hq-root .fw-anim {
+    display: none;
+  }
+}
+
+/* —— Smartboard legs (2026-07-02) —— the two tapered steel columns that
+ * carry the press screen down to the painted stage line, rebuilt from the
+ * original board in zspan-hq.png. The old inset box-shadow on the screen
+ * still provides the CRT depth; these are pure mount furniture. */
+.hq-root .press-legs {
+  pointer-events: none;
+  z-index: 11;
+}
+.hq-root .press-leg {
+  position: absolute;
+  top: -2px;
+  width: 9%;
+  height: 100%;
+  background: linear-gradient(90deg, #2c3242 0%, #3a4254 45%, #232837 100%);
+  clip-path: polygon(18% 0, 82% 0, 100% 100%, 0% 100%);
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
+}
+.hq-root .press-leg::after {
+  /* foot pad */
+  content: "";
+  position: absolute;
+  left: -12%;
+  right: -12%;
+  bottom: 0;
+  height: 12%;
+  background: #14181f;
+}

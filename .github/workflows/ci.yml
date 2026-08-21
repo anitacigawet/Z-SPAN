@@ -1,0 +1,68 @@
+# RR-CI — cross-OS install + CLI suite matrix.
+#
+# The first native cross-OS execution the zspan-cli package has ever had.
+# Strangers pip-install it on Linux / Windows / macOS at the public flip, so
+# this proves a real `pip install .` + the test suite actually run there — not
+# just in the operator's macOS venv. Scoped to the CLI package (the only thing
+# a stranger installs); the flagship (Flask/Vite) has its own local checks.
+name: CLI cross-OS matrix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "02_Core_Project/zspan_cli/**"
+      - ".github/workflows/ci.yml"
+  pull_request:
+    paths:
+      - "02_Core_Project/zspan_cli/**"
+      - ".github/workflows/ci.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  cli-matrix:
+    name: CLI · ${{ matrix.os }} · py${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      # Don't cancel the whole matrix when one cell fails — a per-OS or
+      # per-version gap is exactly the signal this workflow exists to surface.
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        # The package declares requires-python = ">=3.10". 3.10 = floor,
+        # 3.12 = current-recent. Add "3.13" here once validated.
+        python-version: ["3.10", "3.11", "3.12"]
+    defaults:
+      run:
+        # bash is present on all three runners (Git Bash on Windows), so
+        # `set -e` + multi-line semantics are identical everywhere.
+        shell: bash
+        working-directory: 02_Core_Project/zspan_cli
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Real install (pip install . — pulls the declared deps)
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install .
+
+      - name: Console entry point works (install smoke)
+        run: zspan --help
+
+      - name: CLI test suite
+        # PYTHONPATH=. is load-bearing: pyproject.toml no longer packages
+        # zspan_cli.tests into the wheel (Finding #2 fix), so the installed
+        # package has no tests/. The source-tree copy at ./zspan_cli/tests/
+        # is what CI runs, and PYTHONPATH ensures Python finds it before the
+        # installed zspan_cli.
+        env:
+          PYTHONPATH: .
+        run: python -m zspan_cli.tests.test_zspan_cli

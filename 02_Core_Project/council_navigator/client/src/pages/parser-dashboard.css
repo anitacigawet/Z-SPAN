@@ -1,0 +1,213 @@
+/* ParserDashboard (Phase I) — full-page LED grid + floating chrome.
+ *
+ * Larry-King-CNN-backdrop register. Black canvas, LED grid centered +
+ * dominant, status legend + counts + action as floating translucent
+ * chrome that doesn't fight the grid for attention. */
+
+.parser-dashboard {
+  position: relative;
+  min-height: 100vh;
+  background: #04050a;
+  color: #f1ece0;
+  font-family: "Manrope", "Helvetica Neue", Helvetica, system-ui, sans-serif;
+  overflow: hidden;
+}
+
+/* The LED grid spans the full viewport — the dashboard IS the map.
+ * Sized to fill the page edge-to-edge; aspect ratio handled by the
+ * SVG's preserveAspectRatio so the continent stays centered + scaled. */
+.parser-dashboard-grid-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+/* —— Top chrome — title block (left) + status legend (right) —— */
+.parser-dashboard-chrome-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  /* align-items: center vertically aligns the title block and the legend
+   * pill at the chrome-top boundary; the previous flex-start let them
+   * drift apart vertically (legend's 12px internal padding pushed its
+   * first row above the title's eyebrow). Per I-5 Opus cross-view. */
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 36px;
+  pointer-events: none; /* children re-enable per element */
+}
+
+/* Title block — back btn + eyebrow + title + subtitle. */
+.parser-dashboard-title-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  pointer-events: auto;
+}
+.parser-dashboard-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid rgba(180, 220, 255, 0.12);
+  border-radius: 6px;
+  background: rgba(8, 10, 22, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: rgba(241, 236, 224, 0.7);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  margin-top: 4px;
+}
+.parser-dashboard-back-btn:hover {
+  color: #ffffff;
+  background: rgba(28, 32, 52, 0.92);
+  border-color: rgba(180, 220, 255, 0.22);
+}
+.parser-dashboard-title-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.parser-dashboard-eyebrow {
+  font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(232, 192, 130, 0.75);
+  margin-bottom: 4px;
+}
+.parser-dashboard-title {
+  font-family: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+.parser-dashboard-subtitle {
+  margin-top: 6px;
+  font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(241, 236, 224, 0.45);
+}
+
+/* Status legend — four-row pill on the top-right. Each row: dot + label
+ * + count. Reads as "key for the map below" — same register as the
+ * Guide's view-mode toggle but vertical layout. */
+.parser-dashboard-legend {
+  list-style: none;
+  margin: 0;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(8, 10, 22, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(180, 220, 255, 0.12);
+  border-radius: 10px;
+  pointer-events: auto;
+}
+.parser-dashboard-legend-item {
+  display: grid;
+  grid-template-columns: 14px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.parser-dashboard-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  justify-self: center;
+}
+.parser-dashboard-legend-dot--working {
+  background: #22d75f;
+  box-shadow: 0 0 6px rgba(34, 215, 95, 0.7);
+}
+.parser-dashboard-legend-dot--broken {
+  background: #ff4d4f;
+  box-shadow: 0 0 6px rgba(255, 77, 79, 0.7);
+}
+.parser-dashboard-legend-dot--maintenance {
+  background: #f5c33b;
+  box-shadow: 0 0 6px rgba(245, 195, 59, 0.7);
+}
+.parser-dashboard-legend-dot--pending {
+  background: transparent;
+  border: 1.1px solid rgba(200, 210, 230, 0.55);
+}
+.parser-dashboard-legend-label {
+  color: rgba(241, 236, 224, 0.78);
+  font-weight: 500;
+}
+.parser-dashboard-legend-count {
+  font-weight: 700;
+  color: #ffffff;
+  font-variant-numeric: tabular-nums;
+}
+
+/* STATUS-chip selectors retired with the scrape daemon per D-169
+ * (the STATUS chip opened the StatusDrawer that wrapped ScrapeStatusPanel;
+ * both are gone). The BitTorrent parser-view redesign will surface its
+ * own affordances. */
+
+/* —— Bottom chrome — test-all action button on the right. —— */
+.parser-dashboard-chrome-bottom {
+  position: fixed;
+  bottom: 28px;
+  right: 36px;
+  z-index: 10;
+  pointer-events: none;
+}
+.parser-dashboard-test-all {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  background: rgba(217, 165, 90, 0.92);
+  border: 1px solid rgba(232, 192, 130, 0.92);
+  border-radius: 999px;
+  color: #06070d;
+  font-family: "JetBrains Mono", "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 12px 32px -10px rgba(217, 165, 90, 0.5);
+  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+.parser-dashboard-test-all:hover:not(:disabled) {
+  background: #f5c33b;
+  border-color: #f5c33b;
+  transform: translateY(-1px);
+  box-shadow: 0 16px 40px -10px rgba(245, 195, 59, 0.55);
+}
+.parser-dashboard-test-all:disabled {
+  background: rgba(180, 220, 255, 0.16);
+  border-color: rgba(180, 220, 255, 0.16);
+  color: rgba(241, 236, 224, 0.55);
+  cursor: progress;
+  box-shadow: none;
+}
+.parser-dashboard-test-all-spin {
+  animation: parser-dashboard-spin 0.8s linear infinite;
+}
+@keyframes parser-dashboard-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

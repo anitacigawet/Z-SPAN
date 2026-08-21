@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <title>Z-SPAN — Arizona</title>
+    <meta name="description" content="A virtual library for local politics, beginning with Arizona." />
+    <meta name="theme-color" content="#0E0E10" />
+
+    <!-- Favicon + app icon (highway-shield brand, 2026-06-23) -->
+    <!-- zspan-shield.png is the transparent-bg shield: composites cleanly
+         against any tab bg color. For iOS apple-touch-icon, the system
+         supplies its own rounded-corner mask over the transparent canvas. -->
+    <link rel="icon" type="image/png" href="/brand/zspan-shield.png" />
+    <link rel="apple-touch-icon" href="/brand/zspan-shield.png" />
+
+    <!-- Open Graph (Slack/Discord/Facebook previews) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Z-SPAN — A virtual library for local politics" />
+    <meta property="og:description" content="A virtual library for local politics, beginning with Arizona." />
+    <meta property="og:image" content="/brand/zspan-og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Z-SPAN — A virtual library for local politics" />
+    <meta name="twitter:description" content="A virtual library for local politics, beginning with Arizona." />
+    <meta name="twitter:image" content="/brand/zspan-og.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=VT323&family=Playfair+Display:ital,wght@1,500;1,600&display=swap"
+    />
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

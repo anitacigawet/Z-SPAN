@@ -1,0 +1,821 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Verbatim decision evidence: inline, readable, and deliberately unedited. */
+.decision-evidence-host {
+  text-indent: 0;
+  text-align: left;
+  letter-spacing: normal;
+  font-style: normal;
+  white-space: normal;
+}
+.decision-evidence-disclosure {
+  width: min(100%, 72ch);
+  margin-top: 12px;
+  overflow: hidden;
+  background: var(--surface-2);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: var(--radius);
+  color: #fff;
+}
+.decision-evidence-disclosure[hidden] { display: none; }
+.decision-evidence-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.10);
+  background: linear-gradient(90deg, rgba(51,97,166,.18), rgba(51,97,166,.04));
+}
+.decision-evidence-title {
+  color: rgba(255,255,255,.90);
+  font-size: 14px;
+  font-weight: 600;
+}
+.decision-evidence-badge {
+  flex: 0 0 auto;
+  padding: 2px 7px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 999px;
+  color: rgba(255,255,255,.55);
+  font-size: 11px;
+  font-weight: 500;
+}
+.decision-evidence-body { padding: 16px; }
+.decision-evidence-item + .decision-evidence-item { margin-top: 24px; }
+.decision-evidence-blockquote {
+  max-width: 72ch;
+  margin: 0;
+  padding: 1px 0 1px 16px;
+  border-left: 3px solid var(--highway-sign-blue);
+  color: rgba(255,255,255,.88);
+  font-size: 16px;
+  line-height: 1.75;
+}
+.decision-evidence-paragraph { margin: 0; }
+.decision-evidence-paragraph + .decision-evidence-paragraph { margin-top: 1em; }
+.decision-evidence-divider {
+  display: grid;
+  grid-template-columns: minmax(20px, 1fr) auto minmax(20px, 1fr);
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0;
+}
+.decision-evidence-divider-rule {
+  display: block;
+  height: 1px;
+  background: rgba(255,255,255,.10);
+}
+.decision-evidence-divider-text {
+  color: rgba(255,255,255,.55);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+}
+.decision-evidence-collapse {
+  display: block;
+  margin: 18px 0 0 auto;
+  padding: 5px 9px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: calc(var(--radius) - 2px);
+  background: transparent;
+  color: rgba(255,255,255,.60);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.decision-evidence-collapse:hover,
+.decision-evidence-collapse:focus-visible {
+  border-color: rgba(255,255,255,.24);
+  color: rgba(255,255,255,.88);
+}
+@media (max-width: 640px) {
+  .decision-evidence-header { align-items: flex-start; padding: 10px 12px; }
+  .decision-evidence-body { padding: 14px 12px; }
+  .decision-evidence-blockquote { padding-left: 13px; font-size: 15px; }
+  .decision-evidence-divider { grid-template-columns: minmax(10px, 1fr) minmax(0, auto) minmax(10px, 1fr); gap: 8px; }
+}
+
+/*
+ * Z-SPAN visual system — based on <private-predecessor-repo>'s "Kingman Insight" design
+ * (<private-predecessor-repo>).
+ *
+ * Dark by default. Deep blacks (#0A0A0A) with subtle white-tinted borders.
+ * Inter typography across all weights. Generous whitespace, structural
+ * hierarchy via numbered lists and uppercase eyebrow labels. Status
+ * accents (green / blue) used sparingly. The "civic" feel comes from
+ * structure, not color.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Semantic surface tokens (preserved from prior versions for component compat) */
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-active: var(--active);
+  --color-info: var(--info);
+
+  /* Z-SPAN brand tokens — reserved, used only as small civic accents */
+  --color-civic-blue: var(--civic-blue);
+  --color-civic-blue-deep: var(--civic-blue-deep);
+  --color-engagement-orange: var(--engagement-orange);
+  --color-success-green: var(--success-green);
+  --color-alert-red: var(--alert-red);
+  --color-info-blue: var(--info-blue);
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* ── Z-SPAN brand tokens (used as accents only) ───────────── */
+  --civic-blue:        #1A3A7C;
+  --civic-blue-deep:   #0F2456;
+  --highway-sign-blue: #3361A6;   /* US highway services-sign blue; ExitRampSign uses this */
+  --engagement-orange: #E85C41;
+  --success-green:     #22C55E;   /* matches <private-predecessor-repo> status green */
+  --alert-red:         #EF4444;
+  --info-blue:         #3B82F6;   /* matches <private-predecessor-repo> council-sentiment blue */
+
+  /* ── Surfaces (dark, matching <private-predecessor-repo>) ───────────────── */
+  --canvas:    #0A0A0A;                    /* page background */
+  --surface:   #141416;                    /* slightly lifted */
+  --surface-2: #18181A;                    /* card surface */
+  --surface-3: #1C1C1E;                    /* hover/active state */
+  --line:        rgba(255, 255, 255, 0.05);
+  --line-strong: rgba(255, 255, 255, 0.10);
+  --active:    var(--success-green);       /* status indicator */
+  --info:      var(--info-blue);
+
+  /* ── shadcn/Radix token mappings ──────────────────────────── */
+  --background: var(--canvas);
+  --foreground: #FFFFFF;
+
+  --card: var(--surface-2);
+  --card-foreground: #FFFFFF;
+  --popover: var(--surface-2);
+  --popover-foreground: #FFFFFF;
+
+  --primary: #FFFFFF;
+  --primary-foreground: #000000;
+  --secondary: #27272A;
+  --secondary-foreground: #FFFFFF;
+  --muted: #1A1A1C;
+  --muted-foreground: #A1A1AA;
+  --accent: #27272A;
+  --accent-foreground: #FFFFFF;
+
+  --destructive: var(--alert-red);
+  --destructive-foreground: #FFFFFF;
+
+  --border: var(--line);
+  --input: rgba(255, 255, 255, 0.06);
+  --ring: rgba(255, 255, 255, 0.20);
+
+  --chart-1: var(--success-green);
+  --chart-2: var(--info-blue);
+  --chart-3: #A855F7;
+  --chart-4: #F59E0B;
+  --chart-5: var(--alert-red);
+
+  --sidebar: var(--surface);
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #FFFFFF;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: var(--surface-3);
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: var(--line);
+  --sidebar-ring: rgba(255, 255, 255, 0.20);
+}
+
+/* .dark is a no-op alias — the app is dark by default. Kept so any
+   shadcn component that gates on .dark continues to work. */
+.dark {
+  /* tokens identical to :root (already dark) */
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family:
+      "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+      sans-serif;
+    font-feature-settings:
+      "cv02", "cv03", "cv04", "cv11";
+  }
+  code,
+  kbd,
+  pre,
+  samp,
+  .font-mono {
+    font-family:
+      "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   kg-* utility classes (Kingman Insight legacy — preserved for
+   component compatibility across the codebase)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Status dot — green with glow */
+.kg-dot-active {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 9999px;
+  background: var(--success-green);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+}
+
+/* Eyebrow / section label — small, uppercase, heavily tracked */
+.kg-eyebrow {
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #6B6B72;
+}
+
+.kg-eyebrow-info {
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--info-blue);
+}
+
+/* Episode dates sit on fluid 16:9 artwork, so their type must follow the
+   card width rather than the viewport. The px declarations are fallbacks for
+   browsers without container-query units; supported browsers use the face's
+   inline size below the 200px design width, where the original 11px/20px type
+   is preserved exactly. */
+.episode-card-face {
+  container-type: inline-size;
+}
+
+.episode-card-weekday {
+  font-size: 11px;
+  font-size: min(11px, 5.5cqw);
+}
+
+.episode-card-date {
+  font-size: 20px;
+  font-size: min(20px, 10cqw);
+  line-height: 1.4;
+}
+
+/* Card surface — surface-2 with whisper border */
+.kg-card {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+}
+
+.kg-card-2 {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+}
+
+/* Info card with left blue accent bar (council sentiment / signal) */
+.kg-info-card {
+  position: relative;
+  overflow: hidden;
+  background: #0B121A;
+  border: 1px solid #1C2B3E;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+.kg-info-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: rgba(59, 130, 246, 0.5);
+}
+
+/* Selected sidebar row with left green bar */
+.kg-row-selected {
+  background: var(--surface-3);
+  position: relative;
+}
+.kg-row-selected::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.5rem;
+  bottom: 1.5rem;
+  width: 3px;
+  background: var(--success-green);
+  border-radius: 0 2px 2px 0;
+}
+
+/* Custom thin scrollbar */
+.kg-scroll::-webkit-scrollbar,
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.kg-scroll::-webkit-scrollbar-track,
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+.kg-scroll::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.10);
+  border-radius: 3px;
+}
+.kg-scroll::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.30);
+}
+
+/* Three-dot loading indicator */
+.kg-dots {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.kg-dots > span {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: #6B6B72;
+  animation: kg-bounce 0.9s infinite ease-in-out both;
+}
+.kg-dots > span:nth-child(1) { animation-delay: 0ms; }
+.kg-dots > span:nth-child(2) { animation-delay: 150ms; }
+.kg-dots > span:nth-child(3) { animation-delay: 300ms; }
+@keyframes kg-bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
+  40% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* Markdown rendering */
+.markdown-inline p {
+  display: inline;
+  margin: 0;
+}
+.markdown-inline strong {
+  font-weight: 700;
+  color: #FFFFFF;
+}
+.markdown-body {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #C9C9CC;
+}
+.markdown-body p {
+  margin-bottom: 1rem;
+}
+.markdown-body p:last-child {
+  margin-bottom: 0;
+}
+.markdown-body strong {
+  color: #FFFFFF;
+  font-weight: 600;
+}
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 1.25rem;
+  margin-bottom: 1rem;
+}
+.markdown-body li {
+  margin-bottom: 0.25rem;
+}
+
+/* Smooth fade-in entrance */
+@keyframes kg-fade-in-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.kg-fade-in {
+  animation: kg-fade-in-up 0.4s ease-out forwards;
+}
+
+/* Selection */
+::selection {
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Z-SPAN-specific utilities (used sparingly as civic accents)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Primary CTA: white pill with black text — matches <private-predecessor-repo>'s primary button */
+.zs-cta-primary {
+  background: #FFFFFF;
+  color: #000000;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border-radius: var(--radius);
+  transition: background-color 0.15s ease;
+}
+.zs-cta-primary:hover {
+  background: #E5E5E5;
+}
+
+/* Accent CTA: Engagement Orange — use sparingly, max 10% of CTAs */
+.zs-cta-accent {
+  background: var(--engagement-orange);
+  color: #FFFFFF;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border-radius: var(--radius);
+  transition: filter 0.15s ease;
+}
+.zs-cta-accent:hover {
+  filter: brightness(0.92);
+}
+
+/* Vote graphic helpers */
+.zs-vote-yes { color: var(--success-green); font-weight: 700; }
+.zs-vote-no  { color: var(--alert-red);     font-weight: 700; }
+
+/* S-098 font-watermark CSS removed — the font-pair approach was scrapped
+   at session-14 close in favor of the visible ribbon (WatermarkRibbon.tsx).
+   See commit history on the s098-fontwatermark-v0 branch for the research
+   record. */
+
+/* ═══════════════════════════════════════════════════════════════
+   Footer micro-effects — "made possible by sunshine laws, ensuring a
+   brighter tomorrow." Tiny, on-style, epilepsy-safe (slow, low-contrast,
+   infrequent; all motion disabled under prefers-reduced-motion).
+   ═══════════════════════════════════════════════════════════════ */
+
+/* "sunshine" — a warm, radiated rainbow glow: an iridescent sun-hued
+   gradient slowly flows through the letters (the oil-slick technique,
+   warmed from cool petrol tones into sunshine colors) over a soft
+   golden halo. Also the explainer hyperlink. */
+.zs-sunshine {
+  background: linear-gradient(
+    90deg,
+    #FFE680, #FFC24B, #FF9E6B, #FF7EA8, #FFCB6B, #FFE680
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  text-shadow: 0 0 7px rgba(255, 196, 75, 0.35), 0 0 16px rgba(255, 126, 168, 0.18);
+  text-decoration: none;
+  animation: zs-sun-oilslick 7s linear infinite;
+}
+.zs-sunshine:hover {
+  text-shadow: 0 0 10px rgba(255, 196, 75, 0.6), 0 0 22px rgba(255, 126, 168, 0.35);
+}
+@keyframes zs-sun-oilslick {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* "brighter" — a lit bulb: steady-on, then once per ~10s a brief
+   flicker → off → on, like an old bulb settling. Gentle + infrequent;
+   never a strobe.
+
+   2026-06-21 retroactive serendipity worth preserving: when the word
+   "brighter" was hyperlinked to the Hawthorne effect on the footer,
+   this bulb-flicker animation turned out to mirror the Hawthorne Works
+   lighting experiments themselves — the 1924-1932 Western Electric
+   studies at the Hawthorne Works in Cicero, Illinois that NAMED the
+   effect were literally about workers responding to flickering / varying
+   factory lights. The animation predated the link by months and was
+   just a "lit bulb for the word 'brighter'"; the metaphor alignment
+   was discovered after-the-fact and kept as a quiet design easter egg
+   for readers who know the reference. Don't strip the flicker on
+   future redesigns without considering this. */
+.zs-brighter {
+  color: #FFFFFF;
+  font-weight: 600;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.45);
+  animation: zs-bulb 10s ease-in-out infinite;
+  text-decoration: none; /* class doubles as anchor styling now that brighter is also a link */
+}
+@keyframes zs-bulb {
+  0%, 84%  { color: #FFFFFF; text-shadow: 0 0 6px rgba(255, 255, 255, 0.45); opacity: 1; }     /* steady on */
+  /* cartoonish bulb flicker — two quick stutters as it struggles, right before it cuts out */
+  85.2%    { color: #FFFFFF; text-shadow: 0 0 2px rgba(255, 255, 255, 0.18); opacity: 0.5; }    /* blink down */
+  86%      { color: #FFFFFF; text-shadow: 0 0 9px rgba(255, 255, 255, 0.75); opacity: 1; }      /* snap up */
+  87%      { color: #FFFFFF; text-shadow: 0 0 2px rgba(255, 255, 255, 0.15); opacity: 0.45; }   /* blink down */
+  87.8%    { color: #FFFFFF; text-shadow: 0 0 10px rgba(255, 255, 255, 0.85); opacity: 1; }     /* surge up */
+  90.5%    { color: #5A5A60; text-shadow: none; opacity: 0.55; }               /* off (timing unchanged) */
+  93.5%    { color: #5A5A60; text-shadow: none; opacity: 0.55; }               /* hold off */
+  96%      { color: #FFFFFF; text-shadow: 0 0 11px rgba(255, 255, 255, 0.80); opacity: 1; }  /* snap back on */
+  100%     { color: #FFFFFF; text-shadow: 0 0 6px rgba(255, 255, 255, 0.45); opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Karaoke word glow (player/KaraokeStrip.tsx marker mode) — the
+   "finger sliding across the words" luminance wipe. Replaces the old
+   solid background-block highlight, which collapsed to an OS-text-
+   selection look over 14px italic and snapped on word-by-word. No box:
+   the GLYPHS light up; a ~10px-wide edge glides across the active word
+   driven by --karaoke-progress (set on the active span by the RAF each
+   frame); a glyph-clipped halo rides ONLY the moving edge (not a whole-
+   word shadow, which would snap per word). Per-word so it survives
+   wrapping; accent = --karaoke-accent (blue on Broadcast, amber on
+   TruthBook/CityLedger); body text stays white for transcript
+   legibility. Design: Claude<->Codex think-tank 2026-07-12.
+   ═══════════════════════════════════════════════════════════════ */
+.karaoke-word {
+  position: relative;
+  display: inline-block;
+  vertical-align: baseline;
+  color: rgb(255 255 255 / 0.85);
+}
+/* Dim/brighten only once playback is live — a dormant quote (no active
+   word) stays uniformly at 0.85, never pre-dimmed to 0.40. */
+.karaoke-word--future { color: rgb(255 255 255 / 0.40); }
+.karaoke-word--past { color: rgb(255 255 255 / 0.94); }
+.karaoke-word--active {
+  color: transparent;
+  background-image: linear-gradient(
+    90deg,
+    rgb(255 255 255 / 0.96) 0,
+    rgb(255 255 255 / 0.96) calc(var(--karaoke-progress, 0%) - 5px),
+    color-mix(in srgb, var(--karaoke-accent, #3B82F6) 42%, white) var(--karaoke-progress, 0%),
+    rgb(255 255 255 / 0.40) calc(var(--karaoke-progress, 0%) + 5px),
+    rgb(255 255 255 / 0.40) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.karaoke-word--active::after {
+  content: attr(data-glow-word);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  white-space: pre;
+  color: transparent;
+  background-image: linear-gradient(
+    90deg,
+    transparent calc(var(--karaoke-progress, 0%) - 7px),
+    color-mix(in srgb, var(--karaoke-accent, #3B82F6) 55%, white) calc(var(--karaoke-progress, 0%) - 2px),
+    white var(--karaoke-progress, 0%),
+    color-mix(in srgb, var(--karaoke-accent, #3B82F6) 55%, white) calc(var(--karaoke-progress, 0%) + 2px),
+    transparent calc(var(--karaoke-progress, 0%) + 7px)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter:
+    drop-shadow(0 0 2px color-mix(in srgb, var(--karaoke-accent, #3B82F6) 55%, transparent))
+    drop-shadow(0 0 6px color-mix(in srgb, var(--karaoke-accent, #3B82F6) 28%, transparent));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zs-sunshine { animation: none; }
+  /* Karaoke: keep the sync (informational) but drop the luminous halo +
+     feather — a crisp wipe, no glow. */
+  .karaoke-word--active::after { display: none; }
+  .karaoke-word--active {
+    background-image: linear-gradient(
+      90deg,
+      rgb(255 255 255 / 0.96) 0,
+      rgb(255 255 255 / 0.96) var(--karaoke-progress, 0%),
+      rgb(255 255 255 / 0.40) var(--karaoke-progress, 0%),
+      rgb(255 255 255 / 0.40) 100%
+    );
+  }
+  .zs-brighter {
+    animation: none;
+    color: #FFFFFF;
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+  }
+  .zs-etch-revealed {
+    --etch-color: 255, 255, 255;
+    animation: none;
+    opacity: 1;
+    color: rgb(var(--etch-color));
+    text-shadow: 0 0 4px rgba(var(--etch-color), 0.2);
+  }
+  .zs-etch-revealed.zs-etch-red {
+    --etch-color: 248, 113, 113;
+    font-weight: 700;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Etch-in reveal — used by the public-data disclaimer's
+   acknowledgment-sentence karaoke (S-091 C4). Per operator
+   2026-06-25: "watching words being rendered from god / etched in
+   front of you, exactly like the lightbulb animation on the footer
+   text on the homepage." Single-pass animation per word; once
+   revealed, the word STAYS bright white with subtle glow (no fade
+   to gray — distinct from the existing highlight-current-word
+   karaoke aesthetic at CreatorsSignupPage::StepTwo).
+
+   Reveal sequence (0.4s per word):
+     0%   — invisible, lifted +2px, strong glow priming
+     60%  — fully visible, settled position, medium glow
+     100% — fully visible, settled, subtle resting glow
+
+   The .zs-etch-hidden class keeps unrevealed words occupying
+   layout space (so the line doesn't reflow as words appear) but
+   invisible — `opacity: 0` rather than `visibility: hidden` so
+   accessibility tools can still read the sentence ahead of the
+   animation. */
+.zs-etch-hidden {
+  opacity: 0;
+}
+
+.zs-etch-revealed {
+  --etch-color: 255, 255, 255;
+  animation: zs-etch-in 0.4s ease-out forwards;
+  color: rgb(var(--etch-color));
+}
+
+/* Red variant — combine with .zs-etch-revealed (e.g., `class="zs-etch-revealed zs-etch-red"`).
+   Overrides the --etch-color CSS variable so the same keyframe drives a red glow
+   instead of authoring a separate animation. */
+.zs-etch-revealed.zs-etch-red {
+  --etch-color: 248, 113, 113;
+  font-weight: 700;
+}
+
+/* Session-30 (2026-07-04) — cascade variant of the etch reveal.
+   Used by STATE 1 of the public-data disclaimer, where every rendered
+   word carries an inline animation-delay so words reveal sequentially
+   across the full stage1DwellMs (10s for public / 1s for operator).
+   Uses its own keyframe (`zs-etch-cascade-in`) that animates ONLY
+   opacity + translate — NOT color — so wrapping styles like
+   `text-red-600` on a `<strong>` (the blood-red "not") or the
+   `text-amber-300/90` on the officials-hotline links show through
+   the cascade span. animation-fill-mode: both applies the 0% frame
+   BEFORE the delay elapses so pre-delay words stay invisible instead
+   of flashing visible-then-animating. The cascade is timed so the
+   last word finishes revealing right as the "Click here" button
+   unlocks — reader and gate become ready together. */
+@keyframes zs-etch-cascade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.zs-etch-cascade {
+  animation-name: zs-etch-cascade-in;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zs-etch-cascade {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+@keyframes zs-etch-in {
+  0% {
+    opacity: 0;
+    transform: translateY(2px);
+    text-shadow: 0 0 12px rgba(var(--etch-color), 0.85);
+    color: rgb(var(--etch-color));
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0);
+    text-shadow: 0 0 8px rgba(var(--etch-color), 0.5);
+    color: rgb(var(--etch-color));
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    text-shadow: 0 0 4px rgba(var(--etch-color), 0.3);
+    color: rgb(var(--etch-color));
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Key Decisions highlighter — natural-paper marker wash on the
+   action+identifier (green) and any contingency / qualifier clause
+   (orange). Emitted by the key_decisions.md Round 2 addendum as
+   <core>...</core> and <nuance>...</nuance>; renderer wraps each
+   in <mark> with these classes. Operator-described 2026-06-21:
+   green-always (every decision has a core); nuance is optional.
+   Color choice = natural orange over yellow because yellow reads
+   as the default-highlighter signal-of-nothing-specific; muted
+   orange reads as deliberate "noted caveat" without alarm pitch.
+   ═══════════════════════════════════════════════════════════════ */
+.kd-highlight-core,
+.kd-highlight-nuance {
+  background-color: transparent; /* override <mark> default browser yellow */
+  color: inherit;                /* preserve the dark editorial foreground */
+  padding: 0.05em 0.12em;
+  border-radius: 0.12em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.kd-highlight-core {
+  /* muted natural-paper highlighter green — #7BA85E at 22% opacity */
+  background-color: rgba(123, 168, 94, 0.22);
+}
+.kd-highlight-nuance {
+  /* muted natural-paper highlighter orange — #C9924E at 22% opacity */
+  background-color: rgba(201, 146, 78, 0.22);
+}
+.kd-verbatim {
+  background: transparent;
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: #3B82F6;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color 150ms ease, text-decoration-color 150ms ease;
+}
+.kd-verbatim:hover {
+  color: #60A5FA;
+  text-decoration-color: #60A5FA;
+}
+.kd-verbatim:focus-visible {
+  outline: 2px solid #3B82F6;
+  outline-offset: 2px;
+  border-radius: 2px;
+}

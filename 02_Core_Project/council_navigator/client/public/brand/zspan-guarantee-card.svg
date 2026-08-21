@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="zspan-guarantee-card-title zspan-guarantee-card-description">
+  <title id="zspan-guarantee-card-title">The Z-SPAN Guarantee</title>
+  <desc id="zspan-guarantee-card-description">A library-card design explaining that, after a civic source is accepted, Z-SPAN will have a parser ready or post a clear update within three days.</desc>
+
+  <defs>
+    <pattern id="zspan-guarantee-card-paper-lines" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M0 23.5H24" fill="none" stroke="#C8B68E" stroke-width="1" opacity=".22"/>
+    </pattern>
+  </defs>
+
+  <rect x="35" y="40" width="744" height="444" rx="34" fill="#0F2456" opacity=".18"/>
+  <rect x="28" y="28" width="744" height="444" rx="34" fill="#FFF8E8" stroke="#0C7A43" stroke-width="8"/>
+  <rect x="45" y="45" width="710" height="410" rx="22" fill="url(#zspan-guarantee-card-paper-lines)" stroke="#F5A524" stroke-width="3" stroke-dasharray="11 9"/>
+
+  <g transform="translate(77 76)">
+    <path d="M0 0H646M0 65H646" fill="none" stroke="#0F2456" stroke-width="3"/>
+    <text x="323" y="47" text-anchor="middle" fill="#0F2456" font-family="Georgia, 'Times New Roman', serif" font-size="35" font-weight="700">THE Z-SPAN GUARANTEE</text>
+  </g>
+
+  <g transform="translate(82 174)">
+    <rect x="0" y="0" width="138" height="132" rx="19" fill="#EEF7F1" stroke="#0C7A43" stroke-width="3"/>
+    <g transform="translate(16 21)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M1 14C18 7 36 8 53 20V86C36 75 18 73 1 80Z" fill="#FFF8E8" stroke="#0F2456" stroke-width="4"/>
+      <path d="M105 14C88 7 70 8 53 20V86C70 75 88 73 105 80Z" fill="#FFF8E8" stroke="#0F2456" stroke-width="4"/>
+      <path d="M53 20V86" stroke="#0F2456" stroke-width="4"/>
+      <circle cx="25" cy="34" r="7" fill="#F5A524" stroke="none"/>
+      <path d="M38 34H68" stroke="#F5A524" stroke-width="4"/>
+      <path d="M62 28L69 34L62 40" stroke="#F5A524" stroke-width="4"/>
+      <path d="M75 53L84 62L99 43" stroke="#22C55E" stroke-width="6"/>
+      <path d="M17 57H42M17 68H38" stroke="#94A3B8" stroke-width="3"/>
+    </g>
+
+    <g transform="translate(172 0)">
+      <text x="0" y="24" fill="#475569" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="700" letter-spacing=".7">AFTER YOUR SOURCE IS ACCEPTED / WITHIN</text>
+      <text x="0" y="89" fill="#0F2456" font-family="Georgia, 'Times New Roman', serif" font-size="72" font-weight="700">3 DAYS</text>
+      <text x="0" y="124" fill="#0C7A43" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="800">A parser will be ready - or we'll post a clear update.</text>
+    </g>
+  </g>
+
+  <g transform="translate(82 340)">
+    <rect x="0" y="0" width="636" height="76" rx="18" fill="#FFFDF6" stroke="#D8C8A5" stroke-width="2"/>
+    <circle cx="31" cy="38" r="13" fill="#22C55E"/>
+    <path d="M25 38L29 42L37 33" fill="none" stroke="#FFF8E8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="55" y="34" fill="#0F2456" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="800">Source accepted</text>
+    <text x="55" y="53" fill="#64748B" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13">The clock starts here</text>
+
+    <path d="M191 38H257" fill="none" stroke="#F5A524" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 8"/>
+    <path d="M250 31L258 38L250 45" fill="none" stroke="#F5A524" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <circle cx="284" cy="38" r="13" fill="#F5A524"/>
+    <circle cx="284" cy="38" r="5" fill="#0F2456"/>
+    <text x="308" y="34" fill="#0F2456" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="800">Parser underway</text>
+    <text x="308" y="53" fill="#64748B" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13">We're working on it</text>
+
+    <path d="M455 17V59" fill="none" stroke="#D8C8A5" stroke-width="2"/>
+    <text x="480" y="31" fill="#0C7A43" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" font-weight="800">AS SOON AS READY</text>
+    <text x="480" y="52" fill="#0F2456" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14" font-weight="800">NO LATER THAN DAY 3</text>
+  </g>
+
+  <text x="400" y="446" text-anchor="middle" fill="#475569" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="14">If the source blocks the parser, the update will explain what happened.</text>
+</svg>

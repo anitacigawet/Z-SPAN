@@ -1,0 +1,91 @@
+# Z-SPAN flagship Python dependencies.
+#
+# Sol pen-test Finding #12 remediation (2026-07-25): every top-level
+# dependency now pins to a specific version. Previously most were
+# floating (e.g. bare "flask") which meant every Railway rebuild
+# could resolve to a different transitively-pulled tree. Pinned
+# versions here match the resolved set that the flagship runtime
+# venv has installed + validated against the live app.
+#
+# NEXT STEP (not shipped in this pass): produce a hash-locked
+# requirements.lock via `pip-compile --generate-hashes` (pip-tools).
+# That gives full supply-chain integrity (rejects any wheel whose
+# hash doesn't match) but requires resolving against the target
+# Python + regression tests against the resolved set — a bigger
+# project than a same-day patch. Recorded as follow-up.
+#
+# To refresh a pin: check the actual installed version in the target
+# venv (`pip freeze | grep <pkg>`) after the app tests green, then
+# update the pin here.
+
+beautifulsoup4==4.15.0
+# Entity-expansion-safe XML parsing for public RSS/calendar sources.
+defusedxml==0.7.1
+feedparser==6.0.12
+flask==3.1.3
+flask-cors==6.0.5
+icalendar==7.1.2
+lxml==6.1.1
+requests==2.34.2
+
+# Flagship in-process retrieval (Surface Pro/Qdrant retirement): same local
+# embedding stack and cosine matrix path shipped by the production CLI.
+fastembed==0.8.0
+numpy==2.4.6
+
+# T-004 video matcher uses parsers/meeting_vocabulary.yaml.
+pyyaml==6.0.3
+
+# V1-Catalog-1 follow-up: normalize.py canonicalizes mixed meeting_date
+# formats (US long-form, slash, ISO, etc.) to ISO YYYY-MM-DD. Pulled in
+# transitively today but pinning explicit so a fresh venv works.
+python-dateutil==2.9.0.post0
+
+# Playwright — used by S-098 watermark_ribbon_decoder + several city
+# parsers (browser_scraper, glendale_parser, kayenta_parser, chino_valley_parser,
+# council_scraper) + the compiler's capture.py. Historically also pulled in
+# for notebooklm-py's headed login flow, but NotebookLM was removed per
+# D-143 (2026-07-01) so this is now scraping-only.
+playwright==1.60.0
+
+# T-009 Phase 0 Whisper pipeline: yt-dlp downloads the source meeting
+# audio for transcription via OpenAI Whisper. Used by whisper_client.py.
+yt-dlp==2026.7.4
+
+# T-009 Phase 2 YouTube Proofs uploader: Google's official auth +
+# YouTube Data API client. Three packages, one logical dependency.
+google-auth==2.53.0
+google-auth-oauthlib==1.4.0
+google-api-python-client==2.197.0
+
+# S-004 Phase 2 (D-055): Slack bot SDK for chat.postMessage, files.upload_v2,
+# and Socket Mode listener. Webhook-only path (Phase 1) doesn't need this;
+# the SDK is only loaded when slack_bot_token / slack_app_token are present
+# in user_settings.json, so the dependency is effectively opt-in.
+slack_sdk==3.42.0
+
+# D-069: unofficial wrapper for the consumer Gemini Pro web UI. Used by
+# pipeline_operator_gemini_verify.py to drive gemini.google.com via the
+# user's Google One AI Pro entitlement (cookies in user_settings.json,
+# same BYOK shape as notebooklm-py). Spike validated 2026-05-30 against
+# mp4 upload + Pro response. Same unofficial-wrapper risk class as
+# notebooklm-py — Google UI updates can break it; recovery is pip-upgrading
+# when the maintainer ships a fix. Loaded lazily so only verify-mode needs it.
+# Pinned to the version validated by the 2026-05-30 spike (mp4 upload + Pro
+# response); bumping requires re-validating the spike still works. Supply-
+# chain defense — T-4 / D-070 follow-up.
+gemini-webapi==2.0.0
+
+# S-098 Phase 2.5 watermark ribbon decoder uses Pillow for image I/O and
+# OpenCV (headless variant — no GUI deps we don't use, smaller wheel,
+# wider precompiled-wheel availability matrix) for the frame-shape
+# anchor. Saturation-cluster fallback still works without cv2 if the
+# install fails. Pillow is also pulled in transitively by other deps;
+# pinning explicit here so the watermark decoder's I/O path is honest.
+Pillow==12.2.0
+opencv-python-headless==4.10.0.84
+
+# Cloud Whisper transcription path (whisper_client.py `_transcribe_youtube_via_openai`,
+# selected by user_settings `zspan_whisper_provider=openai`). Undeclared until
+# 2026-07-19 — a fresh env failed with ModuleNotFoundError mid-transcription.
+openai==2.46.0

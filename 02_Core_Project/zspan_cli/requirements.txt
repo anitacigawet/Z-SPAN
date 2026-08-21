@@ -1,0 +1,13 @@
+# zspan-cli — run-from-clone dependencies.
+# Each line lands with the chunk that needs it (header discipline from CLI-1).
+requests>=2.28
+
+# CLI-3 — `zspan process`
+yt-dlp>=2026.7.4            # video/audio resolve (YouTube + direct-media)
+faster-whisper>=1.0         # local transcription floor (free, CPU int8)
+fastembed>=0.3              # local BGE-small embeddings (ONNX — reuses the
+                            # onnxruntime faster-whisper already installs;
+                            # same BAAI/bge-small-en-v1.5 model the flagship
+                            # indexes with, ~500MB lighter than the torch
+                            # stack sentence-transformers would drag in)
+numpy>=1.26                 # pure-numpy cosine retrieval (spec ⚖️ #3 — no vector DB)

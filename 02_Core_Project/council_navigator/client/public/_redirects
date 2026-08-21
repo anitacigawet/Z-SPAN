@@ -1,0 +1,15 @@
+# Cloudflare Pages URL rewrites.
+#
+# S-102 sticker-as-civic-tag — the citizen-facing ribbon scanner is the
+# microtext URL on every Z-SPAN ribbon. The pathname is preserved in the
+# browser bar while Pages serves the SPA with the appropriate query.
+#
+# Syntax: <source> <destination> <status>
+#   200 = rewrite (browser URL stays as source; SPA gets destination)
+#   301/302 = redirect (browser URL changes to destination)
+/scan   /?view=scan   200
+/audit  /?view=audit  200
+/corrections  /?view=corrections  200
+/registry  /?view=registry  200
+/login  /?view=login  200
+/i  /?view=invite  200

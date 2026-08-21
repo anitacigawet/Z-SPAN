@@ -1,0 +1,101 @@
+# Meeting-type vocabulary for the channel-to-video matcher (T-004).
+#
+# Each entry maps a regex pattern (case-insensitive, applied to the video
+# title) to a meeting type. The matcher uses these to score candidate
+# videos against a meeting's `meeting_title` field.
+#
+# Designed to be city-agnostic — patterns capture the standard civic-meeting
+# vocabulary. Per-city quirks (specific naming conventions a city uses)
+# can extend this file rather than fork the matcher logic.
+#
+# Pattern guidelines:
+#   - Use lowercase regex; matcher applies re.IGNORECASE
+#   - Anchor where the term needs to be a whole word (e.g., \bcouncil\b)
+#   - Order matters when multiple patterns could match — first match wins.
+#     Keep the most specific patterns first, generic last.
+#
+# When adding patterns:
+#   - Run a dry-run match against the test channels and see what it
+#     mis-classifies before committing
+#   - Add a comment if a pattern was added to handle a specific city quirk
+
+patterns:
+  # ── Special / non-routine first (more specific than generic council) ──
+  # Tolerate up to 3 intervening words so titles like "Special Town Council
+  # Meeting" or "Special Joint Council Meeting" still classify as `special`
+  # rather than falling through to the generic `council` pattern.
+  - { type: special,        pattern: 'special(?:\s+\S+){0,3}?\s+(?:meeting|session)' }
+  - { type: special,        pattern: 'emergency\s+meeting' }
+
+  # ── Public hearings (often under broader categories but worth tagging) ──
+  - { type: hearing,        pattern: 'public\s+hearing' }
+
+  # ── Executive sessions (rarely public-broadcast, but tag if surfaced) ──
+  - { type: executive,      pattern: 'executive\s+session' }
+  - { type: executive,      pattern: 'closed\s+session' }
+
+  # ── Work / study sessions (substantive but not voting) ──
+  - { type: work_session,   pattern: 'work\s+session' }
+  - { type: work_session,   pattern: 'study\s+session' }
+  - { type: work_session,   pattern: 'workshop' }
+  - { type: work_session,   pattern: 'retreat' }
+
+  # ── Planning / zoning ──
+  - { type: planning,       pattern: 'planning\s+(?:and\s+zoning|&\s+zoning|commission)' }
+  - { type: planning,       pattern: 'p\s*&\s*z\b' }
+  - { type: planning,       pattern: 'zoning\s+(?:board|commission|hearing)' }
+
+  # ── Standing committees ──
+  # Each gets its own specific subtype so different committees don't
+  # false-match each other (Golf Commission and Airport Commission are
+  # both "committees" but they're not the SAME committee — type_match
+  # should yield 0.0 between them, not 1.0).
+  #
+  # SCOPING: any entry may include an optional `cities: [...]` field.
+  # When present, the pattern ONLY applies when classifying titles for
+  # one of those cities. When absent, the pattern is global (applies
+  # everywhere). Use cities-scoping for committees that are city-quirks
+  # rather than universal civic vocabulary — keeps the file auditable
+  # as new cities are added.
+
+  # Generic / cross-city committees (no scope = global)
+  - { type: committee_parks,           pattern: 'parks?\s+(?:and\s+rec(?:reation)?|&\s+rec(?:reation)?|board|commission)' }
+  - { type: committee_public_safety,   pattern: 'public\s+safety\s+(?:committee|board|commission)' }
+  - { type: committee_public_works,    pattern: 'public\s+works?\s+(?:committee|board|commission)' }
+  - { type: committee_finance,         pattern: 'finance\s+(?:committee|board)' }
+  - { type: committee_budget,          pattern: 'budget\s+(?:committee|hearing|workshop)' }
+  - { type: committee_arts,            pattern: 'arts?\s+(?:committee|board|commission)' }
+  - { type: committee_library,         pattern: 'library\s+(?:committee|board|commission)' }
+  - { type: committee_tourism,         pattern: 'tourism\s+(?:committee|board|commission)' }
+  - { type: committee_water,           pattern: 'water\s+(?:committee|board|commission)' }
+
+  # ── Kingman-specific committees ──
+  # These names + structures came from Kingman's actual YouTube channel.
+  # Some may eventually generalize (Heritage Preservation, Transit, Economic
+  # Development are not unique to Kingman) but until we verify against a
+  # second city's data, scope them here. Add other cities to the list as
+  # they're observed to use the same naming.
+
+  - { type: committee_economic_dev,    pattern: 'economic\s+development\s+(?:advisory\s+)?(?:commission|committee|board)', cities: [Kingman] }
+  - { type: committee_heritage,        pattern: '(?:historic|heritage)\s+(?:preservation|district)\s+(?:committee|board|commission)', cities: [Kingman] }
+  - { type: committee_transit,         pattern: '(?:transportation|transit)\s+(?:advisory\s+)?(?:committee|board|commission)', cities: [Kingman] }
+  # Airport & Industrial Park Advisory Commission (Kingman's full naming includes
+  # "Industrial Park" between airport and commission — needs the intervening-word
+  # tolerance)
+  - { type: committee_airport,         pattern: 'airport(?:\s+\S+){0,5}?\s+(?:advisory\s+)?(?:committee|board|commission)', cities: [Kingman] }
+  - { type: committee_airport,         pattern: 'airport\s+(?:committee|board|commission)', cities: [Kingman] }
+  # Kingman's municipal golf course (Cerbat Cliffs) has a dedicated commission
+  - { type: committee_golf,            pattern: 'golf\s+(?:committee|board|commission)', cities: [Kingman] }
+  # Kingman: "Municipal Utility Commission"
+  - { type: committee_utility,         pattern: '(?:municipal\s+)?utilit(?:y|ies)\s+(?:advisory\s+)?(?:committee|board|commission)', cities: [Kingman] }
+  # Kingman: "Clean City Commission" (Route 66 corridor cleanup tradition)
+  - { type: committee_sanitation,      pattern: '(?:clean\s+city|sanitation)\s+(?:commission|committee|board)', cities: [Kingman] }
+
+  # ── Council (last because most generic; many specific patterns above ──
+  #     would also contain "council" as a stem but we want them tagged ──
+  #     more specifically) ──
+  - { type: council,        pattern: 'regular\s+(?:city\s+)?council\s+meeting' }
+  - { type: council,        pattern: 'city\s+council\s+meeting' }
+  - { type: council,        pattern: 'town\s+council\s+meeting' }
+  - { type: council,        pattern: 'council\s+meeting' }
+  - { type: council,        pattern: '\bcouncil\b' }

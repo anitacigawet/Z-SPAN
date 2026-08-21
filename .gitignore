@@ -1,0 +1,312 @@
+# Z-SPAN top-level gitignore.
+# (The Navigator subdir at 02_Core_Project/council_navigator/
+#  has its own .gitignore with frontend/Python-specific rules.)
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+ehthumbs.db
+.vscode/
+.idea/
+*.swp
+*~
+
+# Cloudflare wrangler CLI artifacts (build cache, deploy assets state).
+# Created when the operator runs `wrangler pages deploy` from repo root
+# (session-87 emergency-recovery flow after CF Pages auto-build shipped
+# a mismatched hash on b118f90). Local tooling state; never committed.
+.wrangler/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+venv/
+venv_*/
+.venv/
+.venv-worker/
+*.bak
+*.bak.*
+*.backup
+
+# Local env / secrets
+.env
+.env.local
+*.local
+# Mac transcriber node bearer token — never commit
+**/.bearer_token
+
+# OAuth / service-account credential downloads (Google Cloud).
+# Default download names from console.cloud.google.com → Credentials.
+# These authorize writes to YouTube (Proofs uploads, T-009 Phase 2) and
+# other on-behalf-of-user operations — NEVER commit.
+# Credential home directory — gitignored as a WHOLE DIRECTORY so safety
+# doesn't depend on exact filename patterns (D-104 audit F-1; relocated
+# from repo root 2026-06-13). The filename patterns above/below stay as
+# belt-and-braces for legacy root-level downloads.
+**/secrets/
+client_secret*.json
+*_oauth*.json
+*.credentials.json
+service-account*.json
+# YouTube refresh token, persisted after the one-time OAuth consent flow.
+youtube_refresh_token.json
+
+# Voiceprint embeddings — PAUSED + untracked 2026-07-01 (Fable-5 audit F5).
+# Biometric-adjacent data of named individuals must not ride the repo that
+# Prong D flips public. Files stay on disk (local use is operator-accepted
+# for now); git history still contains the 5 pre-pause files — the
+# pre-public-flip history-remake gate row in LAUNCH_GATES covers that.
+**/city_intelligence/*/voices/
+
+# Runtime data / artifacts (regenerable, large, or sensitive)
+**/meetings_cache.db
+**/meetings_cache.db-shm
+**/meetings_cache.db-wal
+# Prod-DB forensic archives — contain operator PII in published_by rows.
+# NEVER track; repo is public-bound. (session-88 CF audit HIGH-3)
+ops/prod_db_archive/
+# Additional PII-bearing files flagged by the session-89 three-way security
+# audit (sol MEDIUM): local username/path/LAN endpoint + owner email. Seal
+# against a stray git add before the fresh-repo public flip.
+02_Core_Project/pc_agent_relay/STATUS.json
+ops/REMAKE2_EXECUTION_NOTES.md
+**/user_settings.json
+**/orchestrator_autonomy.json
+**/parser_test_results.json
+**/FINAL_HEALTH_REPORT.json
+
+# NotebookLM Studio media (regenerable, multi-MB / multi-GB)
+**/media/
+
+# Logs
+*.log
+logs/
+
+# Node
+node_modules/
+/operator_only/
+dist/
+.pnpm-store/
+
+# Built distribution artifacts — never tracked (sol Finding #2, 2026-07-25).
+# The tracked `zspan_cli-0.1.0-py3-none-any.whl` was built BEFORE PR #147's
+# packaging fix, so it still carried PROMPT_REVIEW_LEDGER.md (425 lines,
+# a private citizen's name) + the test package + 38 unallowlisted prompts.
+# PR #147 fixed the build; the stale artifact stayed tracked until now.
+# Distributions are release assets, not source — build them fresh from a
+# clean checkout at release time, never commit them.
+*.whl
+*.tar.gz
+02_Core_Project/zspan_cli/build/
+02_Core_Project/zspan_cli/dist/
+# The vendored prompt copy setup.py generates at build time. The canonical
+# prompts live in 02_Core_Project/prompts/; tracking this copy would let it
+# drift from them and re-create the stale-vendored-artifact problem that
+# once shipped an internal review ledger inside a wheel.
+02_Core_Project/zspan_cli/zspan_cli/_prompts/
+
+# Reference projects pulled in for inspection (kept on disk only)
+03_Research/ganymede-backend/
+03_Research/<private-predecessor-repo>/
+
+# Worker subprocess log files (per-WO, regenerable, possibly large)
+**/worker_logs/
+# Haiku HTML scraper per-invocation audit-trail logs (S-036 V1)
+agents/_haiku_html_scraper_logs/
+
+# Throwaway experiment outputs (not committed)
+experiments/
+
+# HQ handoff: local snapshot of client/ source copied in for the
+# Claude-design session. Kept on disk only — it's a transient handoff
+# convenience, NOT canonical source. Committing it would duplicate the
+# client/ tree into git and silently drift from the real source. The
+# DESIGN_BRIEF.md + PROJECT_CONTEXT.md + README.md in that folder ARE
+# committed; only the copied project_files/ snapshot is ignored.
+01_Project_Overview/HANDOFF_ZSPAN_HQ/project_files/
+
+# Claude Code session state (.claude/ everywhere, in full). Session
+# tooling is workshop, never a public artifact — skills, couriers,
+# prompt templates, handoffs, launch configs all stay local (D-154
+# ADDENDUM 2026-07-07: ".claude/ in full — session tooling is
+# workshop"). The pre-remake tree carried tracked-skills carve-outs
+# here; repo v3 deliberately does not (2026-07-07 session-38 audit —
+# a surviving carve-out structurally invites accidental workshop
+# publication). The flagship's working copy keeps these dirs on disk;
+# the governance-corpus backup stanza covers them off-machine.
+.claude/*
+**/.claude/*
+
+# ── Operator-internal working docs — kept out of the published tree ────
+# The public application tree excludes the internal operating manual,
+# strategy corpus, task ledgers, and fleet
+# docs are disk-only and never belong in it. All untracked today — these
+# patterns are belt-and-suspenders so a stray `git add` from the repo root
+# can't sweep one onto a branch bound for the public repo. Root-anchored so
+# same-named files nested elsewhere are unaffected.
+/CLAUDE.md
+/AGENTS.md
+/AUTOPILOT_PROTOCOL.md
+/ROADMAP.md
+/TASKS.md
+/TASKS_ARCHIVE.md
+/BRAINSTORM_LOG.md
+/HUMAN_API_HANDOFF.md
+/OCTANE_MODE_EXPERIMENT.md
+/respawn.md
+/respawn-mac-migration-2026-06-14.md
+/01_Project_Overview/
+/agents/
+/04_Operator_Side/
+
+# ── Journals — operator's living voice-memo / brainstorm space ─────────
+# Context-only sealed corpus (CLAUDE.md § journals). Disk-only like the
+# verbatim ledger; guard against a stray root `git add` sweeping it toward
+# a public-bound tree. (session-88 CF audit: journals/FABLE_AUDIT_*.md holds
+# the operator email.)
+/journals/
+
+# ── Verbatim ledger — operator's exact words behind each decision ──────
+# Local-only anti-"telephone-game" record (operator-directed 2026-07-18):
+# James's verbatim messages that produced each decision, so a distilled
+# D-entry can always be checked against what he actually said. NEVER
+# published to GitHub — this is the raw operator voice, disk-only.
+/verbatim_ledger/
+
+# ── Research archive — intellectual lineage, disk-only by default ──────
+# 03_Research/ is the local brainstorming and research archive. Keep it out
+# of the application source tree so experiments and generated results are not
+# mistaken for product code or public data.
+/03_Research/*
+
+# Per-run diagnostic + smoke JSON dumps in parsers/. Regenerable,
+# per-machine, never load-bearing. Examples: mac_*_result.json (Mac
+# claude-relay round-trip diagnostic outputs), _smoke_*.json /
+# _smoke_*.py (one-shot smoke artifacts that landed in scripts/ during
+# iteration). Added 2026-06-11 post-audit .gitignore triage.
+02_Core_Project/council_navigator/parsers/mac_*_result.json
+02_Core_Project/council_navigator/parsers/mac_*_diagnostic.json
+02_Core_Project/council_navigator/parsers/scripts/_smoke_*
+
+# Per-agent heartbeat transcripts + crashes.csv (per-run, large JSONL, regenerable).
+# Each role's settings.json lives at agents/<role>.settings.json (committed);
+# the dirs under ops/<role>-logs/ are the audit-trail outputs, not configuration.
+ops/*-logs/
+
+# D-099 Phase 2.1b — PC agent relay per-callback audit logs (regenerable,
+# day-rotated JSONL). The relay scaffolding + STATUS.json IS committed;
+# only the per-day audit log files are not.
+02_Core_Project/pc_agent_relay/audit_logs/
+
+# Mac node handshake/state files are LIVE self-written by each node on its
+# heartbeat (host_lan_ip, base_url, timestamps) — they cannot be scrubbed in
+# place (the node re-writes them next heartbeat) and post-D-111 loopback
+# consolidation they're per-machine dormant handshake state. Untracked
+# 2026-07-12 (audit / RR-1 SCRUB) so the public repo carries no operator LAN
+# topology; the node scaffolding (server.py, SETUP.md) documents the
+# architecture publicly without the machine detail.
+02_Core_Project/mac_claude_relay/STATUS.json
+02_Core_Project/mac_transcriber/STATUS.json
+02_Core_Project/mac_diarizer/STATUS.json
+
+# Per-agent runtime state files (the .gitkeep tracks the dir; the snapshot
+# files are written by the agents' state-write wrappers and are per-machine).
+agents/_custodian_state/parser-health.json
+agents/_scout_state/*.json
+
+# Bundled documentation exports for external AI ingestion (NotebookLM / Gemini)
+docs_export_*/
+
+# Ephemeral session scratch dir — used by Claude Code sessions for
+# intermediate output (json/log files from background tasks, etc.).
+# Untracked accumulation noise in `git status`; explicit ignore here.
+.tmp/
+
+# Quote-discipline preview sidecars (2026-06-23) — operator-side preview
+# extractions for the V1-RAG-3 selection-discipline before/after toggle
+# on BroadcastPage. Path served by /api/preview/quotes/:meeting_id.
+.preview/
+
+# ── Public parser source + private operational artifacts ──────────
+# Active parser implementations are part of Z-SPAN's public source. Trial and
+# superseded variants remain local until promoted to an active parser file.
+02_Core_Project/council_navigator/parsers/*_parser_codex_trial*.py
+02_Core_Project/council_navigator/parsers/*_parser_v*.py
+02_Core_Project/council_navigator/parsers/parser_index.json
+# Endpoint exports belong in the separate Civic Source Catalog.
+02_Core_Project/council_navigator/client/public/data/Arizona_*.json
+02_Core_Project/council_navigator/client/src/data/Arizona_*.json
+02_Core_Project/council_navigator/parsers/CATALOG_CHECKLIST.json
+02_Core_Project/council_navigator/parsers/_endpoint_catalog/
+
+# Generated diagnostics, operator records, and research outputs are not
+# application source.
+02_Core_Project/council_navigator/parsers/PARSER_SUMMARY.json
+02_Core_Project/council_navigator/parsers/coverage_index.json
+02_Core_Project/council_navigator/parsers/health_report_*.json
+02_Core_Project/council_navigator/parsers/financial_reports/
+registry/registry_manifest.json
+ops/registry_tools/seal_registry.py
+ops/scan_built_artifacts_for_vendor_hosts.py
+ops/migrate_to_fresh_repo.sh
+02_Core_Project/zspan_cli/zspan_cli/tests/data/meeting_104003_discussion.json
+
+# Librarian safeguard code is public. Its adversarial pass/fail corpus and
+# tests that enumerate the exact rule matrix remain private.
+02_Core_Project/council_navigator/parsers/input_security/librarian_gate_cases.v1.json
+02_Core_Project/council_navigator/parsers/input_security/librarian_gate_cases.v2.json
+02_Core_Project/council_navigator/parsers/input_security/librarian_stencil_cases.v1.json
+02_Core_Project/council_navigator/parsers/input_security/librarian_stencil_cases.v2.json
+02_Core_Project/council_navigator/parsers/input_security/test_librarian_input_gate.py
+02_Core_Project/council_navigator/parsers/input_security/test_librarian_query_stencil.py
+02_Core_Project/council_navigator/client/src/lib/librarianInputGate.test.ts
+02_Core_Project/council_navigator/client/src/lib/librarianQueryStencil.test.ts
+
+# client/public/ is a strict publication surface.
+# It ships to every visitor as directly-addressable static assets, so no dev
+# scripts, no in-progress crop comparisons, no operator screenshots, no
+# NotebookLM (or successor) metadata files. Belt-and-suspenders — the scanner
+# at ops/scan_public_tree_for_dev_artifacts.py fails the build on any such
+# file; these .gitignore rules stop a stray `git add` from ever staging them.
+02_Core_Project/council_navigator/client/public/**/*.py
+02_Core_Project/council_navigator/client/public/**/*.meta.json
+02_Core_Project/council_navigator/client/public/**/*.smoke.prompt.txt
+02_Core_Project/council_navigator/client/public/hq/crops/
+02_Core_Project/council_navigator/client/public/hq/composite_for_critique.png
+02_Core_Project/council_navigator/client/public/hq/press_infographic.png
+# Aggregated council roster stays operator-local under the D-153 sealed-corpus
+# rationale (operator direction 2026-07-24).
+02_Core_Project/council_navigator/parsers/council_members_data.json
+02_Core_Project/council_navigator/city_intelligence/*.json
+02_Core_Project/council_navigator/parsers/USER_SETTINGS_KEYS.md
+# per-state discovery outputs (the "where") stay local; the framework
+# README + schema in state_scaffolding/ are the public face:
+02_Core_Project/council_navigator/state_scaffolding/*/
+
+# Provider-agnostic emergency onboarding (S-146 / disk-only per D-154 —
+# references the governance corpus; survives via the RED DRIVE root *.md loop)
+/EMERGENCY_ONBOARDING.md
+
+# The project genotype — INTERNAL RECOVERY MATERIAL (2026-07-14 tank). One
+# self-contained blueprint that lets a fresh AI regrow a sibling of the project
+# from zero artifacts. Governance-corpus member: carries internal doctrine +
+# operator voice + active-prompt bodies, so it stays OFF the public repo (D-154)
+# — survives via the RED DRIVE root *.md loop, plaintext by principle (an idea
+# cannot be removed). The seal rides inside it: no recipes / secrets / endpoints.
+/PROJECT_GENOTYPE.md
+
+# Codex CLI project config + session artifacts — infrastructure config, untracked-by-design
+# (same class as AGENTS.md per D-154; the /zspan-pr-check sensitivity sweep watches this family)
+.codex/
+
+# Prompt review queue — operator review surface, stays disk-side (James 2026-07-19).
+# Holds unreviewed claude_authored prompt drafts + internal review reasoning.
+02_Core_Project/prompts/PROMPT_REVIEW_LEDGER.md
+
+# Project Room — the read-only collaboration projection (session-94 canvas
+# think-tank). Projects governance-corpus content (TEMPORARY_THOUGHTS calls,
+# railroad state), so the whole dir stays untracked-by-design like its
+# sources. Durability rides the RED DRIVE backup, not git.
+project_room/

@@ -1,0 +1,248 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zspan.org/schemas/recon.schema.json",
+  "title": "Z-SPAN per-city recon JSON",
+  "description": "Canonical shape for a `state_scaffolding/<state>/discovery/<county>/<city>.json` recon file. The 14 top-level fields capture everything a downstream parser-scaffolder needs to produce a working parser without re-doing recon. Canonical source: 01_Project_Overview/NATIONAL_SCALING.md § Output schema. Worked examples: 13 Arizona cities at state_scaffolding/arizona/discovery/<county>/<city>.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "city_name",
+    "county",
+    "state",
+    "official_url",
+    "calendar_url",
+    "calendar_api_url",
+    "calendar_format",
+    "youtube_channel_url",
+    "ocd_division_id",
+    "council_members",
+    "election",
+    "population",
+    "research_notes",
+    "flagged_domains"
+  ],
+  "properties": {
+    "city_name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The city's display name as it appears on its own .gov / canonical website. NOT slugged; NOT lowercased. Examples: 'Kingman', 'Lake Havasu City', 'St. Johns', 'Dewey-Humboldt'."
+    },
+    "county": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Za-z. \\-']+ County$",
+      "description": "The county name with trailing ' County' suffix. Examples: 'Mohave County', 'Yavapai County', 'Apache County'."
+    },
+    "state": {
+      "type": "string",
+      "minLength": 4,
+      "description": "Full state name (NOT the 2-letter abbreviation). Examples: 'Arizona', 'Nevada', 'New Mexico'."
+    },
+    "official_url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https?://",
+      "description": "The city's canonical .gov or equivalent official website. Source of truth for council rosters, election notices, calendar links. Per D-118, alternate-TLD probing is PROHIBITED — confirm the .gov directly, do not investigate alternate domains."
+    },
+    "calendar_url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https?://",
+      "description": "The human-visible URL where the meeting calendar / agenda archive lives. May or may not equal the machine-scrapable API endpoint (see calendar_api_url)."
+    },
+    "calendar_api_url": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "pattern": "^https?://",
+      "description": "Machine-scrapable API endpoint for SPA-class vendors (CivicClerk, PrimeGov, etc.) where calendar_url is a single-page-application shell and meeting data lives at a separate API path. Discoverable via JavaScript bundle introspection (see NATIONAL_SCALING.md § bundle introspection rule). NULL for non-SPA vendors (Granicus / Legistar legacy / CivicPlus AgendaCenter / static HTML)."
+    },
+    "calendar_format": {
+      "type": "string",
+      "enum": [
+        "granicus",
+        "legistar",
+        "civicplus",
+        "civicplus_calendar",
+        "civicplus_documentcenter",
+        "civicplus_agendacenter",
+        "civicplus_meetingslist",
+        "civicplus_vision",
+        "civicclerk",
+        "primegov",
+        "swagit",
+        "destiny",
+        "hyland",
+        "novusagenda",
+        "iqm2",
+        "municode",
+        "civicweb",
+        "tribe_events",
+        "streamline",
+        "m1downloadlist",
+        "tablepress",
+        "custom",
+        "unknown"
+      ],
+      "description": "Canonical vendor enum. Per NATIONAL_SCALING.md § calendar_format strict rule: use 'unknown' when neither the fingerprinter NOR your inspection can identify the platform OR when inspection was blocker-induced empty. Use 'custom' only with POSITIVE evidence of hand-rolled HTML on the city's own domain. Blocker-induced empty resolves to 'unknown', NOT 'custom'. The deterministic fingerprinter at parsers/scripts/vendor_fingerprint.py classifies ~63% of cities in microseconds."
+    },
+    "youtube_channel_url": {
+      "type": ["string", "null"],
+      "pattern": "^https://(?:www\\.)?youtube\\.com/(?:@[\\w.-]+|channel/[\\w-]+|user/[\\w.-]+|c/[\\w.-]+)/?$",
+      "description": "YouTube-domain-only channel URL (after F5 canonical-form normalization — strip /live, /streams, /videos, /featured, /playlists, /community, /about, /shorts, /channels tab suffixes before emit). NULL when no active council-meeting channel exists. NON-YouTube archives (Granicus MP4, Swagit, Vimeo, SharePoint, ASX/RTMP, embedded HTML5) MUST emit NULL here; surface non-YouTube archives in research_notes. Trust-rank: (1) .gov-linked, (2) WebSearch-discovered with active council-meeting content evidence, (3) NULL."
+    },
+    "ocd_division_id": {
+      "type": ["string", "null"],
+      "pattern": "^ocd-division/country:us/state:[a-z]{2}/place:[a-z_\\-]+$",
+      "description": "Open Civic Data division ID for the place. Format: 'ocd-division/country:us/state:<lc>/place:<slug>'. NULL when no OCD entry exists for this place (rare; small unincorporated places)."
+    },
+    "council_members": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "role",
+          "seat_id",
+          "term_started",
+          "term_ends"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "Mayor",
+              "Vice Mayor",
+              "Council Member",
+              "Trustee",
+              "Commissioner",
+              "Supervisor"
+            ],
+            "description": "Canonical role label. Normalize variants (Vice-Mayor → Vice Mayor; Councilmember → Council Member)."
+          },
+          "seat_id": {
+            "type": ["string", "null"],
+            "description": "Per F16 seat_id convention: 'mayor' / 'vice_mayor' for those roles; 'seat_N' (N=1..) ONLY with explicit numbered-seat DOM evidence; NULL for generic at-large council members."
+          },
+          "term_started": {
+            "type": ["string", "null"],
+            "format": "date",
+            "description": "ISO date YYYY-MM-DD when the member's current term began. NULL when not stated on the .gov roster page."
+          },
+          "term_ends": {
+            "type": ["string", "null"],
+            "format": "date",
+            "description": "ISO date YYYY-MM-DD when the member's current term ends. NULL when not stated on the .gov roster page."
+          }
+        }
+      },
+      "description": "Council member roster verified verbatim against the .gov roster page. Empty array when no roster is discoverable (record the limitation in research_notes)."
+    },
+    "election": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "next_election_date",
+        "term_length_years",
+        "next_election_seats_up"
+      ],
+      "properties": {
+        "next_election_date": {
+          "type": ["string", "null"],
+          "format": "date",
+          "description": "ISO date YYYY-MM-DD of the next regularly-scheduled council election. Per F21, fetch the .gov homepage + scan for Notice-of-Election PDFs before emitting null. NULL only when neither the .gov nor authoritative sources surface a date."
+        },
+        "term_length_years": {
+          "type": ["integer", "null"],
+          "minimum": 1,
+          "maximum": 8,
+          "description": "Council member term length in years (typically 2 or 4). NULL when the roster page doesn't state it."
+        },
+        "next_election_seats_up": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Specific seat IDs up in the next election (e.g., ['seat_2', 'seat_4', 'mayor']). Empty array when the Notice-of-Election PDF says generic 'N Council Seats' without enumerating specific seat IDs (F16 null-for-at-large discipline)."
+        }
+      }
+    },
+    "population": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "description": "Most recent population estimate from the city's own About page (preferred) OR the US Census ACS (fallback). NULL when neither source surfaces a value. Do NOT use Wikipedia 2020 Census as the easy-hallucination fallback — Codex catches this trap (the .gov's stated population almost always supersedes a stale Wikipedia number)."
+    },
+    "research_notes": {
+      "type": "string",
+      "minLength": 50,
+      "description": "Free-text research notes summarizing what was witnessed during recon. Required even when all fields populate cleanly — explains the recon decisions a future maintainer will want to re-verify. Includes: vendor fingerprint witnesses, fallback paths taken, ambiguities flagged for operator review, F-finding references. Synthesis-corrections (changes made by the verifier panel to Codex's initial output) MUST be documented here with '=== SYNTHESIS FIX YYYY-MM-DD — FNN reason ===' separators."
+    },
+    "flagged_domains": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "domain",
+          "verdict",
+          "evidence",
+          "investigation_method",
+          "severity",
+          "discovered"
+        ],
+        "properties": {
+          "domain": {
+            "type": "string",
+            "minLength": 4
+          },
+          "verdict": {
+            "type": "string",
+            "enum": [
+              "hijack",
+              "squat",
+              "stale",
+              "legitimate-confusable"
+            ]
+          },
+          "evidence": {
+            "type": "string",
+            "minLength": 10,
+            "description": "Free-text evidence describing what was observed about the flagged domain. Per D-118, this evidence MUST come from non-HTTP sources (Google search snippets, WHOIS, DNS, crt.sh Certificate Transparency, Wayback Machine) — alternate-TLD HTTP probing is PROHIBITED."
+          },
+          "investigation_method": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "enum": [
+                "websearch-snippet-only",
+                "whois",
+                "dns",
+                "crt.sh",
+                "wayback",
+                "incidental-on-official-source"
+              ]
+            }
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "discovered": {
+            "type": "string",
+            "format": "date",
+            "description": "ISO date YYYY-MM-DD when the domain was discovered + flagged during recon."
+          }
+        }
+      },
+      "description": "Catalog of suspicious / confusable / hijack / squat domains discovered incidentally during recon (e.g., townofkearny.com 301-hijacks to a Spanish winery brand). Populated by incidental observation on the official source we're already touching — NOT by deliberate alternate-TLD HTTP probing (D-118 prohibition). Empty array when no flagged domains surface during recon."
+    }
+  }
+}

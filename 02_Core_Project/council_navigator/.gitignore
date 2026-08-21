@@ -1,0 +1,142 @@
+# Dependencies
+**/node_modules
+.pnpm-store/
+
+# Operator-only code (Tier 2 boundary — see journal entry
+# 2026-06-26-voice-biometric-tier-2-operator-investigative-scope.md +
+# [[journal-only-documentation-discipline-boundary]]). These directories
+# hold operator-only surfaces; public clones never see this code.
+client/src/operator_only/
+parsers/operator_only/
+
+# Build outputs
+dist/
+build/
+*.dist
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Dependency directories
+jspm_packages/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+
+# Nuxt.js build / generate output
+.nuxt
+
+# Gatsby files
+.cache/
+
+# Storybook build outputs
+.out
+.storybook-out
+
+# Temporary folders
+tmp/
+temp/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+__pycache__/
+
+# Pipeline artifacts
+parsers/pipeline_state.json
+parsers/logs/
+parsers/meetings_cache.db
+parsers/meetings_cache.db-wal
+parsers/meetings_cache.db-shm
+parsers/backups/
+
+# User-configured secrets (DeepSeek API key set via Settings UI)
+parsers/user_settings.json
+AI_SUMMARY_TEST.md
+AI_SUMMARY_VERIFIED.md
+COUNTY_BUTTON_BUG.md
+
+# Z-SPAN: proof clips + media served via /media/<meeting_id>/<file>.
+# Large binary blobs, never committed. Retired studio artifacts
+# (audio_overview/video_explainer/infographic — the pre-D-143 class) were
+# quarantined OUT of the served root 2026-07-06 (Fable-5 audit F-5.4):
+# they live in media_quarantine/, which Express does NOT serve, so stale
+# direct URLs 404 instead of handing out retired AI content.
+media/
+media_quarantine/
+
+# Local HTTPS dev certs — mkcert-generated, per-machine, never commit
+dev-cert.pem
+dev-key.pem
+

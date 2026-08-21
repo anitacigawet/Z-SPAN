@@ -1,0 +1,87 @@
+# Z-SPAN — a virtual library for local politics
+# https://zspan.org
+#
+# This file is POLICY COMMUNICATION, not containment. Compliance is
+# voluntary — well-behaved crawlers honor the disallow directives; bad
+# actors ignore them. Anything that MUST be kept off crawler indexes
+# (PII, operator surfaces, unpublished records) is enforced at the auth /
+# release-flag / server layer, not here.
+
+# Search engines + general crawlers are welcome.
+User-agent: *
+Allow: /
+
+# Sitemap directive deliberately omitted — Z-SPAN does not yet publish
+# a sitemap.xml. When sitemap publishing ships, restore: Sitemap:
+# https://zspan.org/sitemap.xml
+
+# ────────────────────────────────────────────────────────────────────
+# AI training crawlers — disallowed by default.
+#
+# Z-SPAN and the separate Civic Source Catalog are source-available under
+# PolyForm Noncommercial 1.0.0. Uses beyond what robots.txt can express are
+# governed by the applicable license and by rights in the underlying sources.
+# ────────────────────────────────────────────────────────────────────
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
+
+User-agent: cohere-ai
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: omgilibot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /

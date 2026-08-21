@@ -1,0 +1,38 @@
+# api.zspan.org public API origin (D-164, PI-4).
+# Deploy from this directory with `wrangler deploy`; this is the authoritative
+# path because dashboard script-paste does not create the rate-limit binding.
+# Env vars BACKEND_URL + ZSPAN_EDGE_TOKEN are set as Worker secrets in the
+# dashboard — never committed here.
+#
+# The custom-domain binding (api.zspan.org) is added in the CF dashboard
+# AFTER the shadow test passes on the workers.dev URL, and public DNS
+# activation rides the un-gate sequencing (dead last, operator's click).
+
+name = "api-zspan-org"
+main = "worker.ts"
+compatibility_date = "2026-07-01"
+
+# Both workers.dev hostnames stay OFF, declared here rather than only
+# toggled in the dashboard.
+#
+# 2026-07-25: this Worker was serving the full jurisdiction catalog and
+# meeting index anonymously on BOTH `api-zspan-org.jjworkaz.workers.dev`
+# and the wildcard preview `*-api-zspan-org.jjworkaz.workers.dev`, while
+# zspan.org itself was correctly Access-walled. The dashboard toggles were
+# switched off — but Cloudflare defaults `workers_dev` to TRUE, so with no
+# setting here the very next `wrangler deploy` would have silently put
+# both hostnames back. A dashboard toggle is a mute; this is the fix.
+#
+# The only intended public route for this Worker is the api.zspan.org
+# custom domain, added deliberately at the dashboard when the operator
+# activates it. There is no reason for a workers.dev hostname to exist.
+workers_dev = false
+preview_urls = false
+
+[[ratelimits]]
+name = "CATALOG_RATE_LIMITER"
+namespace_id = "1001"
+simple = { limit = 60, period = 10 }
+
+# route is added at the dashboard when the domain goes live:
+# routes = [{ pattern = "api.zspan.org/*", custom_domain = true }]

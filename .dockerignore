@@ -1,0 +1,166 @@
+# INTERIM — sol pen-test Finding #6 (session-94).
+# This file is a denylist mirror, not proof that an image is free of local
+# secrets or internal state. Full closure is deferred to a focused pass:
+# replace `COPY .` with positive allowlisted COPY declarations (or generate an
+# equivalently allowlisted context), clean-build/start the image, then inspect
+# every `docker save` layer for forbidden material.
+# Discuss record: .claude/handoffs/session-94-sol-discuss-round1.md
+
+# Don't bloat the Docker build context.
+# Mirrors .gitignore plus build artifacts the image regenerates.
+
+.git
+.gitignore
+.github
+.vscode
+.idea
+.wrangler/
+
+# Python build artifacts
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.egg-info/
+.venv
+.venv*
+venv
+venv_*
+
+# Node build artifacts (regenerated in-image)
+**/node_modules/
+**/dist/
+**/.pnpm-store/
+
+# Sensitive / user-specific
+**/user_settings.json
+**/.env
+**/.env.local
+**/client_secret*.json
+**/*_oauth*.json
+**/*.credentials.json
+**/service-account*.json
+**/youtube_refresh_token.json
+**/.env*
+**/*.local
+**/*.bak
+**/*.bak.*
+**/*.backup
+**/dev-cert.pem
+**/dev-key.pem
+**/operator_only/
+
+# Runtime / regenerable data
+**/meetings_cache.db*
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+**/media/
+**/media_quarantine/
+**/worker_logs/
+**/parser_test_results.json
+**/FINAL_HEALTH_REPORT.json
+**/health_report_*.json
+**/pipeline_state.json
+**/backups/
+**/pids/
+**/*.pid
+**/*.pid.lock
+**/*.seed
+**/.node_repl_history
+**/tmp/
+**/temp/
+*.log
+logs/
+
+# Operator-local AI/session state and release staging
+.claude/
+**/.claude/
+.claude/release-staging/
+.codex/
+**/.codex/
+.agents/
+**/.agents/
+agents/
+
+# Sealed governance, research, and operator corpora
+01_Project_Overview/
+03_Research/
+04_Operator_Side/
+journals/
+verbatim_ledger/
+CLAUDE*.md
+AGENTS.md
+AUTOPILOT_PROTOCOL.md
+ROADMAP.md
+TASKS.md
+TASKS_ARCHIVE.md
+BRAINSTORM_LOG.md
+HUMAN_API_HANDOFF.md
+OCTANE_MODE_EXPERIMENT.md
+respawn*.md
+EMERGENCY_ONBOARDING.md
+PROJECT_GENOTYPE.md
+
+# Prompt review is an operator-only surface, including future sibling ledgers.
+**/PROMPT_REVIEW_LEDGER.md
+**/PROMPT_REVIEW_LEDGER*.md
+**/PROMPT_REVIEW_*.md
+
+# Local jurisdiction intelligence and discovery scaffolding
+**/city_intelligence/
+**/state_scaffolding/
+
+# Local relay/runtime nodes carry per-machine state and topology.
+02_Core_Project/mac_*/
+02_Core_Project/pc_agent_relay/
+02_Core_Project/surfacepro_rag_node/
+**/mac_*_result.json
+**/mac_*_diagnostic.json
+
+# PII-bearing and operator-specific runtime state
+ops/prod_db_archive/
+ops/*-logs/
+ops/REMAKE2_EXECUTION_NOTES.md
+**/STATUS.json
+**/orchestrator_autonomy.json
+**/council_members_data.json
+**/USER_SETTINGS_KEYS.md
+.preview/
+.tmp/
+docs_export_*/
+
+# Built distributions and generated vendored prompt copies
+*.whl
+*.tar.gz
+*.tgz
+02_Core_Project/zspan_cli/build/
+02_Core_Project/zspan_cli/dist/
+02_Core_Project/zspan_cli/zspan_cli/_prompts/
+
+# Reference projects (kept locally for inspection only)
+03_Research/ganymede-backend/
+03_Research/<private-predecessor-repo>/
+
+# Throwaway experiments
+experiments/
+
+# OS noise
+.DS_Store
+Thumbs.db
+ehthumbs.db
+*.swp
+*~
+
+# Don't pack the obsidian vault if it ever lands under ZSPAN
+**/Obsidian/
+
+# Operator secrets — never enter any image build context
+# (sol pen test session-91 finding-6: parsers/secrets/ was NOT excluded
+# and .dockerignore claims to mirror .gitignore but doesn't)
+**/secrets/
+**/.bearer_token
+**/*key*.pem*
+**/dev-key.pem.bak
+
+# Project Room — governance-content projection, never enters an image
+project_room/

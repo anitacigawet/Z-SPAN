@@ -1,0 +1,30 @@
+# Railway deployment config for the Z-SPAN flagship backend.
+#
+# Builds from the Dockerfile at repo root. Restarts on failure with
+# bounded retries so transient crashes self-heal but a broken commit
+# doesn't burn restart-loop hours.
+#
+# Required Railway dashboard config (not declared here — set in UI):
+#   - Volume mounted at /data    (persistent SQLite + media files)
+#   - Environment variables:
+#       OPENAI_API_KEY                  (required — Whisper + quote cleaner)
+#       SLACK_WEBHOOK_URL               (optional — error notifications)
+#       YOUTUBE_DATA_API_KEY            (optional — T-004 video matcher)
+#       GEMINI_API_KEY                  (optional — T-013 batch review automation)
+#   - Public ingress: api.zspan.org via workers/api-zspan-org Worker
+#
+# Self-hosters: this same Dockerfile works for local docker run; the
+# Railway-specific bits live in dashboard config, not in this file.
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+# Express logs "Server running on http://localhost:PORT/" once both
+# Flask and Express are bound. /healthz is a data-free Express liveness
+# endpoint and intentionally does not exercise Flask or SQLite.
+healthcheckPath = "/healthz"
+healthcheckTimeout = 30
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 5
